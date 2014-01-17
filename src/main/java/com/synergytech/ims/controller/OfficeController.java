@@ -7,6 +7,7 @@ package com.synergytech.ims.controller;
 
 import com.synergytech.ims.entities.Office;
 import com.synergytech.ims.facade.OfficeFacade;
+import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -20,7 +21,7 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean
 @SessionScoped
-public class OfficeController {
+public class OfficeController implements Serializable{
 
     /**
      * Creates a new instance of OfficeController
