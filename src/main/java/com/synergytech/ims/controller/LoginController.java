@@ -88,9 +88,11 @@ public class LoginController implements Serializable {
         try {
             loginusr = getUserfacade().getByUserName(current.getUserUsername());
             if (loginusr.getUserUserpassword().equals(current.getUserUserpassword())) {
+                
                 setLoggedIn(true);
                 setMsgFlag(false);
                 setMessage(null);
+                setCurrent(loginusr);
                 return "/home.xhtml?faces-redirect=true";
             } else {
                 mess = "Invalid login try";
