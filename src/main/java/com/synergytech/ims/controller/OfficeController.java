@@ -58,6 +58,7 @@ public class OfficeController implements Serializable{
     public void createOffice() {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
+            current.setOfficeOfficeid(0);
             getOfficeFacade().create(current);
             setCurrent(null);
             context.addMessage(null, new FacesMessage("Successful", "Office Created"));
