@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="OfficeCreateDlg" widgetVar="OfficeCreateDialog" modal="true" resizable="false" appendToBody="true" header="#{myBundle.CreateOfficeTitle}" closeOnEscape="true">
+
+            <h:form id="OfficeCreateForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2">
+
+                        <p:outputLabel value="#{myBundle.CreateOfficeLabel_officeId}" for="officeId" />
+                        <p:inputText id="officeId" value="#{officeController.selected.officeId}" title="#{myBundle.CreateOfficeTitle_officeId}" required="true" requiredMessage="#{myBundle.CreateOfficeRequiredMessage_officeId}" size="15" maxlength="15"/>
+
+                        <p:outputLabel value="#{myBundle.CreateOfficeLabel_officeName}" for="officeName" />
+                        <p:inputText id="officeName" value="#{officeController.selected.officeName}" title="#{myBundle.CreateOfficeTitle_officeName}" size="100" maxlength="100"/>
+
+                        <p:outputLabel value="#{myBundle.CreateOfficeLabel_officeAddress}" for="officeAddress" />
+                        <p:inputText id="officeAddress" value="#{officeController.selected.officeAddress}" title="#{myBundle.CreateOfficeTitle_officeAddress}" size="60" maxlength="60"/>
+
+                        <p:outputLabel value="#{myBundle.CreateOfficeLabel_officeTelephone}" for="officeTelephone" />
+                        <p:inputText id="officeTelephone" value="#{officeController.selected.officeTelephone}" title="#{myBundle.CreateOfficeTitle_officeTelephone}" size="10" maxlength="10"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{officeController.saveNew}" value="#{myBundle.Save}" update="display,:OfficeListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,OfficeCreateDialog);"/>
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="OfficeCreateDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>
