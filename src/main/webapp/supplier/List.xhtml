@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="SupplierListForm">
+
+        <p:panel header="Supplier List">
+            <p:dataTable value="#{supplierController.supplierlist}" var="item">
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="SupplierSupplierid"/>
+                    </f:facet>
+                    <h:outputText value="#{item.supplierSupplierid}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="SupplierName"/>
+                    </f:facet>
+                    <h:outputText value="#{item.supplierName}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="SupplierAddress"/>
+                    </f:facet>
+                    <h:outputText value="#{item.supplierAddress}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="SupplierContact"/>
+                    </f:facet>
+                    <h:outputText value="#{item.supplierContact}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="SupplierStatus"/>
+                    </f:facet>
+                    <h:outputText value="#{item.supplierStatus}"/>
+                </p:column>
+            </p:dataTable>
+
+        </p:panel>
+
+    </h:form>
+
+</ui:composition>
