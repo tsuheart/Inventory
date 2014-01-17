@@ -18,18 +18,18 @@
                         <h:panelGrid columns="2" style="padding: 40px;">
 
                             <h:panelGroup>
-                                <h:graphicImage library="images" name="login-img.png" width="100" height="100"/>
+                                <h:graphicImage library="images" name="login-img.jpg" width="100" height="150"/>
                             </h:panelGroup>
                             <h:panelGroup>
                                 <h:panelGrid columns="2" cellspacing="5">
                                     <p:outputLabel for="name" value="Username" style="font-weight: bold;"/>
-                                    <p:inputText id="name" value="#{loginController.selected.userName}"/>
+                                    <p:inputText id="name" value="#{loginController.current.userUsername}"/>
                                     <p:outputLabel for="password" value="Password" style="font-weight: bold;"/>
-                                    <p:password id="password" value="#{loginController.selected.userPassword}"/>     
+                                    <p:password id="password" value="#{loginController.current.userUserpassword}"/>     
                                     <p:spacer/>
                                     <p:commandButton action="#{loginController.login()}" value="Login" style="float: right;" update="out"/>
                                     <br/>
-                                    <h:panelGroup id="out" rendered="#{not loginController.loggedin}">
+                                    <h:panelGroup id="out" rendered="#{not loginController.loggedIn}">
                                         <h:outputText id="error_msg" value="#{loginController.message}"/>
                                     </h:panelGroup>
 

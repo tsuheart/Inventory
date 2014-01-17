@@ -13,7 +13,7 @@
                 <h:outputText value="Inventory Mangement System"></h:outputText>
             </ui:define>
             <ui:define name="body">
-                <p:panel header="Welcome">
+                <p:panel header="Welcome #{loginController.current.userFirstname} #{loginController.current.userLastname}!">
                     <p><h:outputText value="Welcome to Inventory Management System (IMS)."></h:outputText></p>
                 </p:panel>
             </ui:define>
