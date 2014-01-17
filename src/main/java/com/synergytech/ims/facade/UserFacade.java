@@ -7,6 +7,7 @@
 package com.synergytech.ims.facade;
 
 import com.synergytech.ims.entities.User;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +28,10 @@ public class UserFacade extends AbstractFacade<User> {
 
     public UserFacade() {
         super(User.class);
+    }
+    
+    public User getByUserName(String username){
+        return(getEntityManager().createNamedQuery("User.findByUserUsername", User.class).setParameter("userUsername",username).getSingleResult());
     }
     
 }
