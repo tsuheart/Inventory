@@ -13,7 +13,7 @@
 
     <h:body>
 
-        <p:layout fullPage="true">
+        <p:layout fullPage="true" rendered="#{loginController.loggedIn}">
             <p:layoutUnit position="north" size="100" header="Inventory Management System">
                 <!-- Menu here. Also a layout and a way to log a user out -->
                 <ui:include src="/appmenu.xhtml"/>
@@ -31,6 +31,9 @@
             </p:layoutUnit>
 
         </p:layout>
+        <h:panelGroup rendered="#{not loginController.loggedIn}">
+            <meta http-equiv="Refresh" content="0;URL=../index.xhtml" />            
+        </h:panelGroup>
 
     </h:body>
 
