@@ -1,3 +1,37 @@
-<html>
-    
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition>
+
+        <p:dialog id="SupplierViewDlg" widgetVar="SupplierViewDialog" modal="true" resizable="false" appendToBody="true" header="View Supplier" closeOnEscape="true">
+
+            <h:form id="SupplierViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{supplierController.current != null}">
+                        <h:outputText value="SupplierSupplierid:"/>
+                        <h:outputText value="#{supplierController.current.supplierSupplierid}" title="SupplierSupplierid"/>
+                        <h:outputText value="SupplierName:"/>
+                        <h:outputText value="#{supplierController.current.supplierName}" title="SupplierName"/>
+                        <h:outputText value="SupplierAddress:"/>
+                        <h:outputText value="#{supplierController.current.supplierAddress}" title="SupplierAddress"/>
+                        <h:outputText value="SupplierContact:"/>
+                        <h:outputText value="#{supplierController.current.supplierContact}" title="SupplierContact"/>
+                        <h:outputText value="SupplierStatus:"/>
+                        <h:outputText value="#{supplierController.current.supplierStatus}" title="SupplierStatus"/>
+                    </p:panelGrid>
+                    <p:commandButton value="Close" onclick="SupplierViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
 </html>

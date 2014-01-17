@@ -7,41 +7,55 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <h:form id="SupplierListForm">
-
+        
+        <p:growl id="growl" sticky="false"/>
         <p:panel header="Supplier List">
-            <p:dataTable value="#{supplierController.supplierlist}" var="item">
+            
+            <p:dataTable id="datalist" selectionMode="single" selection="#{supplierController.current}"
+                         rowKey="#{item.supplierSupplierid}" paginator="true" rows="10" rowsPerPageTemplate="10,20,30" 
+                         value="#{supplierController.supplierlist}" var="item">
+                <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="SupplierSupplierid"/>
+                        <h:outputText value="Supplier id"/>
                     </f:facet>
                     <h:outputText value="#{item.supplierSupplierid}"/>
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="SupplierName"/>
+                        <h:outputText value="Name"/>
                     </f:facet>
                     <h:outputText value="#{item.supplierName}"/>
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="SupplierAddress"/>
+                        <h:outputText value="Address"/>
                     </f:facet>
                     <h:outputText value="#{item.supplierAddress}"/>
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="SupplierContact"/>
+                        <h:outputText value="Contact"/>
                     </f:facet>
                     <h:outputText value="#{item.supplierContact}"/>
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="SupplierStatus"/>
+                        <h:outputText value="Status"/>
                     </f:facet>
                     <h:outputText value="#{item.supplierStatus}"/>
                 </p:column>
+                <f:facet name="footer">
+                    <div class="footer-section">
+                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="Create" onclick="SupplierCreateDialog.show()"/>
+                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="View" update=":SupplierViewForm" oncomplete="SupplierViewDialog.show()" disabled="#{empty supplierController.current}"/>
+                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Edit" update=":SupplierEditForm" oncomplete="SupplierEditDialog.show()" disabled="#{empty supplierController.current}"/>
+                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="Delete" actionListener="#{supplierController.deleteSupplier()}" update=":SupplierListForm:growl ,datalist" disabled="#{empty supplierController.current}"/>
+                    </div>
+                </f:facet>
             </p:dataTable>
-
         </p:panel>
 
     </h:form>
