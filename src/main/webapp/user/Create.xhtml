@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UserCreateDlg" widgetVar="UserCreateDialog" modal="true" resizable="false" appendToBody="true" header="Create User" closeOnEscape="true">
+            <p:growl id="growl" sticky="false" />
+            <h:form id="UserCreateForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2">
+                                    <h:outputLabel value="UserUsername:" for="userUsername" />
+                                    <h:inputText id="userUsername" value="#{userController.current.userUsername}" title="UserUsername" required="true" requiredMessage="The UserUsername field is required."/>
+                                    <h:outputLabel value="UserUserpassword:" for="userUserpassword" />
+                                    <h:inputText id="userUserpassword" value="#{userController.current.userUserpassword}" title="UserUserpassword" required="true" requiredMessage="The UserUserpassword field is required."/>
+                                    <h:outputLabel value="UserFirstname:" for="userFirstname" />
+                                    <h:inputText id="userFirstname" value="#{userController.current.userFirstname}" title="UserFirstname" required="true" requiredMessage="The UserFirstname field is required."/>
+                                    <h:outputLabel value="UserLastname:" for="userLastname" />
+                                    <h:inputText id="userLastname" value="#{userController.current.userLastname}" title="UserLastname" required="true" requiredMessage="The UserLastname field is required."/>
+                                    <h:outputLabel value="UserAddress:" for="userAddress" />
+                                    <h:inputText id="userAddress" value="#{userController.current.userAddress}" title="UserAddress" required="true" requiredMessage="The UserAddress field is required."/>
+                                    <h:outputLabel value="UserContact:" for="userContact" />
+                                    <h:inputText id="userContact" value="#{userController.current.userContact}" title="UserContact" />
+                                    <h:outputLabel value="UserStatus:" for="userStatus" />
+                                    <h:inputText id="userStatus" value="#{userController.current.userStatus}" title="UserStatus" required="true" requiredMessage="The UserStatus field is required."/>
+                                    <h:outputLabel value="UserOfficeOfficeid:" for="userOfficeOfficeid" />
+                                    <h:selectOneMenu id="userOfficeOfficeid" converter="#{officeConverter}" value="#{userController.current.userOfficeOfficeid}" title="UserOfficeOfficeid" required="true" requiredMessage="The UserOfficeOfficeid field is required.">
+                                        <!-- TODO: update below reference to list of available items-->
+                                        <f:selectItems value="#{officeController.officelist}" var="officeid" itemValue="#{officeid}" itemLabel="#{officeid.officeOfficeid}"/>
+                                    </h:selectOneMenu>
+                                </p:panelGrid>
+                    <p:commandButton action="#{userController.createUser()}" value="Save" update="display,:UserListForm:datalist,:growl, :UserCreateForm" oncomplete="handleSubmit(xhr,status,args,UserCreateDialog);"/>
+                    <p:commandButton value="Cancel" onclick="UserCreateDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

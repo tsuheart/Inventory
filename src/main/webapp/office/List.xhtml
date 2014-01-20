@@ -50,7 +50,7 @@
                 </p:column>
                 <f:facet name="footer">
                     <div class="footer-section">
-                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="Create" onclick="OfficeCreateDialog.show()"/>
+                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="Create" actionListener="#{officeController.prepareCreate()}" oncomplete="OfficeCreateDialog.show()"/>
                         <p:commandButton id="viewButton"   icon="ui-icon-search" value="View" update=":OfficeViewForm" oncomplete="OfficeViewDialog.show()" disabled="#{empty officeController.current}"/>
                         <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Edit" update=":OfficeEditForm" oncomplete="OfficeEditDialog.show()" disabled="#{empty officeController.current}"/>
                         <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="Delete" actionListener="#{officeController.deleteOffice()}" update=":growl,datalist" disabled="#{empty officeController.current}"/>

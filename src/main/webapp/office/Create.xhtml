@@ -14,8 +14,6 @@
 
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2">
-                        <h:outputLabel value="OfficeOfficeid:" for="officeOfficeid" />
-                        <h:inputText id="officeOfficeid" value="#{officeController.current.officeOfficeid}" title="OfficeOfficeid" required="true" requiredMessage="The OfficeOfficeid field is required."/>
                         <h:outputLabel value="OfficeName:" for="officeName" />
                         <h:inputText id="officeName" value="#{officeController.current.officeName}" title="OfficeName" required="true" requiredMessage="The OfficeName field is required."/>
                         <h:outputLabel value="OfficeAddress:" for="officeAddress" />
@@ -24,6 +22,7 @@
                         <h:inputText id="officeContact" value="#{officeController.current.officeContact}" title="OfficeContact" />
                         <h:outputLabel value="OfficeStatus:" for="officeStatus" />
                         <h:inputText id="officeStatus" value="#{officeController.current.officeStatus}" title="OfficeStatus" required="true" requiredMessage="The OfficeStatus field is required."/>
+
                     </p:panelGrid>
                     <p:commandButton action="#{officeController.createOffice()}" value="Save" update="display,:OfficeListForm:datalist,:growl, :OfficeCreateForm" oncomplete="handleSubmit(xhr,status,args,OfficeCreateDialog);"/>
                     <p:commandButton value="Cancel" onclick="OfficeCreateDialog.hide()"/>

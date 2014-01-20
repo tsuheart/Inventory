@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition>
+
+        <p:dialog id="UserViewDlg" widgetVar="UserViewDialog" modal="true" resizable="false" appendToBody="true" header="User View" closeOnEscape="true">
+
+            <h:form id="UserViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{userController.current != null}">
+
+                        <h:outputText value="UserUsername:"/>
+                        <h:outputText value="#{userController.current.userUsername}" title="UserUsername"/>
+                        <h:outputText value="UserUserpassword:"/>
+                        <h:outputText value="#{userController.current.userUserpassword}" title="UserUserpassword"/>
+                        <h:outputText value="UserFirstname:"/>
+                        <h:outputText value="#{userController.current.userFirstname}" title="UserFirstname"/>
+                        <h:outputText value="UserLastname:"/>
+                        <h:outputText value="#{userController.current.userLastname}" title="UserLastname"/>
+                        <h:outputText value="UserAddress:"/>
+                        <h:outputText value="#{userController.current.userAddress}" title="UserAddress"/>
+                        <h:outputText value="UserContact:"/>
+                        <h:outputText value="#{userController.current.userContact}" title="UserContact"/>
+                        <h:outputText value="UserStatus:"/>
+                        <h:outputText value="#{userController.current.userStatus}" title="UserStatus"/>
+                        <h:outputText value="UserOfficeOfficeid:"/>
+                        <h:outputText value="#{userController.current.userOfficeOfficeid.officeOfficeid}" title="UserOfficeOfficeid"/>
+
+                    </p:panelGrid>
+                    <p:commandButton value="Close" onclick="UserViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>
