@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package com.synergytech.ims.converter;
 
-import com.synergytech.ims.entities.Office;
-import com.synergytech.ims.facade.OfficeFacade;
+import com.synergytech.ims.entities.Supplier;
+import com.synergytech.ims.facade.SupplierFacade;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -21,17 +22,13 @@ import javax.faces.convert.ConverterException;
  */
 @ManagedBean
 @RequestScoped
-public class OfficeConverter implements Converter {
+public class SupplierConverter implements Converter{
 
-    /**
-     *
-     * @author Administrator
-     */
     @EJB
-    private OfficeFacade officeFacade;
+    private SupplierFacade supplierFacade;
 
-    public OfficeFacade getFacade() {
-        return officeFacade;
+    public SupplierFacade getFacade() {
+        return supplierFacade;
     }
 
     @Override
@@ -39,7 +36,7 @@ public class OfficeConverter implements Converter {
         if (newValue == null || newValue.isEmpty()) {
             return null;
         }
-        return (officeFacade.getByOfficeId(newValue));
+        return (supplierFacade.getBySupplierCode(newValue));
     }
 
     @Override
@@ -48,14 +45,13 @@ public class OfficeConverter implements Converter {
             return null; // Or an empty string, can also.
         }
 
-        if (!(value instanceof Office)) {
-            throw new ConverterException("The value is not a valid Office: " + value);
+        if (!(value instanceof Supplier)) {
+            throw new ConverterException("The value is not a valid Supplier: " + value);
         }
-        Integer officeid = ((Office) value).getOfficeOfficeid();
-        return (officeid != null) ? String.valueOf(officeid) : null;
+        String suppliercode = ((Supplier)value).getSupplierSupplierid();
+        return (suppliercode != null) ? String.valueOf(suppliercode) : null;
     }
-
-    public OfficeConverter() {
+    public SupplierConverter() {
     }
-
+    
 }

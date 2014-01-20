@@ -23,7 +23,11 @@
                         <h:outputLabel value="SupplierContact:" for="supplierContact" />
                         <h:inputText id="supplierContact" value="#{supplierController.current.supplierContact}" title="SupplierContact" />
                         <h:outputLabel value="SupplierStatus:" for="supplierStatus" />
-                        <h:inputText id="supplierStatus" value="#{supplierController.current.supplierStatus}" title="SupplierStatus" required="true" requiredMessage="The SupplierStatus field is required."/>
+                        <p:selectOneMenu id="supplierStatus" value="#{supplierController.current.supplierStatus}" required="true" requiredMessage="The SupplierStatus field is required.">  
+                            <f:selectItem itemLabel="Select One" itemValue="" />
+                            <f:selectItem itemLabel="Active" itemValue="Active" />  
+                            <f:selectItem itemLabel="Inactive" itemValue="Inactive" /> 
+                        </p:selectOneMenu>                         
                     </h:panelGrid>
                     <p:commandButton actionListener="#{supplierController.createSupplier()}" value="Save" update="display,:SupplierListForm:datalist,:SupplierListForm:growl, :SupplierCreateForm" oncomplete="handleSubmit(xhr,status,args,SupplierCreateDialog);"/>
                     <p:commandButton value="Cancel" onclick="SupplierCreateDialog.hide()"/>
