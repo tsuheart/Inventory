@@ -5,8 +5,8 @@
  */
 package com.synergytech.ims.converter;
 
-import com.synergytech.ims.entities.Office;
-import com.synergytech.ims.facade.OfficeFacade;
+import com.synergytech.ims.entities.Category;
+import com.synergytech.ims.facade.CategoryFacade;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -21,17 +21,13 @@ import javax.faces.convert.ConverterException;
  */
 @ManagedBean
 @RequestScoped
-public class OfficeConverter implements Converter {
+public class CategoryConverter implements Converter {
 
-    /**
-     *
-     * @author Administrator
-     */
     @EJB
-    private OfficeFacade officeFacade;
+    private CategoryFacade categoryFacade;
 
-    public OfficeFacade getFacade() {
-        return officeFacade;
+    public CategoryFacade getFacade() {
+        return categoryFacade;
     }
 
     @Override
@@ -39,7 +35,7 @@ public class OfficeConverter implements Converter {
         if (newValue == null || newValue.isEmpty()) {
             return null;
         }
-        return (officeFacade.getByOfficeId(newValue));
+        return (categoryFacade.getByCategoryID(newValue));
     }
 
     @Override
@@ -48,14 +44,14 @@ public class OfficeConverter implements Converter {
             return null; // Or an empty string, can also.
         }
 
-        if (!(value instanceof Office)) {
-            throw new ConverterException("The value is not a valid Office: " + value);
+        if (!(value instanceof Category)) {
+            throw new ConverterException("The value is not a valid Category: " + value);
         }
-        Integer officeid = ((Office) value).getOfficeOfficeid();
-        return (officeid != null) ? String.valueOf(officeid) : null;
+        Integer catid = ((Category)value).getCategoryCategoryid();
+        return (catid != null) ? String.valueOf(catid) : null;
     }
 
-    public OfficeConverter() {
+    public CategoryConverter() {
     }
 
 }

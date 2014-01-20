@@ -3,18 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.synergytech.ims.controller;
 
+import com.synergytech.ims.entities.Category;
 import com.synergytech.ims.entities.Supplier;
-import com.synergytech.ims.facade.SupplierFacade;
+import com.synergytech.ims.facade.CategoryFacade;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 
 /**
  *
@@ -22,49 +21,50 @@ import javax.faces.event.ActionEvent;
  */
 @ManagedBean
 @SessionScoped
-public class SupplierController {
+public class CategoryController {
 
     @EJB
-    SupplierFacade supplierfacade;
-    Supplier current;
+    CategoryFacade categoryFacade;
+    Category current;
+    List<Category> categorylist;
 
-    List<Supplier> supplierlist;
     /**
-     * Creates a new instance of SupplierController
+     * Creates a new instance of CategoryController
      */
-    public Supplier getCurrent() {       
+    public CategoryFacade getCategoryFacade() {
+        return categoryFacade;
+    }
+
+    public Category getCurrent() {
         return current;
     }
 
-    public void setCurrent(Supplier current) {
+    public void setCurrent(Category current) {
         this.current = current;
     }
-    
-    public void prepareCreate(){
-        if(current==null)
-            current=new Supplier();
+
+    public CategoryController() {
     }
 
-    public SupplierFacade getSupplierfacade() {
-        return supplierfacade;
-    }
-    
-    public SupplierController() {
+    public List<Category> getCategorylist() {
+        categorylist=getCategoryFacade().findAll();
+        return categorylist;
     }
 
-    public List<Supplier> getSupplierlist() {
-        supplierlist=getSupplierfacade().findAll();
-        return supplierlist;
+    public void setCategorylist(List<Category> categorylist) {
+        this.categorylist = categorylist;
     }
 
-    public void setSupplierlist(List<Supplier> supplierlist) {
-        this.supplierlist = supplierlist;
+    public void prepareCreate() {
+        if (current == null) {
+            current = new Category();
+        }
     }
     
-    public void createSupplier() {
+    public void createCategory() {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
-            getSupplierfacade().create(current);
+           getCategoryFacade().create(current);
             setCurrent(null);
             context.addMessage(null, new FacesMessage("Successful", "Supplier Created"));
         } catch (Exception ex) {
@@ -73,10 +73,10 @@ public class SupplierController {
         }
     }
 
-    public void editSupplier() {
+    public void editCategory() {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
-            getSupplierfacade().edit(current);
+            getCategoryFacade().edit(current);
             setCurrent(null);
             context.addMessage(null, new FacesMessage("Supplier Edited", "Supplier Edited"));
         } catch (Exception ex) {
@@ -85,10 +85,10 @@ public class SupplierController {
         }
     }
 
-    public void deleteSupplier() {
+    public void deleteCategory() {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
-            getSupplierfacade().remove(current);
+            getCategoryFacade().remove(current);
             setCurrent(null);
             context.addMessage(null, new FacesMessage("Successful", "Supplier Deleted"));
         } catch (Exception ex) {
@@ -98,4 +98,7 @@ public class SupplierController {
         }
     }
     
+    public List<Category> All(){
+        return getCategoryFacade().findAll();
+    }
 }

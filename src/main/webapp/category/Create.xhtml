@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CategoryCreateDlg" widgetVar="CategoryCreateDialog" modal="true" resizable="false" appendToBody="true" header="Create Supplier" closeOnEscape="true">
+
+            <h:form id="CategoryCreateForm">
+
+                <h:panelGroup id="display">
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="CategoryName:" for="categoryName" />
+                        <h:inputText id="categoryName" value="#{categoryController.current.categoryName}" title="CategoryName" required="true" requiredMessage="The CategoryName field is required."/>
+                        <h:outputLabel value="CategoryParentid:" for="categoryParentid" />
+                        <h:inputText id="categoryParentid" value="#{categoryController.current.categoryParentid}" title="CategoryParentid" />
+                    </h:panelGrid>
+                    <p:commandButton actionListener="#{categoryController.createCategory()}" value="Save" update="display,:CategoryListForm:datalist,:CategoryListForm:growl, :CategoryCreateForm" oncomplete="handleSubmit(xhr,status,args,CategoryCreateDialog);"/>
+                    <p:commandButton value="Cancel" onclick="CategoryCreateDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

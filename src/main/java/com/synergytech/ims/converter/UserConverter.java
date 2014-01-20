@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package com.synergytech.ims.converter;
 
-import com.synergytech.ims.entities.Office;
-import com.synergytech.ims.facade.OfficeFacade;
+import com.synergytech.ims.entities.User;
+import com.synergytech.ims.facade.UserFacade;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -21,17 +22,13 @@ import javax.faces.convert.ConverterException;
  */
 @ManagedBean
 @RequestScoped
-public class OfficeConverter implements Converter {
+public class UserConverter implements Converter{
 
-    /**
-     *
-     * @author Administrator
-     */
     @EJB
-    private OfficeFacade officeFacade;
+    private UserFacade userFacade;
 
-    public OfficeFacade getFacade() {
-        return officeFacade;
+    public UserFacade getFacade() {
+        return userFacade;
     }
 
     @Override
@@ -39,7 +36,7 @@ public class OfficeConverter implements Converter {
         if (newValue == null || newValue.isEmpty()) {
             return null;
         }
-        return (officeFacade.getByOfficeId(newValue));
+        return (userFacade.getByUserName(newValue));
     }
 
     @Override
@@ -48,14 +45,13 @@ public class OfficeConverter implements Converter {
             return null; // Or an empty string, can also.
         }
 
-        if (!(value instanceof Office)) {
-            throw new ConverterException("The value is not a valid Office: " + value);
+        if (!(value instanceof User)) {
+            throw new ConverterException("The value is not a valid User: " + value);
         }
-        Integer officeid = ((Office) value).getOfficeOfficeid();
-        return (officeid != null) ? String.valueOf(officeid) : null;
+        String username = ((User)value).getUserUsername();
+        return (username != null) ? String.valueOf(username) : null;
     }
-
-    public OfficeConverter() {
+    public UserConverter() {
     }
-
+    
 }

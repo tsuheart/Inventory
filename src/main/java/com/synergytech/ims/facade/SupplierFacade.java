@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.synergytech.ims.facade;
 
 import com.synergytech.ims.entities.Supplier;
@@ -17,6 +16,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class SupplierFacade extends AbstractFacade<Supplier> {
+
     @PersistenceContext(unitName = "com.synergytech.ims_Project_Inventory_war_1.0-SNAPSHOTPU")
     private EntityManager em;
 
@@ -28,5 +28,10 @@ public class SupplierFacade extends AbstractFacade<Supplier> {
     public SupplierFacade() {
         super(Supplier.class);
     }
-    
+
+    public Supplier getBySupplierCode(String supplier) {
+        Supplier sup = getEntityManager().createNamedQuery("Supplier.findBySupplierSupplierid", Supplier.class).setParameter("supplierSupplierid", supplier).getSingleResult();
+        return sup;
+    }
+
 }
