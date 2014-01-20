@@ -25,7 +25,7 @@
                         <h:outputLabel value="OfficeStatus:" for="officeStatus" />
                         <h:inputText id="officeStatus" value="#{officeController.current.officeStatus}" title="OfficeStatus" required="true" requiredMessage="The OfficeStatus field is required."/>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{officeController.createOffice()}" value="Save" update="display,:OfficeListForm:datalist,:growl, :OfficeCreateForm" oncomplete="handleSubmit(xhr,status,args,OfficeCreateDialog);"/>
+                    <p:commandButton action="#{officeController.createOffice()}" value="Save" update="display,:OfficeListForm:datalist,:growl, :OfficeCreateForm" oncomplete="handleSubmit(xhr,status,args,OfficeCreateDialog);"/>
                     <p:commandButton value="Cancel" onclick="OfficeCreateDialog.hide()"/>
                 </h:panelGroup>
 
