@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition>
+
+        <p:dialog id="CategoryViewDlg" widgetVar="CategoryViewDialog" modal="true" resizable="false" appendToBody="true" header="View Supplier" closeOnEscape="true">
+
+            <h:form id="CategoryViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{categoryController.current != null}">
+                        <h:outputText value="CategoryCategoryid:"/>
+                        <h:outputText value="#{categoryController.current.categoryCategoryid}" title="CategoryCategoryid"/>
+                        <h:outputText value="CategoryName:"/>
+                        <h:outputText value="#{categoryController.current.categoryName}" title="CategoryName"/>
+                        <h:outputText value="CategoryParentid:"/>
+                        <h:outputText value="#{categoryController.current.categoryParentid}" title="CategoryParentid"/>
+                    </p:panelGrid>
+                    <p:commandButton value="Close" onclick="CategoryViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

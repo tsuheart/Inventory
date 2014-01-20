@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="CategoryListForm">
+
+        <p:growl id="growl" sticky="false"/>
+        <p:panel header="Category List">
+            <p:dataTable id="datalist" value="#{categoryController.categorylist}" var="item" selectionMode="single"
+                         selection="#{categoryController.current}" paginator="true" rowKey="#{item.categoryCategoryid}"
+                         rows="10" rowsPerPageTemplate="10,20,30">
+                <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="CategoryCategoryid"/>
+                    </f:facet>
+                    <h:outputText value="#{item.categoryCategoryid}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="CategoryName"/>
+                    </f:facet>
+                    <h:outputText value="#{item.categoryName}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="CategoryParentid"/>
+                    </f:facet>
+                    <h:outputText value="#{item.categoryParentid}"/>
+                </p:column>
+                <f:facet name="footer">
+                    <div class="footer-section">
+                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="Create" action="#{categoryController.prepareCreate()}" oncomplete="CategoryCreateDialog.show()"/>
+                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="View" update=":CategoryViewForm" oncomplete="CategoryViewDialog.show()" disabled="#{empty categoryController.current}"/>
+                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Edit" update=":CategoryEditForm" oncomplete="CategoryEditDialog.show()" disabled="#{empty categoryController.current}"/>
+                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="Delete" actionListener="#{categoryController.deleteCategory()}" update=":CategoryListForm:growl ,datalist" disabled="#{empty categoryController.current}"/>
+                    </div>
+                </f:facet>
+            </p:dataTable>
+        </p:panel>
+
+    </h:form>
+
+</ui:composition>
