@@ -14,12 +14,12 @@
 
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{categoryController.current != null}">
-                        <h:outputText value="CategoryCategoryid:"/>
-                        <h:outputText value="#{categoryController.current.categoryCategoryid}" title="CategoryCategoryid"/>
-                        <h:outputText value="CategoryName:"/>
-                        <h:outputText value="#{categoryController.current.categoryName}" title="CategoryName"/>
-                        <h:outputText value="CategoryParentid:"/>
-                        <h:outputText value="#{categoryController.current.categoryParentid}" title="CategoryParentid"/>
+                        <p:outputLabel value="CategoryCategoryid:"/>
+                        <p:outputLabel value="#{categoryController.current.categoryCategoryid}" title="CategoryCategoryid"/>
+                        <p:outputLabel value="CategoryName:"/>
+                        <p:outputLabel value="#{categoryController.current.categoryName}" title="CategoryName"/>
+                        <p:outputLabel value="CategoryParentid:"/>
+                        <p:outputLabel value="#{categoryController.current.categoryParentid}" title="CategoryParentid"/>
                     </p:panelGrid>
                     <p:commandButton value="Close" onclick="CategoryViewDialog.hide()"/>
                 </h:panelGroup>

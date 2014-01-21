@@ -15,22 +15,22 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{userController.current != null}">
 
-                        <h:outputText value="UserUsername:"/>
-                        <h:outputText value="#{userController.current.userUsername}" title="UserUsername"/>
-                        <h:outputText value="UserUserpassword:"/>
-                        <h:outputText value="#{userController.current.userUserpassword}" title="UserUserpassword"/>
-                        <h:outputText value="UserFirstname:"/>
-                        <h:outputText value="#{userController.current.userFirstname}" title="UserFirstname"/>
-                        <h:outputText value="UserLastname:"/>
-                        <h:outputText value="#{userController.current.userLastname}" title="UserLastname"/>
-                        <h:outputText value="UserAddress:"/>
-                        <h:outputText value="#{userController.current.userAddress}" title="UserAddress"/>
-                        <h:outputText value="UserContact:"/>
-                        <h:outputText value="#{userController.current.userContact}" title="UserContact"/>
-                        <h:outputText value="UserStatus:"/>
-                        <h:outputText value="#{userController.current.userStatus}" title="UserStatus"/>
-                        <h:outputText value="UserOfficeOfficeid:"/>
-                        <h:outputText value="#{userController.current.userOfficeOfficeid.officeOfficeid}" title="UserOfficeOfficeid"/>
+                        <p:outputLabel value="UserUsername:"/>
+                        <p:outputLabel value="#{userController.current.userUsername}" title="UserUsername"/>
+                        <p:outputLabel value="UserUserpassword:"/>
+                        <p:outputLabel value="#{userController.current.userUserpassword}" title="UserUserpassword"/>
+                        <p:outputLabel value="UserFirstname:"/>
+                        <p:outputLabel value="#{userController.current.userFirstname}" title="UserFirstname"/>
+                        <p:outputLabel value="UserLastname:"/>
+                        <p:outputLabel value="#{userController.current.userLastname}" title="UserLastname"/>
+                        <p:outputLabel value="UserAddress:"/>
+                        <p:outputLabel value="#{userController.current.userAddress}" title="UserAddress"/>
+                        <p:outputLabel value="UserContact:"/>
+                        <p:outputLabel value="#{userController.current.userContact}" title="UserContact"/>
+                        <p:outputLabel value="UserStatus:"/>
+                        <p:outputLabel value="#{userController.current.userStatus}" title="UserStatus"/>
+                        <p:outputLabel value="UserOfficeOfficeid:"/>
+                        <p:outputLabel value="#{userController.current.userOfficeOfficeid.officeOfficeid}" title="UserOfficeOfficeid"/>
 
                     </p:panelGrid>
                     <p:commandButton value="Close" onclick="UserViewDialog.hide()"/>

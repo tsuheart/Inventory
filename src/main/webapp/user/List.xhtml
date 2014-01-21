@@ -20,51 +20,51 @@
 
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="UserUsername"/>
+                        <p:outputLabel value="UserUsername"/>
                     </f:facet>
-                    <h:outputText value="#{item.userUsername}"/>
+                    <p:outputLabel value="#{item.userUsername}"/>
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="UserUserpassword"/>
+                        <p:outputLabel value="UserUserpassword"/>
                     </f:facet>
-                    <h:outputText value="#{item.userUserpassword}"/>
+                    <p:outputLabel value="#{item.userUserpassword}"/>
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="UserFirstname"/>
+                        <p:outputLabel value="UserFirstname"/>
                     </f:facet>
-                    <h:outputText value="#{item.userFirstname}"/>
+                    <p:outputLabel value="#{item.userFirstname}"/>
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="UserLastname"/>
+                        <p:outputLabel value="UserLastname"/>
                     </f:facet>
-                    <h:outputText value="#{item.userLastname}"/>
+                    <p:outputLabel value="#{item.userLastname}"/>
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="UserAddress"/>
+                        <p:outputLabel value="UserAddress"/>
                     </f:facet>
-                    <h:outputText value="#{item.userAddress}"/>
+                    <p:outputLabel value="#{item.userAddress}"/>
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="UserContact"/>
+                        <p:outputLabel value="UserContact"/>
                     </f:facet>
-                    <h:outputText value="#{item.userContact}"/>
+                    <p:outputLabel value="#{item.userContact}"/>
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="UserStatus"/>
+                        <p:outputLabel value="UserStatus"/>
                     </f:facet>
-                    <h:outputText value="#{item.userStatus}"/>
+                    <p:outputLabel value="#{item.userStatus}"/>
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="UserOfficeOfficeid"/>
+                        <p:outputLabel value="UserOfficeOfficeid"/>
                     </f:facet>
-                    <h:outputText value="#{item.userOfficeOfficeid.officeOfficeid}(#{item.userOfficeOfficeid.officeName})"/>
+                    <p:outputLabel value="#{item.userOfficeOfficeid.officeOfficeid}(#{item.userOfficeOfficeid.officeName})"/>
                 </p:column>
 
                 <f:facet name="footer">
@@ -72,7 +72,7 @@
                         <p:commandButton id="createButton" icon="ui-icon-plus"   value="Create" actionListener="#{userController.prepareCreate()}" oncomplete="UserCreateDialog.show()"/>
                         <p:commandButton id="viewButton"   icon="ui-icon-search" value="View" update=":UserViewForm" oncomplete="UserViewDialog.show()" disabled="#{empty userController.current}"/>
                         <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Edit" update=":UserEditForm" oncomplete="UserEditDialog.show()" disabled="#{empty userController.current}"/>
-                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="Delete" actionListener="#{userController.deleteUser()}" update=":growl,datalist" disabled="#{empty userController.current}"/>
+                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="Delete" actionListener="#{userController.deleteUser()}" update=":UserListForm:growl,datalist" disabled="#{empty userController.current}"/>
                     </div>
                 </f:facet>
             </p:dataTable>

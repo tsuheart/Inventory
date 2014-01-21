@@ -10,8 +10,10 @@ import com.synergytech.ims.facade.UserFacade;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -26,8 +28,7 @@ public class LoginController implements Serializable {
     User current;
     List<User> userlist;
 
-    boolean loggedIn, msgFlag;
-    String message;
+    boolean loggedIn;
 
     /**
      * Creates a new instance of LoginController
@@ -66,46 +67,25 @@ public class LoginController implements Serializable {
         this.loggedIn = loggedIn;
     }
 
-    public boolean isMsgFlag() {
-        return msgFlag;
-    }
-
-    public void setMsgFlag(boolean msgFlag) {
-        this.msgFlag = msgFlag;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
     public String login() {
         User loginusr;
-        String mess = null;
+        FacesContext context = FacesContext.getCurrentInstance();
         try {
             loginusr = getUserfacade().getByUserName(current.getUserUsername());
             if (loginusr.getUserUserpassword().equals(current.getUserUserpassword())) {
-                
+
                 setLoggedIn(true);
-                setMsgFlag(false);
-                setMessage(null);
                 setCurrent(loginusr);
+                context.addMessage(null, new FacesMessage("Logged In!", "Log In Successfull"));
                 return "/home.xhtml?faces-redirect=true";
             } else {
-                mess = "Invalid login try";
+                context.addMessage(null, new FacesMessage("Error!", "Invalid Log In! Try Again!"));
                 setLoggedIn(false);
-                setMsgFlag(true);
-                setMessage(mess);
                 return null;
             }
         } catch (Exception ex) {
+            context.addMessage(null, new FacesMessage("Error!", "Invalid Log In! Try Again!"));
             setLoggedIn(false);
-            setMsgFlag(true);
-            mess = "Invalid login try";
-            setMessage(mess);
             return null;
         }
     }

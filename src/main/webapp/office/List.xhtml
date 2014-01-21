@@ -7,7 +7,7 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <h:form id="OfficeListForm">
-        <p:growl id="growl" sticky="false"/>
+        <p:growl id="growl" showDetail="true" sticky="false"/>
         <p:panel header="Office List">
 
             <p:dataTable id="datalist" value="#{officeController.officelist}" var="item"
@@ -20,40 +20,40 @@
 
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="OfficeOfficeid"/>
+                        <p:outputLabel value="OfficeOfficeid"/>
                     </f:facet>
-                    <h:outputText value="#{item.officeOfficeid}"/>
+                    <p:outputLabel value="#{item.officeOfficeid}"/>
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="OfficeName"/>
+                        <p:outputLabel value="OfficeName"/>
                     </f:facet>
-                    <h:outputText value="#{item.officeName}"/>
+                    <p:outputLabel value="#{item.officeName}"/>
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="OfficeAddress"/>
+                        <p:outputLabel value="OfficeAddress"/>
                     </f:facet>
-                    <h:outputText value="#{item.officeAddress}"/>
+                    <p:outputLabel value="#{item.officeAddress}"/>
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="OfficeContact"/>
+                        <p:outputLabel value="OfficeContact"/>
                     </f:facet>
-                    <h:outputText value="#{item.officeContact}"/>
+                    <p:outputLabel value="#{item.officeContact}"/>
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="OfficeStatus"/>
+                        <p:outputLabel value="OfficeStatus"/>
                     </f:facet>
-                    <h:outputText value="#{item.officeStatus}"/>
+                    <p:outputLabel value="#{item.officeStatus}"/>
                 </p:column>
                 <f:facet name="footer">
                     <div class="footer-section">
                         <p:commandButton id="createButton" icon="ui-icon-plus"   value="Create" actionListener="#{officeController.prepareCreate()}" oncomplete="OfficeCreateDialog.show()"/>
                         <p:commandButton id="viewButton"   icon="ui-icon-search" value="View" update=":OfficeViewForm" oncomplete="OfficeViewDialog.show()" disabled="#{empty officeController.current}"/>
                         <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Edit" update=":OfficeEditForm" oncomplete="OfficeEditDialog.show()" disabled="#{empty officeController.current}"/>
-                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="Delete" actionListener="#{officeController.deleteOffice()}" update=":growl,datalist" disabled="#{empty officeController.current}"/>
+                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="Delete" actionListener="#{officeController.deleteOffice()}" update=":OfficeListForm:growl,datalist" disabled="#{empty officeController.current}"/>
                     </div>
                 </f:facet>
             </p:dataTable>

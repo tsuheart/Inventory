@@ -8,7 +8,7 @@
 
     <h:form id="SupplierListForm">
         
-        <p:growl id="growl" sticky="false"/>
+        <p:growl id="growl" showDetail="true" sticky="false"/>
         <p:panel header="Supplier List">
             
             <p:dataTable id="datalist" selectionMode="single" selection="#{supplierController.current}"
@@ -19,33 +19,33 @@
                 
                 <p:column >
                     <f:facet name="header">
-                        <h:outputText value="Supplier id"/>
+                        <p:outputLabel value="Supplier id"/>
                     </f:facet>
-                    <h:outputText value="#{item.supplierSupplierid}"/>
+                    <p:outputLabel value="#{item.supplierSupplierid}"/>
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="Name"/>
+                        <p:outputLabel value="Name"/>
                     </f:facet>
-                    <h:outputText value="#{item.supplierName}"/>
+                    <p:outputLabel value="#{item.supplierName}"/>
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="Address"/>
+                        <p:outputLabel value="Address"/>
                     </f:facet>
-                    <h:outputText value="#{item.supplierAddress}"/>
+                    <p:outputLabel value="#{item.supplierAddress}"/>
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="Contact"/>
+                        <p:outputLabel value="Contact"/>
                     </f:facet>
-                    <h:outputText value="#{item.supplierContact}"/>
+                    <p:outputLabel value="#{item.supplierContact}"/>
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="Status"/>
+                        <p:outputLabel value="Status"/>
                     </f:facet>
-                    <h:outputText value="#{item.supplierStatus}"/>
+                    <p:outputLabel value="#{item.supplierStatus}"/>
                 </p:column>
                 <f:facet name="footer">
                     <div class="footer-section">

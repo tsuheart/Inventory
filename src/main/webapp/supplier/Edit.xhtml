@@ -13,22 +13,22 @@
             <h:form id="SupplierEditForm">
 
                 <h:panelGroup id="display">
-                    <p:panelGrid  columns="2" rendered="#{supplierController.current != null}">
-                        <h:outputLabel value="SupplierSupplierid:" for="supplierSupplierid" />
-                        <h:inputText id="supplierSupplierid" value="#{supplierController.current.supplierSupplierid}" title="SupplierSupplierid" readonly="true" required="true" requiredMessage="The SupplierSupplierid field is required."/>
-                        <h:outputLabel value="SupplierName:" for="supplierName" />
-                        <h:inputText id="supplierName" value="#{supplierController.current.supplierName}" title="SupplierName" required="true" requiredMessage="The SupplierName field is required."/>
-                        <h:outputLabel value="SupplierAddress:" for="supplierAddress" />
-                        <h:inputText id="supplierAddress" value="#{supplierController.current.supplierAddress}" title="SupplierAddress" required="true" requiredMessage="The SupplierAddress field is required."/>
-                        <h:outputLabel value="SupplierContact:" for="supplierContact" />
-                        <h:inputText id="supplierContact" value="#{supplierController.current.supplierContact}" title="SupplierContact" />
-                        <h:outputLabel value="SupplierStatus:" for="supplierStatus" />
+                    <h:panelGrid  columns="2" rendered="#{supplierController.current != null}">
+                        <p:outputLabel value="SupplierSupplierid:" for="supplierSupplierid" />
+                        <p:inputText id="supplierSupplierid" value="#{supplierController.current.supplierSupplierid}" title="SupplierSupplierid" readonly="true" required="true" requiredMessage="The SupplierSupplierid field is required."/>
+                        <p:outputLabel value="SupplierName:" for="supplierName" />
+                        <p:inputText id="supplierName" value="#{supplierController.current.supplierName}" title="SupplierName" required="true" requiredMessage="The SupplierName field is required."/>
+                        <p:outputLabel value="SupplierAddress:" for="supplierAddress" />
+                        <p:inputText id="supplierAddress" value="#{supplierController.current.supplierAddress}" title="SupplierAddress" required="true" requiredMessage="The SupplierAddress field is required."/>
+                        <p:outputLabel value="SupplierContact:" for="supplierContact" />
+                        <p:inputText id="supplierContact" value="#{supplierController.current.supplierContact}" title="SupplierContact" />
+                        <p:outputLabel value="SupplierStatus:" for="supplierStatus" />
                         <p:selectOneMenu id="supplierStatus" value="#{supplierController.current.supplierStatus}" required="true" requiredMessage="The SupplierStatus field is required.">  
                             <f:selectItem itemLabel="Select One" itemValue="" />
                             <f:selectItem itemLabel="Active" itemValue="Active" />  
                             <f:selectItem itemLabel="Inactive" itemValue="Inactive" /> 
                         </p:selectOneMenu>
-                    </p:panelGrid>
+                    </h:panelGrid>
                     <p:commandButton actionListener="#{supplierController.editSupplier()}" value="Save" update="display,:SupplierListForm:datalist,:SupplierListForm:growl" oncomplete="handleSubmit(xhr,status,args,SupplierEditDialog);"/>
                     <p:commandButton value="Cancel" onclick="SupplierEditDialog.hide()"/>
                 </h:panelGroup>

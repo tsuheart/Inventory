@@ -13,14 +13,14 @@
             <h:form id="CategoryEditForm">
 
                 <h:panelGroup id="display">
-                    <p:panelGrid  columns="2" rendered="#{categoryController.current != null}">
-                        <h:outputLabel value="CategoryCategoryid:" for="categoryCategoryid" />
-                        <h:inputText id="categoryCategoryid" readonly="true" value="#{categoryController.current.categoryCategoryid}" title="CategoryCategoryid" required="true" requiredMessage="The CategoryCategoryid field is required."/>
-                        <h:outputLabel value="CategoryName:" for="categoryName" />
-                        <h:inputText id="categoryName" value="#{categoryController.current.categoryName}" title="CategoryName" required="true" requiredMessage="The CategoryName field is required."/>
-                        <h:outputLabel value="CategoryParentid:" for="categoryParentid" />
-                        <h:inputText id="categoryParentid" value="#{categoryController.current.categoryParentid}" title="CategoryParentid" />
-                    </p:panelGrid>
+                    <h:panelGrid  columns="2" rendered="#{categoryController.current != null}">
+                        <p:outputLabel value="CategoryCategoryid:" for="categoryCategoryid" />
+                        <p:inputText id="categoryCategoryid" readonly="true" value="#{categoryController.current.categoryCategoryid}" title="CategoryCategoryid" required="true" requiredMessage="The CategoryCategoryid field is required."/>
+                        <p:outputLabel value="CategoryName:" for="categoryName" />
+                        <p:inputText id="categoryName" value="#{categoryController.current.categoryName}" title="CategoryName" required="true" requiredMessage="The CategoryName field is required."/>
+                        <p:outputLabel value="CategoryParentid:" for="categoryParentid" />
+                        <p:inputText id="categoryParentid" value="#{categoryController.current.categoryParentid}" title="CategoryParentid" />
+                    </h:panelGrid>
                     <p:commandButton actionListener="#{categoryController.editCategory()}" value="Save" update="display,:CategoryListForm:datalist,:CategoryListForm:growl" oncomplete="handleSubmit(xhr,status,args,CategoryEditDialog);"/>
                     <p:commandButton value="Cancel" onclick="CategoryEditDialog.hide()"/>
                 </h:panelGroup>

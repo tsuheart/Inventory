@@ -60,9 +60,9 @@ public class OfficeController implements Serializable{
         try {
             getOfficeFacade().create(current);
             setCurrent(null);
-            context.addMessage(null, new FacesMessage("Successful", "Office Created"));
+            context.addMessage(null, new FacesMessage("Successful!", "Office Created"));
         } catch (Exception ex) {
-            context.addMessage(null, new FacesMessage("Failed", "Office not Created"));
+            context.addMessage(null, new FacesMessage("Failed!", "Office Not Created"));
             setCurrent(null);
         }
     }
@@ -72,9 +72,9 @@ public class OfficeController implements Serializable{
         try {
             getOfficeFacade().edit(current);
             setCurrent(null);
-            context.addMessage(null, new FacesMessage("Successful", "Office Edited"));
+            context.addMessage(null, new FacesMessage("Successful!", "Office Edited"));
         } catch (Exception ex) {
-            context.addMessage(null, new FacesMessage("Failed", "Office not Edited"));
+            context.addMessage(null, new FacesMessage("Failed!", "Office Not Edited"));
             setCurrent(null);
         }
     }
@@ -84,9 +84,9 @@ public class OfficeController implements Serializable{
         try {
             getOfficeFacade().remove(current);
             setCurrent(null);
-            context.addMessage(null, new FacesMessage("Successful", "Office Deleted"));
+            context.addMessage(null, new FacesMessage("Successful!", "Office Deleted"));
         } catch (Exception ex) {
-            context.addMessage(null, new FacesMessage("Failed", "Office not Edited"));
+            context.addMessage(null, new FacesMessage("Failed!", "Office Not Edited"));
             setCurrent(null);
 
         }

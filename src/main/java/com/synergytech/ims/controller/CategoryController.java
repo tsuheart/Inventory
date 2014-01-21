@@ -66,9 +66,9 @@ public class CategoryController {
         try {
            getCategoryFacade().create(current);
             setCurrent(null);
-            context.addMessage(null, new FacesMessage("Successful", "Supplier Created"));
+            context.addMessage(null, new FacesMessage("Successful!", "Category Created"));
         } catch (Exception ex) {
-            context.addMessage(null, new FacesMessage("Failed", "Supplier not Created"));
+            context.addMessage(null, new FacesMessage("Failed!", "Category Not Created"));
             setCurrent(null);
         }
     }
@@ -78,9 +78,9 @@ public class CategoryController {
         try {
             getCategoryFacade().edit(current);
             setCurrent(null);
-            context.addMessage(null, new FacesMessage("Supplier Edited", "Supplier Edited"));
+            context.addMessage(null, new FacesMessage("Successful!", "Category Edited"));
         } catch (Exception ex) {
-            context.addMessage(null, new FacesMessage("Failed", "Supplier not Edited"));
+            context.addMessage(null, new FacesMessage("Failed!", "Category Not Edited"));
             setCurrent(null);
         }
     }
@@ -90,9 +90,9 @@ public class CategoryController {
         try {
             getCategoryFacade().remove(current);
             setCurrent(null);
-            context.addMessage(null, new FacesMessage("Successful", "Supplier Deleted"));
+            context.addMessage(null, new FacesMessage("Successful!", "Category Deleted"));
         } catch (Exception ex) {
-            context.addMessage(null, new FacesMessage("Failed", "Supplier not Edited"));
+            context.addMessage(null, new FacesMessage("Failed!", "Category Not Deleted"));
             setCurrent(null);
 
         }

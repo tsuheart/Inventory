@@ -13,16 +13,16 @@
 
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{officeController.current != null}">
-                        <h:outputText value="OfficeOfficeid:"/>
-                        <h:outputText value="#{officeController.current.officeOfficeid}" title="OfficeOfficeid"/>
-                        <h:outputText value="OfficeName:"/>
-                        <h:outputText value="#{officeController.current.officeName}" title="OfficeName"/>
-                        <h:outputText value="OfficeAddress:"/>
-                        <h:outputText value="#{officeController.current.officeAddress}" title="OfficeAddress"/>
-                        <h:outputText value="OfficeContact:"/>
-                        <h:outputText value="#{officeController.current.officeContact}" title="OfficeContact"/>
-                        <h:outputText value="OfficeStatus:"/>
-                        <h:outputText value="#{officeController.current.officeStatus}" title="OfficeStatus"/>
+                        <p:outputLabel value="OfficeOfficeid:"/>
+                        <p:outputLabel value="#{officeController.current.officeOfficeid}" title="OfficeOfficeid"/>
+                        <p:outputLabel value="OfficeName:"/>
+                        <p:outputLabel value="#{officeController.current.officeName}" title="OfficeName"/>
+                        <p:outputLabel value="OfficeAddress:"/>
+                        <p:outputLabel value="#{officeController.current.officeAddress}" title="OfficeAddress"/>
+                        <p:outputLabel value="OfficeContact:"/>
+                        <p:outputLabel value="#{officeController.current.officeContact}" title="OfficeContact"/>
+                        <p:outputLabel value="OfficeStatus:"/>
+                        <p:outputLabel value="#{officeController.current.officeStatus}" title="OfficeStatus"/>
                     </p:panelGrid>
                     <p:commandButton value="Close" onclick="OfficeViewDialog.hide()"/>
                 </h:panelGroup>

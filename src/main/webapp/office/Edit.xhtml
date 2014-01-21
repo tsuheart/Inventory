@@ -13,19 +13,19 @@
             <h:form id="OfficeEditForm">
 
                 <h:panelGroup id="display">
-                    <p:panelGrid  columns="2" rendered="#{officeController.current != null}">
-                        <h:outputLabel value="OfficeOfficeid:" for="officeOfficeid" />
-                        <h:inputText id="officeOfficeid" value="#{officeController.current.officeOfficeid}" title="OfficeOfficeid" required="true" requiredMessage="The OfficeOfficeid field is required."/>
-                        <h:outputLabel value="OfficeName:" for="officeName" />
-                        <h:inputText id="officeName" value="#{officeController.current.officeName}" title="OfficeName" required="true" requiredMessage="The OfficeName field is required."/>
-                        <h:outputLabel value="OfficeAddress:" for="officeAddress" />
-                        <h:inputText id="officeAddress" value="#{officeController.current.officeAddress}" title="OfficeAddress" required="true" requiredMessage="The OfficeAddress field is required."/>
-                        <h:outputLabel value="OfficeContact:" for="officeContact" />
-                        <h:inputText id="officeContact" value="#{officeController.current.officeContact}" title="OfficeContact" />
-                        <h:outputLabel value="OfficeStatus:" for="officeStatus" />
-                        <h:inputText id="officeStatus" value="#{officeController.current.officeStatus}" title="OfficeStatus" required="true" requiredMessage="The OfficeStatus field is required."/>
-                    </p:panelGrid>
-                    <p:commandButton actionListener="#{officeController.editOffice()}" value="Save" update="display,:OfficeListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,OfficeEditDialog);"/>
+                    <h:panelGrid  columns="2" rendered="#{officeController.current != null}">
+                        <p:outputLabel value="OfficeOfficeid:" for="officeOfficeid" />
+                        <p:inputText id="officeOfficeid" value="#{officeController.current.officeOfficeid}" title="OfficeOfficeid" required="true" requiredMessage="The OfficeOfficeid field is required."/>
+                        <p:outputLabel value="OfficeName:" for="officeName" />
+                        <p:inputText id="officeName" value="#{officeController.current.officeName}" title="OfficeName" required="true" requiredMessage="The OfficeName field is required."/>
+                        <p:outputLabel value="OfficeAddress:" for="officeAddress" />
+                        <p:inputText id="officeAddress" value="#{officeController.current.officeAddress}" title="OfficeAddress" required="true" requiredMessage="The OfficeAddress field is required."/>
+                        <p:outputLabel value="OfficeContact:" for="officeContact" />
+                        <p:inputText id="officeContact" value="#{officeController.current.officeContact}" title="OfficeContact" />
+                        <p:outputLabel value="OfficeStatus:" for="officeStatus" />
+                        <p:inputText id="officeStatus" value="#{officeController.current.officeStatus}" title="OfficeStatus" required="true" requiredMessage="The OfficeStatus field is required."/>
+                    </h:panelGrid>
+                    <p:commandButton actionListener="#{officeController.editOffice()}" value="Save" update="display,:OfficeListForm:datalist,:OfficeListForm:growl" oncomplete="handleSubmit(xhr,status,args,OfficeEditDialog);"/>
                     <p:commandButton value="Cancel" onclick="OfficeEditDialog.hide()"/>
                 </h:panelGroup>
 

@@ -66,9 +66,9 @@ public class SupplierController {
         try {
             getSupplierfacade().create(current);
             setCurrent(null);
-            context.addMessage(null, new FacesMessage("Successful", "Supplier Created"));
+            context.addMessage(null, new FacesMessage("Successful!", "Supplier Created"));
         } catch (Exception ex) {
-            context.addMessage(null, new FacesMessage("Failed", "Supplier not Created"));
+            context.addMessage(null, new FacesMessage("Failed!", "Supplier Not Created"));
             setCurrent(null);
         }
     }
@@ -78,9 +78,9 @@ public class SupplierController {
         try {
             getSupplierfacade().edit(current);
             setCurrent(null);
-            context.addMessage(null, new FacesMessage("Supplier Edited", "Supplier Edited"));
+            context.addMessage(null, new FacesMessage("Successful!", "Supplier Edited"));
         } catch (Exception ex) {
-            context.addMessage(null, new FacesMessage("Failed", "Supplier not Edited"));
+            context.addMessage(null, new FacesMessage("Failed!", "Supplier Not Edited"));
             setCurrent(null);
         }
     }
@@ -90,9 +90,9 @@ public class SupplierController {
         try {
             getSupplierfacade().remove(current);
             setCurrent(null);
-            context.addMessage(null, new FacesMessage("Successful", "Supplier Deleted"));
+            context.addMessage(null, new FacesMessage("Successful!", "Supplier Deleted"));
         } catch (Exception ex) {
-            context.addMessage(null, new FacesMessage("Failed", "Supplier not Edited"));
+            context.addMessage(null, new FacesMessage("Failed!", "Supplier Not Deleted"));
             setCurrent(null);
 
         }

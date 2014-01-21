@@ -8,7 +8,7 @@
 
     <h:form id="CategoryListForm">
 
-        <p:growl id="growl" sticky="false"/>
+        <p:growl id="growl" showDetail="true" sticky="false"/>
         <p:panel header="Category List">
             <p:dataTable id="datalist" value="#{categoryController.categorylist}" var="item" selectionMode="single"
                          selection="#{categoryController.current}" paginator="true" rowKey="#{item.categoryCategoryid}"
@@ -17,21 +17,21 @@
                 <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="CategoryCategoryid"/>
+                        <p:outputLabel value="CategoryCategoryid"/>
                     </f:facet>
-                    <h:outputText value="#{item.categoryCategoryid}"/>
+                    <p:outputLabel value="#{item.categoryCategoryid}"/>
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="CategoryName"/>
+                        <p:outputLabel value="CategoryName"/>
                     </f:facet>
-                    <h:outputText value="#{item.categoryName}"/>
+                    <p:outputLabel value="#{item.categoryName}"/>
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="CategoryParentid"/>
+                        <p:outputLabel value="CategoryParentid"/>
                     </f:facet>
-                    <h:outputText value="#{item.categoryParentid}"/>
+                    <p:outputLabel value="#{item.categoryParentid}"/>
                 </p:column>
                 <f:facet name="footer">
                     <div class="footer-section">
