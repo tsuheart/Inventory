@@ -15,7 +15,7 @@
                 <h:panelGroup id="display">
                     <p:panelGrid  columns="2" rendered="#{userController.current != null}">
                         <h:outputLabel value="UserUsername:" for="userUsername" />
-                        <h:inputText id="userUsername" value="#{userController.current.userUsername}" readonly="true" title="UserUsername" required="true" requiredMessage="The UserUsername field is required."/>
+                        <h:inputText id="userUsername" value="#{userController.current.userUsername}" title="UserUsername" required="true" requiredMessage="The UserUsername field is required."/>
                         <h:outputLabel value="UserUserpassword:" for="userUserpassword" />
                         <h:inputText id="userUserpassword" value="#{userController.current.userUserpassword}" title="UserUserpassword" required="true" requiredMessage="The UserUserpassword field is required."/>
                         <h:outputLabel value="UserFirstname:" for="userFirstname" />
@@ -27,12 +27,16 @@
                         <h:outputLabel value="UserContact:" for="userContact" />
                         <h:inputText id="userContact" value="#{userController.current.userContact}" title="UserContact" />
                         <h:outputLabel value="UserStatus:" for="userStatus" />
-                        <h:inputText id="userStatus" value="#{userController.current.userStatus}" title="UserStatus" required="true" requiredMessage="The UserStatus field is required."/>
+                        <p:selectOneMenu id="userStatus" value="#{userController.current.userStatus}" required="true" requiredMessage="The SupplierStatus field is required.">  
+                            <f:selectItem itemLabel="Select One..." itemValue="" />
+                            <f:selectItem itemLabel="Active" itemValue="Active" />  
+                            <f:selectItem itemLabel="Inactive" itemValue="Inactive" /> 
+                        </p:selectOneMenu>
                         <h:outputLabel value="UserOfficeOfficeid:" for="userOfficeOfficeid" />
-                        <h:selectOneMenu id="userOfficeOfficeid" converter="#{officeConverter}" value="#{userController.current.userOfficeOfficeid}" title="UserOfficeOfficeid" required="true" requiredMessage="The UserOfficeOfficeid field is required.">
+                        <p:selectOneMenu id="userOfficeOfficeid" converter="#{officeConverter}" value="#{userController.current.userOfficeOfficeid}" required="true" requiredMessage="The UserOfficeOfficeid field is required.">
                             <!-- TODO: update below reference to list of available items-->
-                            <f:selectItems value="#{officeController.officelist}" var="o" itemValue="#{o}" itemLabel="#{o.officeOfficeid}"/>
-                        </h:selectOneMenu>
+                            <f:selectItems value="#{officeController.officelist}" var="officeid" itemValue="#{officeid}" itemLabel="#{officeid.officeName}"/>
+                        </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{userController.editUser()}" value="Save" update="display,:UserListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,UserEditDialog);"/>
                     <p:commandButton value="Cancel" onclick="UserEditDialog.hide()"/>

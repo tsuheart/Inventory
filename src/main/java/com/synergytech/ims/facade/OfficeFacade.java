@@ -29,8 +29,8 @@ public class OfficeFacade extends AbstractFacade<Office> {
         super(Office.class);
     }
     
-    public Office getByOfficeId(String office){
-        Office off=getEntityManager().createNamedQuery("Office.findByOfficeOfficeid",Office.class).setParameter("officeOfficeId", office).getSingleResult();
+    public Office getByOfficeId(Integer office){
+        Office off=getEntityManager().createNamedQuery("Office.findByOfficeOfficeid",Office.class).setParameter("officeOfficeid",office).getSingleResult();
         return off;
     }
 }

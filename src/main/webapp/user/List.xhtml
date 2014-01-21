@@ -7,7 +7,7 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <h:form id="UserListForm">
-        <p:growl id="growl" sticky="false"/>
+        <p:growl id="growl" showDetail="true" sticky="false"/>
         <p:panel header="User List">
 
             <p:dataTable id="datalist" value="#{userController.userlist}" var="item"
@@ -64,7 +64,7 @@
                     <f:facet name="header">
                         <h:outputText value="UserOfficeOfficeid"/>
                     </f:facet>
-                    <h:outputText value="#{item.userOfficeOfficeid.officeOfficeid}"/>
+                    <h:outputText value="#{item.userOfficeOfficeid.officeOfficeid}(#{item.userOfficeOfficeid.officeName})"/>
                 </p:column>
 
                 <f:facet name="footer">

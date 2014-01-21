@@ -36,10 +36,11 @@ public class OfficeConverter implements Converter {
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String newValue) throws ConverterException {
+
         if (newValue == null || newValue.isEmpty()) {
             return null;
         }
-        return (officeFacade.getByOfficeId(newValue));
+        return (officeFacade.getByOfficeId(Integer.valueOf(newValue)));
     }
 
     @Override

@@ -61,7 +61,7 @@ public class UserController {
             setCurrent(null);
             context.addMessage(null, new FacesMessage("Successful", "User Created"));
         } catch (Exception ex) {
-            context.addMessage(null, new FacesMessage("Failed", "User not Created"));
+            context.addMessage(null, new FacesMessage("Failed", "User Not Created!"));
             setCurrent(null);
         }
     }
@@ -73,7 +73,7 @@ public class UserController {
             setCurrent(null);
             context.addMessage(null, new FacesMessage("Successful", "User Edited"));
         } catch (Exception ex) {
-            context.addMessage(null, new FacesMessage("Failed", "User not Edited"));
+            context.addMessage(null, new FacesMessage("Failed", "User Not Edited!"));
             setCurrent(null);
         }
     }
@@ -85,7 +85,7 @@ public class UserController {
             setCurrent(null);
             context.addMessage(null, new FacesMessage("Successful", "User Deleted"));
         } catch (Exception ex) {
-            context.addMessage(null, new FacesMessage("Failed", "User not Edited"));
+            context.addMessage(null, new FacesMessage("Failed", "User Not Edited!"));
             setCurrent(null);
 
         }
