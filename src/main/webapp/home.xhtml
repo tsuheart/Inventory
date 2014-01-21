@@ -10,11 +10,11 @@
     <h:body>
         <ui:composition template="/template.xhtml">
             <ui:define name="title">
-                <p:outputLabel value="Inventory Mangement System"/>
+                <h:outputText value="Inventory Mangement System"/>
             </ui:define>
             <ui:define name="body">
                 <p:panel header="Welcome #{loginController.current.userFirstname} #{loginController.current.userLastname}!">
-                    <p><p:outputLabel value="Welcome to Inventory Management System (IMS)."/></p>
+                    <p:outputLabel value="Welcome to Inventory Management System (IMS)."/>
                 </p:panel>
             </ui:define>
         </ui:composition>
