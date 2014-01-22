@@ -28,5 +28,8 @@ public class StoreinFacade extends AbstractFacade<Storein> {
     public StoreinFacade() {
         super(Storein.class);
     }
-    
+    public Storein getByStoreinId(Integer storein){
+        Storein stor=getEntityManager().createNamedQuery("Store.findByStoreItemItemcode",Storein.class).setParameter("storeItemItemcode",storein).getSingleResult();
+        return stor;
+    }
 }

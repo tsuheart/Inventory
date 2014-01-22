@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="StoreinEditDlg" widgetVar="StoreinEditDialog" modal="true" resizable="false" appendToBody="true" header="Edit Stored In Items" closeOnEscape="true">
+
+            <h:form id="StoreinEditForm">
+
+                <h:panelGroup id="display">
+                    <h:panelGrid  columns="2" rendered="#{storeinController.current != null}">
+                        <p:outputLabel value="StoreinSerialno:" for="storeinSerialno" />
+                        <p:inputText id="storeinSerialno" value="#{storeinController.current.storeinSerialno}" title="StoreinSerialno" />
+                        <p:outputLabel value="StoreinQuantity:" for="storeinQuantity" />
+                        <p:inputText id="storeinQuantity" value="#{storeinController.current.storeinQuantity}" title="StoreinQuantity" required="true" requiredMessage="The StoreinQuantity field is required."/>
+                        <p:outputLabel value="StoreinMeasure:" for="storeinMeasure" />
+                        <p:inputText id="storeinMeasure" value="#{storeinController.current.storeinMeasure}" title="StoreinMeasure" required="true" requiredMessage="The StoreinMeasure field is required."/>
+                        <p:outputLabel value="StoreinCreatedDate:" for="storeinCreatedDate" />
+                        <p:inputText id="storeinCreatedDate" value="#{storeinController.current.storeinCreatedDate}" title="StoreinCreatedDate" required="true" requiredMessage="The StoreinCreatedDate field is required.">
+                            <p:outputLabel value="#{currentDate}"/>
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </p:inputText>
+                        <p:outputLabel value="StoreinItemItemcode:" for="storeinItemItemcode" />
+                        <p:selectOneMenu id="storeinItemItemcode" value="#{storeinController.current.storeinItemItemcode}" required="true" requiredMessage="The StoreinItemItemcode field is required.">
+                            <!-- TODO: update below reference to list of available items-->
+                            <f:selectItems value="" var="item" itemValue="" itemLabel=""/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="StoreinCreatedby:" for="storeinCreatedby" />
+                        <p:selectOneMenu id="storeinCreatedby" value="#{storeinController.current.storeinCreatedby}" required="true" requiredMessage="The StoreinCreatedby field is required.">
+                            <!-- TODO: update below reference to list of available items-->
+                            <f:selectItems value="#{loginController.current.userUsername}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="StoreinOfficeOfficeid:" for="storeinOfficeOfficeid" />
+                        <p:selectOneMenu id="storeinOfficeOfficeid" value="#{storeinController.current.storeinOfficeOfficeid}" required="true" requiredMessage="The StoreinOfficeOfficeid field is required.">
+                            <!-- TODO: update below reference to list of available items-->
+                            <f:selectItems value="#{loginController.current.userOfficeOfficeid.officeName}"/>
+                        </p:selectOneMenu>
+                    </h:panelGrid>
+                    <p:commandButton actionListener="#{storeinController.editStorein()}" value="Save" update="display,:StoreinListForm:datalist,:StoreinListForm:growl" oncomplete="handleSubmit(xhr,status,args,StoreinEditDialog);"/>
+                    <p:commandButton value="Cancel" onclick="StoreinEditDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>
