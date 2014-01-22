@@ -13,13 +13,13 @@
             <h:form id="CategoryCreateForm">
 
                 <h:panelGroup id="display">
-                    <h:panelGrid columns="2">
+                    <h:panelGrid  columns="2" rendered="#{categoryController.current != null}">
                         <p:outputLabel value="CategoryName:" for="categoryName" />
                         <p:inputText id="categoryName" value="#{categoryController.current.categoryName}" title="CategoryName" required="true" requiredMessage="The CategoryName field is required."/>
                         <p:outputLabel value="CategoryParentid:" for="categoryParentid" />
-                        <p:inputText id="categoryParentid" value="#{categoryController.current.categoryParentid}" title="CategoryParentid" />
+                        <p:inputText id="categoryParentid" readonly="true" value="#{categoryController.current.categoryParentid}" title="CategoryParentid" />
                     </h:panelGrid>
-                    <p:commandButton actionListener="#{categoryController.createCategory()}" value="Save" update="display,:CategoryListForm:datalist,:CategoryListForm:growl, :CategoryCreateForm" oncomplete="handleSubmit(xhr,status,args,CategoryCreateDialog);"/>
+                    <p:commandButton actionListener="#{categoryController.createCategory()}" value="Save" update="display,:CategoryListForm:tree,:CategoryListForm:growl, :CategoryCreateForm" oncomplete="handleSubmit(xhr,status,args,CategoryCreateDialog);"/>
                     <p:commandButton value="Cancel" onclick="CategoryCreateDialog.hide()"/>
                 </h:panelGroup>
 

@@ -21,7 +21,7 @@
                         <p:outputLabel value="CategoryParentid:" for="categoryParentid" />
                         <p:inputText id="categoryParentid" value="#{categoryController.current.categoryParentid}" title="CategoryParentid" />
                     </h:panelGrid>
-                    <p:commandButton actionListener="#{categoryController.editCategory()}" value="Save" update="display,:CategoryListForm:datalist,:CategoryListForm:growl" oncomplete="handleSubmit(xhr,status,args,CategoryEditDialog);"/>
+                    <p:commandButton actionListener="#{categoryController.editCategory()}" value="Save" update="display,:CategoryListForm:tree,:CategoryListForm:growl" oncomplete="handleSubmit(xhr,status,args,CategoryEditDialog);"/>
                     <p:commandButton value="Cancel" onclick="CategoryEditDialog.hide()"/>
                 </h:panelGroup>
 
