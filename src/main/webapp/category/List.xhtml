@@ -11,20 +11,20 @@
         <p:growl id="growl" showDetail="true" sticky="false"/>
         <p:panel header="Category List">
             <p:tree value="#{categoryController.makeTree()}" var="node" dynamic="true" cache="false"  
-                    selectionMode="single"  selection="#{categoryController.selectedNode}" id="tree">  
+                    selectionMode="single"  selection="#{categoryController.current}" id="tree">  
  
-                <p:ajax event="select" update=":CategoryListForm:growl" listener="#{categoryController.onNodeSelect}" />  
-                <p:ajax event="unselect" update=":CategoryListForm:growl" listener="#{categoryController.onNodeUnselect}" />  
+                <p:ajax event="select" update=":CategoryListForm:growl,:CategoryCreateForm,:CategoryListForm:viewButton,:CategoryListForm:createButton,:CategoryListForm:editButton,:CategoryListForm:deleteButton" listener="#{categoryController.onNodeSelect}" />  
+                <p:ajax event="unselect" update=":CategoryListForm:growl,:CategoryCreateForm,:CategoryListForm:viewButton,:CategoryListForm:createButton,:CategoryListForm:editButton,:CategoryListForm:deleteButton" listener="#{categoryController.onNodeUnselect}" />  
 
                 <p:treeNode>  
                     <h:outputText value="#{node}" />  
                 </p:treeNode>  
             </p:tree>
-            <f:facet name="footer">
+            <f:facet id="footer" name="footer">
                 <div class="footer-section">
                     <p:commandButton id="createButton" icon="ui-icon-plus"   value="Create" action="#{categoryController.prepareCreate()}" oncomplete="CategoryCreateDialog.show()"/>
-                    <p:commandButton id="viewButton"   icon="ui-icon-search" value="View" update=":CategoryViewForm" oncomplete="CategoryViewDialog.show()" disabled="#{empty categoryController.current}"/>
-                    <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Edit" update=":CategoryEditForm" oncomplete="CategoryEditDialog.show()" disabled="#{empty categoryController.current}"/>
+                    <p:commandButton id="viewButton"   icon="ui-icon-search" value="View" action="#{categoryController.viewButton()}" update=":CategoryViewForm" oncomplete="CategoryViewDialog.show()" disabled="#{empty categoryController.current}"/>
+                    <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Edit" action="#{categoryController.viewButton()}" update=":CategoryEditForm" oncomplete="CategoryEditDialog.show()" disabled="#{empty categoryController.current}"/>
                     <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="Delete" actionListener="#{categoryController.deleteCategory()}" update=":CategoryListForm:growl ,tree" disabled="#{empty categoryController.current}"/>
                 </div>
             </f:facet>

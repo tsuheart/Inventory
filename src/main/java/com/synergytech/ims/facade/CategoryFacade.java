@@ -30,8 +30,9 @@ public class CategoryFacade extends AbstractFacade<Category> {
         super(Category.class);
     }
     
-    public Category getByCategoryID(Integer category){
-        Category cat=getEntityManager().createNamedQuery("Category.findByCategoryCategoryid",Category.class).setParameter("categoryCategoryid", category).getSingleResult();
+    
+    public Category getByCategoryID(Integer id){
+        Category cat=getEntityManager().createNamedQuery("Category.findByCategoryCategoryid",Category.class).setParameter("categoryCategoryid", id).getSingleResult();
         return cat;
     }
     

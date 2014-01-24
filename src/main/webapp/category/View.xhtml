@@ -8,17 +8,17 @@
 
     <ui:composition>
 
-        <p:dialog id="CategoryViewDlg" widgetVar="CategoryViewDialog" modal="true" resizable="false" appendToBody="true" header="View Supplier" closeOnEscape="true">
+        <p:dialog id="CategoryViewDlg" widgetVar="CategoryViewDialog" modal="true" resizable="false" appendToBody="true" header="View Category" closeOnEscape="true">
 
             <h:form id="CategoryViewForm">
 
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{categoryController.current != null}">
-                        <p:outputLabel value="CategoryCategoryid:"/>
+                        <p:outputLabel value="Category id:"/>
                         <p:outputLabel value="#{categoryController.current.categoryCategoryid}" title="CategoryCategoryid"/>
-                        <p:outputLabel value="CategoryName:"/>
+                        <p:outputLabel value="Category Name:"/>
                         <p:outputLabel value="#{categoryController.current.categoryName}" title="CategoryName"/>
-                        <p:outputLabel value="CategoryParentid:"/>
+                        <p:outputLabel value="Category Parentid:"/>
                         <p:outputLabel value="#{categoryController.current.categoryParentid}" title="CategoryParentid"/>
                     </p:panelGrid>
                     <p:commandButton value="Close" onclick="CategoryViewDialog.hide()"/>
