@@ -29,4 +29,8 @@ public class ItemFacade extends AbstractFacade<Item> {
         super(Item.class);
     }
     
+    public Item getByItemcode(String itemcode){
+        Item itm=getEntityManager().createNamedQuery("Item.findByItemItemcode",Item.class).setParameter("itemItemcode",itemcode).getSingleResult();
+        return itm;
+    }
 }

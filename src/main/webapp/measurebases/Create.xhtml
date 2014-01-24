@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MeasurebasesCreateDlg" widgetVar="MeasurebasesCreateDialog" modal="true" resizable="false" appendToBody="true" header="Create Measurebases" closeOnEscape="true">
+
+            <h:form id="MeasurebasesCreateForm">
+
+                <h:panelGroup id="display">
+                    <h:panelGrid columns="2">
+                        <p:outputLabel value="MeasurebasesName:" for="measurebasesName" />
+                        <p:inputText id="measurebasesName" value="#{measurebasesController.current.measurebasesName}" title="MeasurebasesName" required="true" requiredMessage="The MeasurebasesName field is required."/>
+                        <p:outputLabel value="MeasurebasesUnit:" for="measurebasesUnit" />
+                        <p:inputText id="measurebasesUnit" value="#{measurebasesController.current.measurebasesUnit}" title="MeasurebasesUnit" />
+                        <p:outputLabel value="MeasurebasesFactor:" for="measurebasesFactor" />
+                        <p:inputText id="measurebasesFactor" value="#{measurebasesController.current.measurebasesFactor}" title="MeasurebasesFactor" />
+                        <p:outputLabel value="MeasurebasesParentid:" for="measurebasesParentid" />
+                        <p:inputText id="measurebasesParentid" value="#{measurebasesController.current.measurebasesParentid}" title="MeasurebasesParentid" />
+                        <p:outputLabel value="MeasurebasesHierarchy:" for="measurebasesHierarchy" />
+                        <p:selectOneMenu id="measurebasesHierarchy" value="#{measurebasesController.current.measurebasesHierarchy}" required="true" requiredMessage="The Measurebases Hierarchy field is required.">  
+                            <f:selectItem itemLabel="Select One..." itemValue="" />
+                            <f:selectItem itemLabel="-1" itemValue="-1" />  
+                            <f:selectItem itemLabel="0" itemValue="0" /> 
+                            <f:selectItem itemLabel="1" itemValue="1" /> 
+                        </p:selectOneMenu>
+                    </h:panelGrid>
+                    <p:commandButton action="#{measurebasesController.createMeasurebases()}" value="Save" update="display,:MeasurebasesListForm:datalist,:MeasurebasesListForm:growl, :MeasurebasesCreateForm" oncomplete="handleSubmit(xhr,status,args,MeasurebasesCreateDialog);"/>
+                    <p:commandButton value="Cancel" onclick="MeasurebasesCreateDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

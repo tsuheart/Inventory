@@ -5,8 +5,8 @@
  */
 package com.synergytech.ims.converter;
 
-import com.synergytech.ims.entities.Category;
-import com.synergytech.ims.facade.CategoryFacade;
+import com.synergytech.ims.entities.Item;
+import com.synergytech.ims.facade.ItemFacade;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -21,21 +21,26 @@ import javax.faces.convert.ConverterException;
  */
 @ManagedBean
 @RequestScoped
-public class CategoryConverter implements Converter {
+public class ItemConverter implements Converter {
 
+    /**
+     *
+     * @author Administrator
+     */
     @EJB
-    private CategoryFacade categoryFacade;
+    private ItemFacade itemFacade;
 
-    public CategoryFacade getFacade() {
-        return categoryFacade;
+    public ItemFacade getItemFacade() {
+        return itemFacade;
     }
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String newValue) throws ConverterException {
+
         if (newValue == null || newValue.isEmpty()) {
             return null;
         }
-        return (categoryFacade.getByCategoryID(Integer.valueOf(newValue)));
+        return (itemFacade.getByItemcode(newValue));
     }
 
     @Override
@@ -44,14 +49,14 @@ public class CategoryConverter implements Converter {
             return null; // Or an empty string, can also.
         }
 
-        if (!(value instanceof Category)) {
-            throw new ConverterException("The value is not a valid Category: " + value);
+        if (!(value instanceof Item)) {
+            throw new ConverterException("The value is not a valid Item: " + value);
         }
-        Integer catid = ((Category)value).getCategoryCategoryid();
-        return (catid != null) ? String.valueOf(catid) : null;
+        String itemcode = ((Item) value).getItemItemcode();
+        return (itemcode != null) ? String.valueOf(itemcode) : null;
     }
 
-    public CategoryConverter() {
+    public ItemConverter() {
     }
 
 }

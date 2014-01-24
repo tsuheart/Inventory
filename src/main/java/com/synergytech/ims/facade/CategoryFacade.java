@@ -7,6 +7,7 @@
 package com.synergytech.ims.facade;
 
 import com.synergytech.ims.entities.Category;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -29,9 +30,22 @@ public class CategoryFacade extends AbstractFacade<Category> {
         super(Category.class);
     }
     
-    public Category getByCategoryID(String category){
+    public Category getByCategoryID(Integer category){
         Category cat=getEntityManager().createNamedQuery("Category.findByCategoryCategoryid",Category.class).setParameter("categoryCategoryid", category).getSingleResult();
         return cat;
+    }
+    
+    public List<Category> getByParentID(Integer pid){
+        return getEntityManager().createNamedQuery("Category.findByCategoryParentid", Category.class).setParameter("categoryParentid", pid).getResultList();
+    }
+    
+    public List<Category> getByParentNullID(){
+        return getEntityManager().createNamedQuery("Category.findByParentNullID", Category.class).getResultList();
+    }
+    
+    public Integer getByCategoryName(String category){
+        Category cat=getEntityManager().createNamedQuery("Category.findByCategoryName",Category.class).setParameter("categoryName", category).getSingleResult();
+        return cat.getCategoryCategoryid();
     }
     
 }

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition>
+
+        <p:dialog id="MeasurebasesViewDlg" widgetVar="MeasurebasesViewDialog" modal="true" resizable="false" appendToBody="true" header="Measurebases View" closeOnEscape="true">
+
+            <h:form id="MeasurebasesViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{measurebasesController.current != null}">
+                        <h:outputText value="MeasurebasesMeasureid:"/>
+                        <h:outputText value="#{measurebasesController.current.measurebasesMeasureid}" title="MeasurebasesMeasureid"/>
+                        <h:outputText value="MeasurebasesName:"/>
+                        <h:outputText value="#{measurebasesController.current.measurebasesName}" title="MeasurebasesName"/>
+                        <h:outputText value="MeasurebasesUnit:"/>
+                        <h:outputText value="#{measurebasesController.current.measurebasesUnit}" title="MeasurebasesUnit"/>
+                        <h:outputText value="MeasurebasesFactor:"/>
+                        <h:outputText value="#{measurebasesController.current.measurebasesFactor}" title="MeasurebasesFactor"/>
+                        <h:outputText value="MeasurebasesParentid:"/>
+                        <h:outputText value="#{measurebasesController.current.measurebasesParentid}" title="MeasurebasesParentid"/>
+                        <h:outputText value="MeasurebasesHierarchy:"/>
+                        <h:outputText value="#{measurebasesController.current.measurebasesHierarchy}" title="MeasurebasesHierarchy"/>
+                    </p:panelGrid>
+                    <p:commandButton value="Close" onclick="MeasurebasesViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

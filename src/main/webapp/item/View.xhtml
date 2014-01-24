@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition>
+
+        <p:dialog id="ItemViewDlg" widgetVar="ItemViewDialog" modal="true" resizable="false" appendToBody="true" header="Item View" closeOnEscape="true">
+
+            <h:form id="ItemViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{itemController.current != null}">
+                        <p:outputLabel value="ItemItemcode:"/>
+                        <p:outputLabel value="#{itemsController.current.itemItemcode}" title="ItemItemcode"/>
+                        <p:outputLabel value="ItemName:"/>
+                        <p:outputLabel value="#{itemsController.current.itemName}" title="ItemName"/>
+                        <p:outputLabel value="ItemRemark:"/>
+                        <p:outputLabel value="#{itemsController.current.itemRemark}" title="ItemRemark"/>
+                        <p:outputLabel value="ItemStatus:"/>
+                        <p:outputLabel value="#{itemsController.current.itemStatus}" title="ItemStatus"/>
+                        <p:outputLabel value="ItemCategoryCategoryid:"/>
+                        <p:outputLabel value="#{itemsController.current.itemCategoryCategoryid}" title="ItemCategoryCategoryid"/>
+                        <p:outputLabel value="ItemMeasurebasesMeasureid:"/>
+                        <p:outputLabel value="#{itemsController.current.itemMeasurebasesMeasureid}" title="ItemMeasurebasesMeasureid"/>
+                    </p:panelGrid>
+                    <p:commandButton value="Close" onclick="ItemViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

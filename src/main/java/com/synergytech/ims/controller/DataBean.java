@@ -7,13 +7,16 @@ package com.synergytech.ims.controller;
 
 import com.synergytech.ims.entities.Category;
 import com.synergytech.ims.facade.CategoryFacade;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import org.primefaces.event.NodeCollapseEvent;
+import org.primefaces.event.NodeExpandEvent;
 import org.primefaces.event.NodeSelectEvent;
 import org.primefaces.event.NodeUnselectEvent;
 import org.primefaces.model.DefaultTreeNode;
@@ -23,38 +26,30 @@ import org.primefaces.model.TreeNode;
  *
  * @author tsuheart
  */
-@ManagedBean
-@ViewScoped
-public class CategoryController {
+@Named(value = "dataBean")
+@SessionScoped
+public class DataBean implements Serializable {
 
     @EJB
-    CategoryFacade categoryFacade;
-    Category current;
+    CategoryFacade categoryfacade;
     List<Category> categorylist;
+
+    /**
+     * Creates a new instance of DataBean
+     */
     private TreeNode root;
     private TreeNode actualRoot, tempRoot;
     private TreeNode selectedNode;
 
-    /**
-     * Creates a new instance of CategoryController
-     */
-    public CategoryFacade getCategoryFacade() {
-        return categoryFacade;
+    public CategoryFacade getCategoryfacade() {
+        return categoryfacade;
     }
 
-    public Category getCurrent() {
-        return current;
-    }
-
-    public void setCurrent(Category current) {
-        this.current = current;
-    }
-
-    public CategoryController() {
+    public void setCategoryfacade(CategoryFacade categoryfacade) {
+        this.categoryfacade = categoryfacade;
     }
 
     public List<Category> getCategorylist() {
-        categorylist = getCategoryFacade().findAll();
         return categorylist;
     }
 
@@ -78,57 +73,13 @@ public class CategoryController {
         this.selectedNode = selectedNode;
     }
 
-    public void prepareCreate() {
-        if (current == null) {
-            current = new Category();
-        }
-    }
-
-    public void createCategory() {
-        FacesContext context = FacesContext.getCurrentInstance();
-        try {
-            getCategoryFacade().create(current);
-            setCurrent(null);
-            context.addMessage(null, new FacesMessage("Successful!", "Category Created"));
-        } catch (Exception ex) {
-            context.addMessage(null, new FacesMessage("Failed!", "Category Not Created"));
-            setCurrent(null);
-        }
-    }
-
-    public void editCategory() {
-        FacesContext context = FacesContext.getCurrentInstance();
-        try {
-            getCategoryFacade().edit(current);
-            setCurrent(null);
-            context.addMessage(null, new FacesMessage("Successful!", "Category Edited"));
-        } catch (Exception ex) {
-            context.addMessage(null, new FacesMessage("Failed!", "Category Not Edited"));
-            setCurrent(null);
-        }
-    }
-
-    public void deleteCategory() {
-        FacesContext context = FacesContext.getCurrentInstance();
-        try {
-            getCategoryFacade().remove(current);
-            setCurrent(null);
-            context.addMessage(null, new FacesMessage("Successful!", "Category Deleted"));
-        } catch (Exception ex) {
-            context.addMessage(null, new FacesMessage("Failed!", "Category Not Deleted"));
-            setCurrent(null);
-
-        }
-    }
-
-    public List<Category> All() {
-        return getCategoryFacade().findAll();
+    public DataBean() {
     }
 
     public TreeNode makeTree() {
         root = new DefaultTreeNode("Root", null);
         actualRoot = new DefaultTreeNode("Root", null);
-        categorylist = getCategoryFacade().getByParentNullID();
+        categorylist = getCategoryfacade().getByParentNullID();
         for (Iterator<Category> it = categorylist.iterator(); it.hasNext();) {
             Category category = it.next();
             actualRoot = new DefaultTreeNode(category.getCategoryName(), root);
@@ -140,7 +91,7 @@ public class CategoryController {
 
     public void createTree(Integer Pid, String categoryName, TreeNode subRoot) {
         List<Category> subRootList;
-        subRootList = getCategoryFacade().getByParentID(Pid);
+        subRootList = getCategoryfacade().getByParentID(Pid);
         if (!subRootList.isEmpty()) {
             for (Iterator<Category> it = subRootList.iterator(); it.hasNext();) {
                 Category category = it.next();
@@ -149,13 +100,28 @@ public class CategoryController {
             }
         }
     }
-    
+
+    public void onNodeExpand(NodeExpandEvent event) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Expanded", event.getTreeNode().toString());
+
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+
+    public void onNodeCollapse(NodeCollapseEvent event) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Collapsed", event.getTreeNode().toString());
+
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+
     public void onNodeSelect(NodeSelectEvent event) {
-        String categoryName = event.getTreeNode().toString();
-        Integer pid = getCategoryFacade().getByCategoryName(categoryName);
-        prepareCreate();
-        getCurrent().setCategoryParentid(pid);
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Selected", categoryName);
+        TreeNode node=event.getTreeNode();
+        
+        while(!node.getParent().toString().equals("Root")){
+            //parent=node.toString();
+            node=node.getParent();
+        } 
+        String parent=node.toString();
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Selected", parent);
         FacesContext.getCurrentInstance().addMessage(null, message);
         //RequestContext context = RequestContext.getCurrentInstance();
         //context.execute("createDialog.show();");
