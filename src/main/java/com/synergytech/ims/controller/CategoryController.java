@@ -7,6 +7,7 @@ package com.synergytech.ims.controller;
 
 import com.synergytech.ims.entities.Category;
 import com.synergytech.ims.facade.CategoryFacade;
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
 import javax.ejb.EJB;
@@ -14,8 +15,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import org.primefaces.event.NodeCollapseEvent;
-import org.primefaces.event.NodeExpandEvent;
+import org.primefaces.context.RequestContext;
 import org.primefaces.event.NodeSelectEvent;
 import org.primefaces.event.NodeUnselectEvent;
 import org.primefaces.model.DefaultTreeNode;
@@ -27,7 +27,7 @@ import org.primefaces.model.TreeNode;
  */
 @ManagedBean
 @ViewScoped
-public class CategoryController {
+public class CategoryController implements Serializable {
 
     @EJB
     CategoryFacade categoryFacade;
@@ -113,6 +113,12 @@ public class CategoryController {
     public void deleteCategory() {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
+            List<Category> tobeDeletedlist;
+            tobeDeletedlist=getCategoryFacade().getByParentID(current.getCategoryParentid());
+            for (Iterator<Category> it = tobeDeletedlist.iterator(); it.hasNext();) {
+                Category category = it.next();
+                getCategoryFacade().remove(category);                
+            }
             getCategoryFacade().remove(current);
             setCurrent(null);
             context.addMessage(null, new FacesMessage("Successful!", "Category Deleted"));
@@ -133,7 +139,7 @@ public class CategoryController {
         categorylist = getCategoryFacade().getByParentNullID();
         for (Iterator<Category> it = categorylist.iterator(); it.hasNext();) {
             Category category = it.next();
-            actualRoot = new DefaultTreeNode(category.getCategoryName(), root);
+            actualRoot = new DefaultTreeNode(category, root);
             createTree(category.getCategoryCategoryid(), category.getCategoryName(), actualRoot);
             actualRoot.setParent(root);
         }
@@ -146,7 +152,7 @@ public class CategoryController {
         if (!subRootList.isEmpty()) {
             for (Iterator<Category> it = subRootList.iterator(); it.hasNext();) {
                 Category category = it.next();
-                TreeNode node = new DefaultTreeNode(category.getCategoryName(), subRoot);
+                TreeNode node = new DefaultTreeNode(category, subRoot);
                 createTree(category.getCategoryCategoryid(), category.getCategoryName(), node);
             }
         }
@@ -154,18 +160,22 @@ public class CategoryController {
     
     public void onNodeSelect(NodeSelectEvent event) {
         String categoryName = event.getTreeNode().toString();
-        Integer pid = getCategoryFacade().getByCategoryName(categoryName);
-        prepareCreate();
-        getCurrent().setCategoryParentid(pid);
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Selected", categoryName);
+//        Integer pid = getCategoryFacade().getByCategoryName(categoryName);
+//        prepareCreate();
+//        getCurrent().setCategoryParentid(pid);
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Selected", categoryName);        
         FacesContext.getCurrentInstance().addMessage(null, message);
-        //RequestContext context = RequestContext.getCurrentInstance();
-        //context.execute("createDialog.show();");
+//        RequestContext context = RequestContext.getCurrentInstance();
+//        context.execute("createDialog.show();");
     }
 
     public void onNodeUnselect(NodeUnselectEvent event) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Unselected", event.getTreeNode().toString());
 
         FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+    
+    public void viewButton(){
+        setCurrent(getCategoryFacade().getByCategoryID(getCurrent().getCategoryParentid()));
     }
 }

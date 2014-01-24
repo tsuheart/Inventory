@@ -35,7 +35,7 @@ public class CategoryConverter implements Converter {
         if (newValue == null || newValue.isEmpty()) {
             return null;
         }
-        return (categoryFacade.getByCategoryID(newValue));
+        return (categoryFacade.getByCategoryID(Integer.valueOf(newValue)));
     }
 
     @Override
