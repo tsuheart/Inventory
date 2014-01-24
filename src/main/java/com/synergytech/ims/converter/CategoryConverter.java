@@ -26,16 +26,17 @@ public class CategoryConverter implements Converter {
     @EJB
     private CategoryFacade categoryFacade;
 
-    public CategoryFacade getFacade() {
+    public CategoryFacade getCategoryFacade() {
         return categoryFacade;
     }
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String newValue) throws ConverterException {
+
         if (newValue == null || newValue.isEmpty()) {
             return null;
         }
-        return (categoryFacade.getByCategoryID(Integer.valueOf(newValue)));
+        return (categoryFacade.getByCategoryId(Integer.valueOf(newValue)));
     }
 
     @Override
@@ -47,11 +48,9 @@ public class CategoryConverter implements Converter {
         if (!(value instanceof Category)) {
             throw new ConverterException("The value is not a valid Category: " + value);
         }
-        Integer catid = ((Category)value).getCategoryCategoryid();
+        Integer catid = ((Category) value).getCategoryCategoryid();
         return (catid != null) ? String.valueOf(catid) : null;
     }
 
-    public CategoryConverter() {
-    }
 
 }

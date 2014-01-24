@@ -175,6 +175,6 @@ public class CategoryController implements Serializable {
     }
     
     public void viewButton(){
-        setCurrent(getCategoryFacade().getByCategoryID(getCurrent().getCategoryParentid()));
+        setCurrent(getCategoryFacade().getByCategoryId(getCurrent().getCategoryParentid()));
     }
 }
