@@ -11,23 +11,25 @@
         <p:dialog id="StoreinCreateDlg" widgetVar="StoreinCreateDialog" modal="true" resizable="false" appendToBody="true" header="Store In Item" closeOnEscape="true">
 
             <h:form id="StoreinCreateForm">
-                
+
                 <h:panelGroup id="display">
                     <h:panelGrid columns="2">
                         <p:outputLabel value="StoreinSerialno:" for="storeinSerialno" />
-                        <p:inputText id="storeinSerialno" value="#{storeinController.current.storeinSerialno}" title="StoreinSerialno">
-                            <p:focus 
-                        </p:inputText>
+                        <p:inputText id="storeinSerialno" value="#{storeinController.current.storeinSerialno}" title="StoreinSerialno"/>
                         <p:outputLabel value="StoreinQuantity:" for="storeinQuantity" />
                         <p:inputText id="storeinQuantity" value="#{storeinController.current.storeinQuantity}" title="StoreinQuantity" required="true" requiredMessage="The StoreinQuantity field is required."/>
                         <p:outputLabel value="StoreinMeasure:" for="storeinMeasure" />
-                        <p:inputText id="storeinMeasure" value="#{storeinController.current.storeinMeasure}" title="StoreinMeasure" required="true" requiredMessage="The StoreinMeasure field is required."/>
-                        <p:outputLabel value="StoreinCreatedDate:" for="storeinCreatedDate" />
-                        <p:inputText id="storeinCreatedDate" value="#{java.util.Date}"/>
-                        <p:outputLabel value="StoreinItemItemcode:" for="storeinItemItemcode" />
-                        <p:selectOneMenu id="storeinItemItemcode" value="#{storeinController.current.storeinItemItemcode}" required="true" requiredMessage="The StoreinItemItemcode field is required.">
+                        <p:selectOneMenu id="storeinMeasure" value="#{storeinController.current.storeinMeasure}" converter="#{measurebasesConverter}" required="true" requiredMessage="The StoreinMeasure field is required.">
                             <!-- TODO: update below reference to list of available items-->
-                            <f:selectItems value="" var="item" itemValue="" itemLabel=""/>
+                            <f:selectItems value="#{measurebasesController.measurebaseslist}" var="meas" itemValue="#{meas}" itemLabel="#{meas.measurebasesName}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="StoreinCreatedDate:" for="storeinCreatedDate" />
+
+                        <p:inputText id="storeinCreatedDate" value="#{storeinController.current.storeinCreatedDate}" required="true" requiredMessage="Date required"/>
+                        <p:outputLabel value="StoreinItemItemcode:" for="storeinItemItemcode" />
+                        <p:selectOneMenu id="storeinItemItemcode" value="#{storeinController.current.storeinItemItemcode}" converter="#{itemConverter}" required="true" requiredMessage="The StoreinItemItemcode field is required.">
+                            <!-- TODO: update below reference to list of available items-->
+                            <f:selectItems value="#{itemsController.itemlist}" var="item" itemValue="#{item}" itemLabel="#{item.itemName}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="StoreinCreatedby:" for="storeinCreatedby" />
                         <p:inputText id="storeinCreatedby" value="#{loginController.current.userUsername}" readonly="true" title="StoreinCreatedby"/>

@@ -13,7 +13,7 @@
             <h:form id="ItemEditForm">
 
                 <h:panelGroup id="display">
-                    <h:panelGrid  columns="2" rendered="#{itemController.current != null}">
+                    <h:panelGrid  columns="2" rendered="#{itemsController.current != null}">
                         <p:outputLabel value="ItemItemcode:" for="itemItemcode" />
                         <p:inputText id="itemItemcode" value="#{itemsController.current.itemItemcode}" readonly="true" title="ItemItemcode" required="true" requiredMessage="The ItemItemcode field is required."/>
                         <p:outputLabel value="ItemName:" for="itemName" />

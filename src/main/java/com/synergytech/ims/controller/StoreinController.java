@@ -6,8 +6,10 @@
 package com.synergytech.ims.controller;
 
 import com.synergytech.ims.entities.Storein;
-import com.synergytech.ims.entities.User;
 import com.synergytech.ims.facade.StoreinFacade;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -44,14 +46,14 @@ public class StoreinController {
     }
 
     public List<Storein> getStoreinlist() {
-        storeinlist=storeinFacade.findAll();
+        storeinlist = storeinFacade.findAll();
         return storeinlist;
     }
 
     public void setStoreinlist(List<Storein> storeinlist) {
         this.storeinlist = storeinlist;
     }
-    
+
     public void createStorein() {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
@@ -93,6 +95,15 @@ public class StoreinController {
         if (current == null) {
             current = new Storein();
         }
+    }
+
+    public String getCurrentDate() {
+        String dateString = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar calendar = Calendar.getInstance();
+        Date date = calendar.getTime();
+        dateString = sdf.format(date);
+        return dateString;
     }
 
     public StoreinController() {

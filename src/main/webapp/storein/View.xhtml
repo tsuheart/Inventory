@@ -24,16 +24,16 @@
                         <p:outputLabel value="#{storeinController.current.storeinMeasure}" title="StoreinMeasure"/>
                         <p:outputLabel value="StoreinCreatedDate:"/>
                         <p:outputLabel value="#{storeinController.current.storeinCreatedDate}" title="StoreinCreatedDate">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
                         </p:outputLabel>
                         <p:outputLabel value="StoreinItemItemcode:"/>
-                        <p:outputLabel value="#{storeinController.current.storeinItemItemcode}" title="StoreinItemItemcode"/>
+                        <p:outputLabel value="#{storeinController.current.storeinItemItemcode.itemItemcode}" title="StoreinItemItemcode"/>
                         <p:outputLabel value="StoreinCreatedby:"/>
-                        <p:outputLabel value="#{storeinController.current.storeinCreatedby}" title="StoreinCreatedby"/>
+                        <p:outputLabel value="#{storeinController.current.storeinCreatedby.userFirstname}" title="StoreinCreatedby"/>
                         <p:outputLabel value="StoreinOfficeOfficeid:"/>
-                        <p:outputLabel value="#{storeinController.current.storeinOfficeOfficeid}" title="StoreinOfficeOfficeid"/>
+                        <p:outputLabel value="#{storeinController.current.storeinOfficeOfficeid.officeName}" title="StoreinOfficeOfficeid"/>
                     </p:panelGrid>
-                    <p:commandButton value="Close" onclick="OfficeViewDialog.hide()"/>
+                    <p:commandButton value="Close" onclick="StoreinViewDialog.hide()"/>
                 </h:panelGroup>
 
             </h:form>
