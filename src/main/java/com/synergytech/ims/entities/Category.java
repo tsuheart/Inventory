@@ -121,7 +121,7 @@ public class Category implements Serializable {
 
     @Override
     public String toString() {
-        return "com.synergytech.ims.entities.Category[ categoryCategoryid=" + categoryCategoryid + " ]";
+        return categoryName;
     }
     
 }

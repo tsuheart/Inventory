@@ -30,7 +30,7 @@ public class CategoryController implements Serializable {
 
     @EJB
     CategoryFacade categoryFacade;
-    Category current;
+    Category current, treeObject;
     List<Category> categorylist;
     private TreeNode root;
     private TreeNode actualRoot, tempRoot;
@@ -79,9 +79,23 @@ public class CategoryController implements Serializable {
         this.selectedNode = selectedNode;
     }
 
+    public Category getTreeObject() {
+        return treeObject;
+    }
+
+    public void setTreeObject(Category treeObject) {
+        this.treeObject = treeObject;
+    }
+
     public void prepareCreate() {
         if (current == null) {
             current = new Category();
+        }
+    }
+    
+    public void prepareTreeObject() {
+        if (treeObject == null) {
+            treeObject = new Category();
         }
     }
 
@@ -89,7 +103,7 @@ public class CategoryController implements Serializable {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
             getCategoryFacade().create(current);
-            setCurrent(null);
+            setCurrent(null);            
             context.addMessage(null, new FacesMessage("Successful!", "Category Created"));
         } catch (Exception ex) {
             context.addMessage(null, new FacesMessage("Failed!", "Category Not Created"));
@@ -113,10 +127,10 @@ public class CategoryController implements Serializable {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
             List<Category> tobeDeletedlist;
-            tobeDeletedlist=getCategoryFacade().getByParentID(current.getCategoryParentid());
+            tobeDeletedlist = getCategoryFacade().getByParentID(current.getCategoryCategoryid());
             for (Iterator<Category> it = tobeDeletedlist.iterator(); it.hasNext();) {
                 Category category = it.next();
-                getCategoryFacade().remove(category);                
+                getCategoryFacade().remove(category);
             }
             getCategoryFacade().remove(current);
             setCurrent(null);
@@ -156,25 +170,36 @@ public class CategoryController implements Serializable {
             }
         }
     }
-    
+
     public void onNodeSelect(NodeSelectEvent event) {
-        String categoryName = event.getTreeNode().toString();
-//        Integer pid = getCategoryFacade().getByCategoryName(categoryName);
-//        prepareCreate();
-//        getCurrent().setCategoryParentid(pid);
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Selected", categoryName);        
+        prepareTreeObject();
+        treeObject = (Category) event.getTreeNode().getData();
+        otherClick();
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Selected", treeObject.getCategoryName());
         FacesContext.getCurrentInstance().addMessage(null, message);
 //        RequestContext context = RequestContext.getCurrentInstance();
 //        context.execute("createDialog.show();");
     }
 
     public void onNodeUnselect(NodeUnselectEvent event) {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Unselected", event.getTreeNode().toString());
-
+        prepareTreeObject();
+        treeObject = (Category) event.getTreeNode().getData();
+        setCurrent(null);
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Unselected", treeObject.getCategoryName());
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
+
+    public void createClick() {
+        setCurrent(null);
+        prepareCreate();
+        if (treeObject != null) {
+            getCurrent().setCategoryParentid(treeObject.getCategoryCategoryid());
+        }        
+    }
     
-    public void viewButton(){
-        setCurrent(getCategoryFacade().getByCategoryId(getCurrent().getCategoryParentid()));
+    public void otherClick(){
+        if(treeObject!=null){
+            setCurrent(treeObject);
+        }
     }
 }
