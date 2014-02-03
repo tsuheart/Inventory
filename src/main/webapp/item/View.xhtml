@@ -13,7 +13,7 @@
             <h:form id="ItemViewForm">
 
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{itemController.current != null}">
+                    <p:panelGrid columns="2" rendered="#{itemsController != null}">
                         <p:outputLabel value="ItemItemcode:"/>
                         <p:outputLabel value="#{itemsController.current.itemItemcode}" title="ItemItemcode"/>
                         <p:outputLabel value="ItemName:"/>

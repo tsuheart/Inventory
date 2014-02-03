@@ -60,7 +60,7 @@
                     <f:facet name="header">
                         <p:outputLabel value="StoreinCreatedby"/>
                     </f:facet>
-                    <p:outputLabel value="#{item.storeinCreatedby}"/>
+                    <p:outputLabel value="#{item.storeinCreatedby.userFirstname}"/>
                 </p:column>
                 <p:column>
                     <f:facet name="header">
@@ -71,8 +71,8 @@
                 <f:facet name="footer">
                     <div class="footer-section">
                         <p:commandButton id="createButton" icon="ui-icon-plus"   value="Create" actionListener="#{storeinController.prepareCreate()}" oncomplete="StoreinCreateDialog.show()"/>
-                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="View" update=":StoreinViewForm" oncomplete="OfficeViewDialog.show()" disabled="#{empty storeinController.current}"/>
-                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Edit" update=":StoreinEditForm" oncomplete="OfficeEditDialog.show()" disabled="#{empty storeinController.current}"/>
+                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="View" update=":StoreinViewForm" oncomplete="StoreinViewDialog.show()" disabled="#{empty storeinController.current}"/>
+                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Edit" update=":StoreinEditForm" oncomplete="StoreinEditDialog.show()" disabled="#{empty storeinController.current}"/>
                         <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="Delete" actionListener="#{storeinController.deleteStorein()}" update=":StoreinListForm:growl,datalist" disabled="#{empty storeinController.current}"/>
                     </div>
                 </f:facet>
