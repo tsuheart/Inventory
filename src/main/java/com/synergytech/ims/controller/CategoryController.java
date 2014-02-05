@@ -165,11 +165,12 @@ public class CategoryController implements Serializable {
     }
 
     private TreeNode rootNode;
+
     @PostConstruct
-   public void init(){
-      rootNode=makeTree();
-   }
-   
+    public void init() {
+        rootNode = makeTree();
+    }
+
     public TreeNode makeTree() {
         System.out.println("make tree");
         root = new DefaultTreeNode("Root", null);
