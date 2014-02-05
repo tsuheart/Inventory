@@ -33,6 +33,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Measurebases.findAll", query = "SELECT m FROM Measurebases m"),
+    @NamedQuery(name = "Measurebases.findByParentNullID", query = "SELECT m FROM Measurebases m WHERE m.measurebasesMeasureid IS NULL"),
     @NamedQuery(name = "Measurebases.findByMeasurebasesMeasureid", query = "SELECT m FROM Measurebases m WHERE m.measurebasesMeasureid = :measurebasesMeasureid"),
     @NamedQuery(name = "Measurebases.findByMeasurebasesName", query = "SELECT m FROM Measurebases m WHERE m.measurebasesName = :measurebasesName"),
     @NamedQuery(name = "Measurebases.findByMeasurebasesUnit", query = "SELECT m FROM Measurebases m WHERE m.measurebasesUnit = :measurebasesUnit"),

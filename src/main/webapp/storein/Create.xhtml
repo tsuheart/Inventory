@@ -24,8 +24,7 @@
                             <f:selectItems value="#{measurebasesController.measurebaseslist}" var="meas" itemValue="#{meas}" itemLabel="#{meas.measurebasesName}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="StoreinCreatedDate:" for="storeinCreatedDate" />
-
-                        <p:inputText id="storeinCreatedDate" value="#{storeinController.current.storeinCreatedDate}" required="true" requiredMessage="Date required"/>
+                        <p:inputText id="storeinCreatedDate" value="#{storeinController.currentDate}" />
                         <p:outputLabel value="StoreinItemItemcode:" for="storeinItemItemcode" />
                         <p:selectOneMenu id="storeinItemItemcode" value="#{storeinController.current.storeinItemItemcode}" converter="#{itemConverter}" required="true" requiredMessage="The StoreinItemItemcode field is required.">
                             <!-- TODO: update below reference to list of available items-->

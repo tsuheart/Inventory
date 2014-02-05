@@ -44,9 +44,5 @@ public class CategoryFacade extends AbstractFacade<Category> {
         return getEntityManager().createNamedQuery("Category.findByParentNullID", Category.class).getResultList();
     }
     
-    public Integer getByCategoryName(String category){
-        Category cat=getEntityManager().createNamedQuery("Category.findByCategoryName",Category.class).setParameter("categoryName", category).getSingleResult();
-        return cat.getCategoryCategoryid();
-    }
     
 }

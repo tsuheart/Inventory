@@ -10,10 +10,11 @@ import com.synergytech.ims.facade.CategoryFacade;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.NodeSelectEvent;
 import org.primefaces.event.NodeUnselectEvent;
@@ -25,15 +26,16 @@ import org.primefaces.model.TreeNode;
  * @author tsuheart
  */
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class CategoryController implements Serializable {
 
     @EJB
     CategoryFacade categoryFacade;
     Category current, treeObject;
     List<Category> categorylist;
+    List<Category> parentcategorylist;
     private TreeNode root;
-    private TreeNode actualRoot, tempRoot;
+    private TreeNode actualRoot;
     private TreeNode selectedNode;
 
     /**
@@ -52,6 +54,15 @@ public class CategoryController implements Serializable {
     }
 
     public CategoryController() {
+    }
+
+    public List<Category> getParentcategorylist() {
+        parentcategorylist = getCategoryFacade().getByParentNullID();
+        return parentcategorylist;
+    }
+
+    public void setParentcategorylist(List<Category> parentcategorylist) {
+        this.parentcategorylist = parentcategorylist;
     }
 
     public List<Category> getCategorylist() {
@@ -79,6 +90,14 @@ public class CategoryController implements Serializable {
         this.selectedNode = selectedNode;
     }
 
+    public TreeNode getRootNode() {
+        return rootNode;
+    }
+
+    public void setRootNode(TreeNode rootNode) {
+        this.rootNode = rootNode;
+    }
+
     public Category getTreeObject() {
         return treeObject;
     }
@@ -92,7 +111,7 @@ public class CategoryController implements Serializable {
             current = new Category();
         }
     }
-    
+
     public void prepareTreeObject() {
         if (treeObject == null) {
             treeObject = new Category();
@@ -103,7 +122,7 @@ public class CategoryController implements Serializable {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
             getCategoryFacade().create(current);
-            setCurrent(null);            
+            setCurrent(null);
             context.addMessage(null, new FacesMessage("Successful!", "Category Created"));
         } catch (Exception ex) {
             context.addMessage(null, new FacesMessage("Failed!", "Category Not Created"));
@@ -126,8 +145,7 @@ public class CategoryController implements Serializable {
     public void deleteCategory() {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
-            List<Category> tobeDeletedlist;
-            tobeDeletedlist = getCategoryFacade().getByParentID(current.getCategoryCategoryid());
+            List<Category> tobeDeletedlist = getCategoryFacade().getByParentID(current.getCategoryCategoryid());
             for (Iterator<Category> it = tobeDeletedlist.iterator(); it.hasNext();) {
                 Category category = it.next();
                 getCategoryFacade().remove(category);
@@ -146,7 +164,14 @@ public class CategoryController implements Serializable {
         return getCategoryFacade().findAll();
     }
 
+    private TreeNode rootNode;
+    @PostConstruct
+   public void init(){
+      rootNode=makeTree();
+   }
+   
     public TreeNode makeTree() {
+        System.out.println("make tree");
         root = new DefaultTreeNode("Root", null);
         actualRoot = new DefaultTreeNode("Root", null);
         categorylist = getCategoryFacade().getByParentNullID();
@@ -193,12 +218,12 @@ public class CategoryController implements Serializable {
         setCurrent(null);
         prepareCreate();
         if (treeObject != null) {
-            getCurrent().setCategoryParentid(treeObject.getCategoryCategoryid());
-        }        
+            getCurrent().setCategoryParentid(treeObject.getCategoryParentid());
+        }
     }
-    
-    public void otherClick(){
-        if(treeObject!=null){
+
+    public void otherClick() {
+        if (treeObject != null) {
             setCurrent(treeObject);
         }
     }

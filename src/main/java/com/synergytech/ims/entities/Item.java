@@ -59,7 +59,7 @@ public class Item implements Serializable {
     @Column(name = "item_status")
     private String itemStatus;
     @JoinColumn(name = "item_category_categoryid", referencedColumnName = "category_categoryid")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
     private Category itemCategoryCategoryid;
     @JoinColumn(name = "item_measurebases_measureid", referencedColumnName = "measurebases_measureid")
     @ManyToOne(optional = false)

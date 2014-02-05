@@ -7,7 +7,7 @@
 package com.synergytech.ims.facade;
 
 import com.synergytech.ims.entities.Measurebases;
-import com.synergytech.ims.entities.Office;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -35,4 +35,11 @@ public class MeasurebasesFacade extends AbstractFacade<Measurebases> {
         return msrb;
     }
     
+    public List<Measurebases> getByParentNullID(){
+        return getEntityManager().createNamedQuery("Measurebases.findByParentNullID", Measurebases.class).getResultList();
+    }
+    
+    public List<Measurebases> getByParentID(Integer pid){
+        return getEntityManager().createNamedQuery("Measurebases.findByMeasurebasesParentid", Measurebases.class).setParameter("measurebasesParentid", pid).getResultList();
+    }
 }

@@ -7,65 +7,28 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <h:form id="MeasurebasesListForm">
+        
         <p:growl id="growl" showDetail="true" sticky="false"/>
-        <p:panel header="Measure Bases List">
+        <p:panel header="Measure Bases List">                        
+            <p:tree value="#{measurebasesController.makeTree}" var="node" dynamic="true" cache="false"  
+                    selectionMode="single" selection="#{measurebasesController.selectedNode}" id="tree" >  
 
-            <p:dataTable id="datalist" value="#{measurebasesController.measurebaseslist}" var="item"
-                         selectionMode="single" selection="#{measurebasesController.current}"
-                         rowKey="#{item.measurebasesMeasureid}"
-                         paginator="true" rows="10" rowsPerPageTemplate="10,20,30">
+                <p:ajax event="select" update=":MeasurebasesListForm:growl,:MeasurebasesCreateForm,:MeasurebasesViewForm,:MeasurebasesEditForm,:MeasurebasesListForm:viewButton,:MeasurebasesListForm:createButton,:MeasurebasesListForm:editButton,:MeasurebasesListForm:deleteButton" listener="#{measurebasesController.onNodeSelect}" />  
+                <p:ajax event="unselect" update=":MeasurebasesListForm:growl,:MeasurebasesCreateForm,:MeasurebasesViewForm,:MeasurebasesEditForm,:MeasurebasesListForm:viewButton,:MeasurebasesListForm:createButton,:MeasurebasesListForm:editButton,:MeasurebasesListForm:deleteButton" listener="#{measurebasesController.onNodeUnselect}" />  
 
-                <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
-
-                <p:column>
-                    <f:facet name="header">
-                        <p:outputLabel value="MeasurebasesMeasureid"/>
-                    </f:facet>
-                    <p:outputLabel value="#{item.measurebasesMeasureid}"/>
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <p:outputLabel value="MeasurebasesName"/>
-                    </f:facet>
-                    <p:outputLabel value="#{item.measurebasesName}"/>
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <p:outputLabel value="MeasurebasesUnit"/>
-                    </f:facet>
-                    <p:outputLabel value="#{item.measurebasesUnit}"/>
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <p:outputLabel value="MeasurebasesFactor"/>
-                    </f:facet>
-                    <p:outputLabel value="#{item.measurebasesFactor}"/>
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <p:outputLabel value="MeasurebasesParentid"/>
-                    </f:facet>
-                    <p:outputLabel value="#{item.measurebasesParentid}"/>
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <p:outputLabel value="MeasurebasesHierarchy"/>
-                    </f:facet>
-                    <p:outputLabel value="#{item.measurebasesHierarchy}"/>
-                </p:column>
-
-                <f:facet name="footer">
-                    <div class="footer-section">
-                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="Create" actionListener="#{measurebasesController.prepareCreate()}" oncomplete="MeasurebasesCreateDialog.show()"/>
-                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="View" update=":MeasurebasesViewForm" oncomplete="MeasurebasesViewDialog.show()" disabled="#{empty measurebasesController.current}"/>
-                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Edit" update=":MeasurebasesEditForm" oncomplete="MeasurebasesEditDialog.show()" disabled="#{empty measurebasesController.current}"/>
-                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="Delete" actionListener="#{measurebasesController.deleteMeasurebases()}" update=":MeasurebasesListForm:growl,datalist" disabled="#{empty measurebasesController.current}"/>
-                    </div>
-                </f:facet>
-            </p:dataTable>
+                <p:treeNode>  
+                    <h:outputText value="#{node}" />  
+                </p:treeNode>  
+            </p:tree>
+            <f:facet id="footer" name="footer">
+                <div class="footer-section">
+                    <p:commandButton id="createButton" icon="ui-icon-plus"   value="Create" action="#{measurebasesController.createClick()}" update=":MeasurebasesCreateForm" oncomplete="MeasurebasesCreateDialog.show()"/>
+                    <p:commandButton id="viewButton"   icon="ui-icon-search" value="View" action="#{measurebasesController.otherClick()}" update=":MeasurebasesViewForm" oncomplete="MeasurebasesViewDialog.show()" disabled="#{empty measurebasesController.current}"/>
+                    <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Edit" action="#{measurebasesController.otherClick()}" update=":MeasurebasesEditForm" oncomplete="MeasurebasesEditDialog.show()" disabled="#{empty measurebasesController.current}"/>
+                    <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="Delete" actionListener="#{measurebasesController.deleteMeasurebases()}" update=":MeasurebasesListForm:growl ,tree" disabled="#{empty measurebasesController.current}"/>
+                </div>
+            </f:facet>
         </p:panel>
-
     </h:form>
 
 </ui:composition>

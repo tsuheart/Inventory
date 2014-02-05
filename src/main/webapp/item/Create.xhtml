@@ -30,7 +30,7 @@
                         <p:outputLabel value="ItemCategoryCategoryid:" for="itemCategoryCategoryid" />
                         <p:selectOneMenu id="itemCategoryCategoryid" value="#{itemsController.current.itemCategoryCategoryid}" converter="#{categoryConverter}" required="true" requiredMessage="The ItemCategoryCategoryid field is required.">
                             <!-- TODO: update below reference to list of available items-->
-                            <f:selectItems value="#{categoryController.categorylist}" var="cat" itemValue="#{cat}" itemLabel="#{cat.categoryName}"/>
+                            <f:selectItems value="#{categoryController.parentcategorylist}" var="cat" itemValue="#{cat}" itemLabel="#{cat.categoryName}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="ItemMeasurebasesMeasureid:" for="itemMeasurebasesMeasureid" />
                         <p:selectOneMenu id="itemMeasurebasesMeasureid" value="#{itemsController.current.itemMeasurebasesMeasureid}" converter="#{measurebasesConverter}" required="true" requiredMessage="The ItemMeasurebasesMeasureid field is required.">

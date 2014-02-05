@@ -10,7 +10,7 @@
 
         <p:growl id="growl" showDetail="true" sticky="false"/>
         <p:panel header="Category List">                        
-            <p:tree value="#{categoryController.makeTree()}" var="node" dynamic="true" cache="false"  
+            <p:tree value="#{categoryController.rootNode}" var="node" dynamic="true" cache="false"  
                     selectionMode="single"  selection="#{categoryController.selectedNode}" id="tree" >  
  
                 <p:ajax event="select" update=":CategoryListForm:growl,:CategoryCreateForm,:CategoryViewForm,:CategoryEditForm,:CategoryListForm:viewButton,:CategoryListForm:createButton,:CategoryListForm:editButton,:CategoryListForm:deleteButton" listener="#{categoryController.onNodeSelect}" />  
