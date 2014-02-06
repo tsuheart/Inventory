@@ -124,9 +124,11 @@ public class CategoryController implements Serializable {
             getCategoryFacade().create(current);
             setCurrent(null);
             context.addMessage(null, new FacesMessage("Successful!", "Category Created"));
+            init();
         } catch (Exception ex) {
             context.addMessage(null, new FacesMessage("Failed!", "Category Not Created"));
             setCurrent(null);
+            init();
         }
     }
 
@@ -136,16 +138,18 @@ public class CategoryController implements Serializable {
             getCategoryFacade().edit(current);
             setCurrent(null);
             context.addMessage(null, new FacesMessage("Successful!", "Category Edited"));
+            init();
         } catch (Exception ex) {
             context.addMessage(null, new FacesMessage("Failed!", "Category Not Edited"));
             setCurrent(null);
+            init();
         }
     }
 
     public void deleteCategory() {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
-            List<Category> tobeDeletedlist = getCategoryFacade().getByParentID(current.getCategoryCategoryid());
+            List<Category> tobeDeletedlist = getCategoryFacade().getByParentID(current);
             for (Iterator<Category> it = tobeDeletedlist.iterator(); it.hasNext();) {
                 Category category = it.next();
                 getCategoryFacade().remove(category);
@@ -153,10 +157,11 @@ public class CategoryController implements Serializable {
             getCategoryFacade().remove(current);
             setCurrent(null);
             context.addMessage(null, new FacesMessage("Successful!", "Category Deleted"));
+            init();
         } catch (Exception ex) {
             context.addMessage(null, new FacesMessage("Failed!", "Category Not Deleted"));
             setCurrent(null);
-
+            init();
         }
     }
 
@@ -172,27 +177,26 @@ public class CategoryController implements Serializable {
     }
 
     public TreeNode makeTree() {
-        System.out.println("make tree");
         root = new DefaultTreeNode("Root", null);
         actualRoot = new DefaultTreeNode("Root", null);
         categorylist = getCategoryFacade().getByParentNullID();
         for (Iterator<Category> it = categorylist.iterator(); it.hasNext();) {
             Category category = it.next();
             actualRoot = new DefaultTreeNode(category, root);
-            createTree(category.getCategoryCategoryid(), category.getCategoryName(), actualRoot);
+            createTree(category, actualRoot);
             actualRoot.setParent(root);
         }
         return root;
     }
 
-    public void createTree(Integer Pid, String categoryName, TreeNode subRoot) {
+    public void createTree(Category cat, TreeNode subRoot) {
         List<Category> subRootList;
-        subRootList = getCategoryFacade().getByParentID(Pid);
+        subRootList = getCategoryFacade().getByParentID(cat);
         if (!subRootList.isEmpty()) {
             for (Iterator<Category> it = subRootList.iterator(); it.hasNext();) {
                 Category category = it.next();
                 TreeNode node = new DefaultTreeNode(category, subRoot);
-                createTree(category.getCategoryCategoryid(), category.getCategoryName(), node);
+                createTree(category, node);
             }
         }
     }
@@ -219,7 +223,7 @@ public class CategoryController implements Serializable {
         setCurrent(null);
         prepareCreate();
         if (treeObject != null) {
-            getCurrent().setCategoryParentid(treeObject.getCategoryParentid());
+            getCurrent().setCategoryParentid(treeObject);
         }
     }
 

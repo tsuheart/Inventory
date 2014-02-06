@@ -36,8 +36,8 @@ public class CategoryFacade extends AbstractFacade<Category> {
         return cat;
     }
     
-    public List<Category> getByParentID(Integer pid){
-        return getEntityManager().createNamedQuery("Category.findByCategoryParentid", Category.class).setParameter("categoryParentid", pid).getResultList();
+    public List<Category> getByParentID(Category cat){
+        return getEntityManager().createNamedQuery("Category.findByCategoryParentid", Category.class).setParameter("categoryParentid", cat).getResultList();
     }
     
     public List<Category> getByParentNullID(){
