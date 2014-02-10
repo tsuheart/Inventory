@@ -36,6 +36,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Category.findAll", query = "SELECT c FROM Category c"),
     @NamedQuery(name = "Category.findByCategoryCategoryid", query = "SELECT c FROM Category c WHERE c.categoryCategoryid = :categoryCategoryid"),
+    @NamedQuery(name = "Category.findByCategoryParentid", query = "SELECT c FROM Category c WHERE c.categoryParentid= :categoryParentid"),
+    @NamedQuery(name = "Category.findByParentNullID", query = "SELECT c FROM Category c WHERE c.categoryParentid IS NULL"),
     @NamedQuery(name = "Category.findByCategoryName", query = "SELECT c FROM Category c WHERE c.categoryName = :categoryName")})
 public class Category implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -133,7 +135,7 @@ public class Category implements Serializable {
 
     @Override
     public String toString() {
-        return "com.synergytech.ims.entities.Category[ categoryCategoryid=" + categoryCategoryid + " ]";
+        return categoryName;
     }
     
 }
