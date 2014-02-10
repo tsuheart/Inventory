@@ -15,7 +15,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Administrator
+ * @author Ujjwal
  */
 @Embeddable
 public class StorePK implements Serializable {

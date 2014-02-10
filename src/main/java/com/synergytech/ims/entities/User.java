@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Administrator
+ * @author Ujjwal
  */
 @Entity
 @Table(name = "user")
@@ -76,13 +76,13 @@ public class User implements Serializable {
     @Size(min = 1, max = 8)
     @Column(name = "user_status")
     private String userStatus;
+    @JoinColumn(name = "user_office_officeid", referencedColumnName = "office_officeid")
+    @ManyToOne(optional = false)
+    private Office userOfficeOfficeid;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "storeoutCreatedby")
     private Collection<Storeout> storeoutCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "storeinCreatedby")
     private Collection<Storein> storeinCollection;
-    @JoinColumn(name = "user_office_officeid", referencedColumnName = "office_officeid")
-    @ManyToOne(optional = false)
-    private Office userOfficeOfficeid;
 
     public User() {
     }
@@ -156,6 +156,14 @@ public class User implements Serializable {
         this.userStatus = userStatus;
     }
 
+    public Office getUserOfficeOfficeid() {
+        return userOfficeOfficeid;
+    }
+
+    public void setUserOfficeOfficeid(Office userOfficeOfficeid) {
+        this.userOfficeOfficeid = userOfficeOfficeid;
+    }
+
     @XmlTransient
     public Collection<Storeout> getStoreoutCollection() {
         return storeoutCollection;
@@ -172,14 +180,6 @@ public class User implements Serializable {
 
     public void setStoreinCollection(Collection<Storein> storeinCollection) {
         this.storeinCollection = storeinCollection;
-    }
-
-    public Office getUserOfficeOfficeid() {
-        return userOfficeOfficeid;
-    }
-
-    public void setUserOfficeOfficeid(Office userOfficeOfficeid) {
-        this.userOfficeOfficeid = userOfficeOfficeid;
     }
 
     @Override
