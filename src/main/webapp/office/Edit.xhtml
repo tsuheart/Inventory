@@ -15,7 +15,7 @@
                 <h:panelGroup id="display">
                     <h:panelGrid  columns="2" rendered="#{officeController.current != null}">
                         <p:outputLabel value="OfficeOfficeid:" for="officeOfficeid" />
-                        <p:inputText id="officeOfficeid" value="#{officeController.current.officeOfficeid}" title="OfficeOfficeid" required="true" requiredMessage="The OfficeOfficeid field is required."/>
+                        <p:inputText id="officeOfficeid" value="#{officeController.current.officeOfficeid}" readonly="true" title="OfficeOfficeid" required="true" requiredMessage="The OfficeOfficeid field is required."/>
                         <p:outputLabel value="OfficeName:" for="officeName" />
                         <p:inputText id="officeName" value="#{officeController.current.officeName}" title="OfficeName" required="true" requiredMessage="The OfficeName field is required."/>
                         <p:outputLabel value="OfficeAddress:" for="officeAddress" />
@@ -23,7 +23,11 @@
                         <p:outputLabel value="OfficeContact:" for="officeContact" />
                         <p:inputText id="officeContact" value="#{officeController.current.officeContact}" title="OfficeContact" />
                         <p:outputLabel value="OfficeStatus:" for="officeStatus" />
-                        <p:inputText id="officeStatus" value="#{officeController.current.officeStatus}" title="OfficeStatus" required="true" requiredMessage="The OfficeStatus field is required."/>
+                        <p:selectOneMenu id="officeStatus" value="#{officeController.current.officeStatus}" required="true" requiredMessage="The OfficeStatus field is required.">  
+                            <f:selectItem itemLabel="Select One..." itemValue="" />
+                            <f:selectItem itemLabel="Active" itemValue="Active" />  
+                            <f:selectItem itemLabel="Inactive" itemValue="Inactive" /> 
+                        </p:selectOneMenu>
                     </h:panelGrid>
                     <p:commandButton actionListener="#{officeController.editOffice()}" value="Save" update="display,:OfficeListForm:datalist,:OfficeListForm:growl" oncomplete="handleSubmit(xhr,status,args,OfficeEditDialog);"/>
                     <p:commandButton value="Cancel" onclick="OfficeEditDialog.hide()"/>
