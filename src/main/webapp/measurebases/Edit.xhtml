@@ -32,7 +32,7 @@
                             <f:selectItem itemLabel="1" itemValue="1" /> 
                         </p:selectOneMenu>
                     </h:panelGrid>
-                    <p:commandButton actionListener="#{measurebasesController.editMeasurebases()}" value="Save" update="display,:MeasurebasesListForm:datalist,:MeasurebasesListForm:growl" oncomplete="handleSubmit(xhr,status,args,MeasurebasesEditDialog);"/>
+                    <p:commandButton actionListener="#{measurebasesController.editMeasurebases()}" value="Save" update="display,:MeasurebasesListForm:tree,:MeasurebasesListForm:growl" oncomplete="handleSubmit(xhr,status,args,MeasurebasesEditDialog);"/>
                     <p:commandButton value="Cancel" onclick="MeasurebasesEditDialog.hide()"/>
                 </h:panelGroup>
 

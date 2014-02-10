@@ -11,7 +11,10 @@ import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -61,7 +64,11 @@ public class Supplier implements Serializable {
     @Size(min = 1, max = 8)
     @Column(name = "supplier_status")
     private String supplierStatus;
-    @ManyToMany(mappedBy = "supplierCollection")
+    @JoinTable(name = "officesupplier", joinColumns = {
+        @JoinColumn(name = "officesupplier_supplier_supplierid", referencedColumnName = "supplier_supplierid")}, inverseJoinColumns = {
+        @JoinColumn(name = "officesupplier_office_officeid", referencedColumnName = "office_officeid", nullable = false)})
+//    @ManyToMany(mappedBy = "supplierCollection", fetch = FetchType.LAZY)
+    @ManyToMany
     private Collection<Office> officeCollection;
 
     public Supplier() {

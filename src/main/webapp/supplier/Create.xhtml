@@ -27,7 +27,10 @@
                             <f:selectItem itemLabel="Select One" itemValue="" />
                             <f:selectItem itemLabel="Active" itemValue="Active" />  
                             <f:selectItem itemLabel="Inactive" itemValue="Inactive" /> 
-                        </p:selectOneMenu>                         
+                        </p:selectOneMenu>   
+                        <p:selectOneMenu id="selectOffice" var="off" value="#{supplierController.current.officeCollection}" required="true" requiredMessage="The SupplierStatus field is required.">  
+                            <f:selectItem itemValue="#{off.officeName}"/>
+                        </p:selectOneMenu>
                     </h:panelGrid>
                     <p:commandButton actionListener="#{supplierController.createSupplier()}" value="Save" update="display,:SupplierListForm:datalist,:SupplierListForm:growl, :SupplierCreateForm" oncomplete="handleSubmit(xhr,status,args,SupplierCreateDialog);"/>
                     <p:commandButton value="Cancel" onclick="SupplierCreateDialog.hide()"/>

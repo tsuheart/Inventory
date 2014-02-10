@@ -42,7 +42,5 @@ public class CategoryFacade extends AbstractFacade<Category> {
     
     public List<Category> getByParentNullID(){
         return getEntityManager().createNamedQuery("Category.findByParentNullID", Category.class).getResultList();
-    }
-    
-    
+    }   
 }

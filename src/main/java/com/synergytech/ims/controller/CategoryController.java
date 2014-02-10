@@ -133,11 +133,13 @@ public class CategoryController implements Serializable {
         try {
             getCategoryFacade().create(current);
             setCurrent(null);
+            setTreeObject(null);
             context.addMessage(null, new FacesMessage("Successful!", "Category Created"));
             init();
         } catch (Exception ex) {
             context.addMessage(null, new FacesMessage("Failed!", "Category Not Created"));
             setCurrent(null);
+            setTreeObject(null);
             init();
         }
     }
@@ -147,30 +149,47 @@ public class CategoryController implements Serializable {
         try {
             getCategoryFacade().edit(current);
             setCurrent(null);
+            setTreeObject(null);
             context.addMessage(null, new FacesMessage("Successful!", "Category Edited"));
             init();
         } catch (Exception ex) {
             context.addMessage(null, new FacesMessage("Failed!", "Category Not Edited"));
             setCurrent(null);
+            setTreeObject(null);
             init();
         }
     }
-
+    
+    public void deleteTree(Category cat) {
+        List<Category> subRootList;
+        subRootList = getCategoryFacade().getByParentID(cat);
+        if (!subRootList.isEmpty()) {
+            for (Iterator<Category> it = subRootList.iterator(); it.hasNext();) {
+                Category category = it.next();
+                deleteTree(category);
+            }
+        }
+        getCategoryFacade().remove(cat);
+    }
+    
     public void deleteCategory() {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
             List<Category> tobeDeletedlist = getCategoryFacade().getByParentID(current);
             for (Iterator<Category> it = tobeDeletedlist.iterator(); it.hasNext();) {
                 Category category = it.next();
+                deleteTree(category);
                 getCategoryFacade().remove(category);
             }
             getCategoryFacade().remove(current);
             setCurrent(null);
+            setTreeObject(null);
             context.addMessage(null, new FacesMessage("Successful!", "Category Deleted"));
             init();
         } catch (Exception ex) {
             context.addMessage(null, new FacesMessage("Failed!", "Category Not Deleted"));
             setCurrent(null);
+            setTreeObject(null);
             init();
         }
     }
@@ -226,6 +245,7 @@ public class CategoryController implements Serializable {
         treeObject = (Category) event.getTreeNode().getData();
         setCurrent(null);
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Unselected", treeObject.getCategoryName());
+        treeObject=null;
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 

@@ -30,7 +30,7 @@
                             <f:selectItem itemLabel="1" itemValue="1" /> 
                         </p:selectOneMenu>
                     </h:panelGrid>
-                    <p:commandButton action="#{measurebasesController.createMeasurebases()}" value="Save" update="display,:MeasurebasesListForm:datalist,:MeasurebasesListForm:growl, :MeasurebasesCreateForm" oncomplete="handleSubmit(xhr,status,args,MeasurebasesCreateDialog);"/>
+                    <p:commandButton action="#{measurebasesController.createMeasurebases()}" value="Save" update="display,:MeasurebasesListForm:tree,:MeasurebasesListForm:growl, :MeasurebasesCreateForm" oncomplete="handleSubmit(xhr,status,args,MeasurebasesCreateDialog);"/>
                     <p:commandButton value="Cancel" onclick="MeasurebasesCreateDialog.hide()"/>
                 </h:panelGroup>
 
