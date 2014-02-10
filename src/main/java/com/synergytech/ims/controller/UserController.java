@@ -81,7 +81,8 @@ public class UserController {
     public void deleteUser() {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
-            getUserFacade().remove(current);
+            current.setUserStatus("Inactive");
+            getUserFacade().edit(current);
             setCurrent(null);
             context.addMessage(null, new FacesMessage("Successful!", "User Deleted"));
         } catch (Exception ex) {

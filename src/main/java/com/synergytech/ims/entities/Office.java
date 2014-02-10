@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Administrator
+ * @author Ujjwal
  */
 @Entity
 @Table(name = "office")
@@ -71,14 +71,14 @@ public class Office implements Serializable {
         @JoinColumn(name = "officesupplier_supplier_supplierid", referencedColumnName = "supplier_supplierid")})
     @ManyToMany
     private Collection<Supplier> supplierCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "storeoutItemOfficeOfficeid")
-    private Collection<Storeout> storeoutCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "storeinOfficeOfficeid")
-    private Collection<Storein> storeinCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "office")
     private Collection<Store> storeCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userOfficeOfficeid")
     private Collection<User> userCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "storeoutItemOfficeOfficeid")
+    private Collection<Storeout> storeoutCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "storeinOfficeOfficeid")
+    private Collection<Storein> storeinCollection;
 
     public Office() {
     }
@@ -144,24 +144,6 @@ public class Office implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Storeout> getStoreoutCollection() {
-        return storeoutCollection;
-    }
-
-    public void setStoreoutCollection(Collection<Storeout> storeoutCollection) {
-        this.storeoutCollection = storeoutCollection;
-    }
-
-    @XmlTransient
-    public Collection<Storein> getStoreinCollection() {
-        return storeinCollection;
-    }
-
-    public void setStoreinCollection(Collection<Storein> storeinCollection) {
-        this.storeinCollection = storeinCollection;
-    }
-
-    @XmlTransient
     public Collection<Store> getStoreCollection() {
         return storeCollection;
     }
@@ -177,6 +159,24 @@ public class Office implements Serializable {
 
     public void setUserCollection(Collection<User> userCollection) {
         this.userCollection = userCollection;
+    }
+
+    @XmlTransient
+    public Collection<Storeout> getStoreoutCollection() {
+        return storeoutCollection;
+    }
+
+    public void setStoreoutCollection(Collection<Storeout> storeoutCollection) {
+        this.storeoutCollection = storeoutCollection;
+    }
+
+    @XmlTransient
+    public Collection<Storein> getStoreinCollection() {
+        return storeinCollection;
+    }
+
+    public void setStoreinCollection(Collection<Storein> storeinCollection) {
+        this.storeinCollection = storeinCollection;
     }
 
     @Override

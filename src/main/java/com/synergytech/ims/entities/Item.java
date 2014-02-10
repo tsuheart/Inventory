@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Administrator
+ * @author Ujjwal
  */
 @Entity
 @Table(name = "item")
@@ -58,18 +58,18 @@ public class Item implements Serializable {
     @Size(min = 1, max = 8)
     @Column(name = "item_status")
     private String itemStatus;
-    @JoinColumn(name = "item_category_categoryid", referencedColumnName = "category_categoryid")
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
-    private Category itemCategoryCategoryid;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "item")
+    private Collection<Store> storeCollection;
     @JoinColumn(name = "item_measurebases_measureid", referencedColumnName = "measurebases_measureid")
     @ManyToOne(optional = false)
     private Measurebases itemMeasurebasesMeasureid;
+    @JoinColumn(name = "item_category_categoryid", referencedColumnName = "category_categoryid")
+    @ManyToOne(optional = false)
+    private Category itemCategoryCategoryid;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "storeoutItemItemcode")
     private Collection<Storeout> storeoutCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "storeinItemItemcode")
     private Collection<Storein> storeinCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "item")
-    private Collection<Store> storeCollection;
 
     public Item() {
     }
@@ -116,12 +116,13 @@ public class Item implements Serializable {
         this.itemStatus = itemStatus;
     }
 
-    public Category getItemCategoryCategoryid() {
-        return itemCategoryCategoryid;
+    @XmlTransient
+    public Collection<Store> getStoreCollection() {
+        return storeCollection;
     }
 
-    public void setItemCategoryCategoryid(Category itemCategoryCategoryid) {
-        this.itemCategoryCategoryid = itemCategoryCategoryid;
+    public void setStoreCollection(Collection<Store> storeCollection) {
+        this.storeCollection = storeCollection;
     }
 
     public Measurebases getItemMeasurebasesMeasureid() {
@@ -130,6 +131,14 @@ public class Item implements Serializable {
 
     public void setItemMeasurebasesMeasureid(Measurebases itemMeasurebasesMeasureid) {
         this.itemMeasurebasesMeasureid = itemMeasurebasesMeasureid;
+    }
+
+    public Category getItemCategoryCategoryid() {
+        return itemCategoryCategoryid;
+    }
+
+    public void setItemCategoryCategoryid(Category itemCategoryCategoryid) {
+        this.itemCategoryCategoryid = itemCategoryCategoryid;
     }
 
     @XmlTransient
@@ -148,15 +157,6 @@ public class Item implements Serializable {
 
     public void setStoreinCollection(Collection<Storein> storeinCollection) {
         this.storeinCollection = storeinCollection;
-    }
-
-    @XmlTransient
-    public Collection<Store> getStoreCollection() {
-        return storeCollection;
-    }
-
-    public void setStoreCollection(Collection<Store> storeCollection) {
-        this.storeCollection = storeCollection;
     }
 
     @Override

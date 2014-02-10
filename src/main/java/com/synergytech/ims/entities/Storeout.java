@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Administrator
+ * @author Ujjwal
  */
 @Entity
 @Table(name = "storeout")
@@ -67,12 +67,12 @@ public class Storeout implements Serializable {
     @JoinColumn(name = "storeout_createdby", referencedColumnName = "user_username")
     @ManyToOne(optional = false)
     private User storeoutCreatedby;
-    @JoinColumn(name = "storeout_item_itemcode", referencedColumnName = "item_itemcode")
-    @ManyToOne(optional = false)
-    private Item storeoutItemItemcode;
     @JoinColumn(name = "storeout_item_office_officeid", referencedColumnName = "office_officeid")
     @ManyToOne(optional = false)
     private Office storeoutItemOfficeOfficeid;
+    @JoinColumn(name = "storeout_item_itemcode", referencedColumnName = "item_itemcode")
+    @ManyToOne(optional = false)
+    private Item storeoutItemItemcode;
 
     public Storeout() {
     }
@@ -136,20 +136,20 @@ public class Storeout implements Serializable {
         this.storeoutCreatedby = storeoutCreatedby;
     }
 
-    public Item getStoreoutItemItemcode() {
-        return storeoutItemItemcode;
-    }
-
-    public void setStoreoutItemItemcode(Item storeoutItemItemcode) {
-        this.storeoutItemItemcode = storeoutItemItemcode;
-    }
-
     public Office getStoreoutItemOfficeOfficeid() {
         return storeoutItemOfficeOfficeid;
     }
 
     public void setStoreoutItemOfficeOfficeid(Office storeoutItemOfficeOfficeid) {
         this.storeoutItemOfficeOfficeid = storeoutItemOfficeOfficeid;
+    }
+
+    public Item getStoreoutItemItemcode() {
+        return storeoutItemItemcode;
+    }
+
+    public void setStoreoutItemItemcode(Item storeoutItemItemcode) {
+        this.storeoutItemItemcode = storeoutItemItemcode;
     }
 
     @Override

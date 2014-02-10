@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Administrator
+ * @author Ujjwal
  */
 @Entity
 @Table(name = "storein")
@@ -64,15 +64,15 @@ public class Storein implements Serializable {
     @Column(name = "storein_created_date")
     @Temporal(TemporalType.DATE)
     private Date storeinCreatedDate;
-    @JoinColumn(name = "storein_item_itemcode", referencedColumnName = "item_itemcode")
-    @ManyToOne(optional = false)
-    private Item storeinItemItemcode;
     @JoinColumn(name = "storein_createdby", referencedColumnName = "user_username")
     @ManyToOne(optional = false)
     private User storeinCreatedby;
     @JoinColumn(name = "storein_office_officeid", referencedColumnName = "office_officeid")
     @ManyToOne(optional = false)
     private Office storeinOfficeOfficeid;
+    @JoinColumn(name = "storein_item_itemcode", referencedColumnName = "item_itemcode")
+    @ManyToOne(optional = false)
+    private Item storeinItemItemcode;
 
     public Storein() {
     }
@@ -128,14 +128,6 @@ public class Storein implements Serializable {
         this.storeinCreatedDate = storeinCreatedDate;
     }
 
-    public Item getStoreinItemItemcode() {
-        return storeinItemItemcode;
-    }
-
-    public void setStoreinItemItemcode(Item storeinItemItemcode) {
-        this.storeinItemItemcode = storeinItemItemcode;
-    }
-
     public User getStoreinCreatedby() {
         return storeinCreatedby;
     }
@@ -150,6 +142,14 @@ public class Storein implements Serializable {
 
     public void setStoreinOfficeOfficeid(Office storeinOfficeOfficeid) {
         this.storeinOfficeOfficeid = storeinOfficeOfficeid;
+    }
+
+    public Item getStoreinItemItemcode() {
+        return storeinItemItemcode;
+    }
+
+    public void setStoreinItemItemcode(Item storeinItemItemcode) {
+        this.storeinItemItemcode = storeinItemItemcode;
     }
 
     @Override

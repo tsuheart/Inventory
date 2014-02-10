@@ -8,6 +8,7 @@ package com.synergytech.ims.controller;
 import com.synergytech.ims.entities.Category;
 import com.synergytech.ims.facade.CategoryFacade;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -37,12 +38,21 @@ public class CategoryController implements Serializable {
     private TreeNode root;
     private TreeNode actualRoot;
     private TreeNode selectedNode;
+    private Date fromDate;
 
     /**
      * Creates a new instance of CategoryController
      */
     public CategoryFacade getCategoryFacade() {
         return categoryFacade;
+    }
+
+    public Date getFromDate() {
+        return fromDate;
+    }
+
+    public void setFromDate(Date fromDate) {
+        this.fromDate = fromDate;
     }
 
     public Category getCurrent() {

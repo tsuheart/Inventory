@@ -22,6 +22,9 @@
                     <p:commandButton actionListener="#{categoryController.createCategory()}" value="Save" update="display,:CategoryListForm:tree,:CategoryListForm:growl, :CategoryCreateForm,:CategoryListForm" oncomplete="handleSubmit(xhr,status,args,CategoryCreateDialog);"/>
                     <p:commandButton value="Cancel" onclick="CategoryCreateDialog.hide()"/>
                 </h:panelGroup>
+                
+                <h:outputText value="start date"/>
+                <p:calendar value
 
             </h:form>
 
