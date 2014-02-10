@@ -159,13 +159,26 @@ public class CategoryController implements Serializable {
             init();
         }
     }
-
+    
+    public void deleteTree(Category cat) {
+        List<Category> subRootList;
+        subRootList = getCategoryFacade().getByParentID(cat);
+        if (!subRootList.isEmpty()) {
+            for (Iterator<Category> it = subRootList.iterator(); it.hasNext();) {
+                Category category = it.next();
+                deleteTree(category);
+            }
+        }
+        getCategoryFacade().remove(cat);
+    }
+    
     public void deleteCategory() {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
             List<Category> tobeDeletedlist = getCategoryFacade().getByParentID(current);
             for (Iterator<Category> it = tobeDeletedlist.iterator(); it.hasNext();) {
                 Category category = it.next();
+                deleteTree(category);
                 getCategoryFacade().remove(category);
             }
             getCategoryFacade().remove(current);
