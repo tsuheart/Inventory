@@ -10,7 +10,7 @@
         
         <p:growl id="growl" showDetail="true" sticky="false"/>
         <p:panel header="Measure Bases List">                        
-            <p:tree value="#{measurebasesController.makeTree}" var="node" dynamic="true" cache="false"  
+            <p:tree value="#{measurebasesController.makeTree()}" var="node" dynamic="true" cache="false"  
                     selectionMode="single" selection="#{measurebasesController.selectedNode}" id="tree" >  
 
                 <p:ajax event="select" update=":MeasurebasesListForm:growl,:MeasurebasesCreateForm,:MeasurebasesViewForm,:MeasurebasesEditForm,:MeasurebasesListForm:viewButton,:MeasurebasesListForm:createButton,:MeasurebasesListForm:editButton,:MeasurebasesListForm:deleteButton" listener="#{measurebasesController.onNodeSelect}" />  

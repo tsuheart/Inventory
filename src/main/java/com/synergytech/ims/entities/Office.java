@@ -12,6 +12,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -66,10 +67,12 @@ public class Office implements Serializable {
     @Size(min = 1, max = 8)
     @Column(name = "office_status")
     private String officeStatus;
-    @JoinTable(name = "officesupplier", joinColumns = {
-        @JoinColumn(name = "officesupplier_office_officeid", referencedColumnName = "office_officeid")}, inverseJoinColumns = {
-        @JoinColumn(name = "officesupplier_supplier_supplierid", referencedColumnName = "supplier_supplierid")})
-    @ManyToMany
+//    @JoinTable(name = "officesupplier", joinColumns = {
+//        @JoinColumn(name = "officesupplier_office_officeid", referencedColumnName = "office_officeid")}, inverseJoinColumns = {
+//        @JoinColumn(name = "officesupplier_supplier_supplierid", referencedColumnName = "supplier_supplierid")})
+//    @ManyToMany
+//    private Collection<Supplier> supplierCollection;
+    @ManyToMany(mappedBy = "officeCollection", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Collection<Supplier> supplierCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "office")
     private Collection<Store> storeCollection;
