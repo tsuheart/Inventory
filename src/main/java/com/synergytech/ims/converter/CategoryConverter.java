@@ -36,7 +36,7 @@ public class CategoryConverter implements Converter {
         if (newValue == null || newValue.isEmpty()) {
             return null;
         }
-        return (categoryFacade.getByCategoryId(Integer.valueOf(newValue)));
+        return (categoryFacade.getByCategoryName(newValue));
     }
 
     @Override
@@ -48,8 +48,8 @@ public class CategoryConverter implements Converter {
         if (!(value instanceof Category)) {
             throw new ConverterException("The value is not a valid Category: " + value);
         }
-        Integer catid = ((Category) value).getCategoryCategoryid();
-        return (catid != null) ? String.valueOf(catid) : null;
+        String catname = ((Category) value).getCategoryName();
+        return (catname != null) ? catname : null;
     }
 
 

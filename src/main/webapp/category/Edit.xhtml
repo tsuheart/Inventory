@@ -19,7 +19,7 @@
                         <p:outputLabel value="Category Name:" for="categoryName" />
                         <p:inputText id="categoryName" value="#{categoryController.current.categoryName}" title="CategoryName" required="true" requiredMessage="The CategoryName field is required."/>
                         <p:outputLabel value="Category Parentid:" for="categoryParentid" />
-                        <p:inputText id="categoryParentid" value="#{categoryController.current.categoryParentid}" title="CategoryParentid" />
+                        <p:inputText converter="#{categoryConverter}" id="categoryParentid" value="#{categoryController.current.categoryParentid}" title="CategoryParentid" />
                     </h:panelGrid>
                     <p:commandButton actionListener="#{categoryController.editCategory()}" value="Save" update="display,:CategoryListForm:tree,:CategoryListForm:growl,:CategoryListForm" oncomplete="handleSubmit(xhr,status,args,CategoryEditDialog);"/>
                     <p:commandButton value="Cancel" onclick="CategoryEditDialog.hide()"/>
