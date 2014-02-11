@@ -39,7 +39,7 @@ public class MeasurebasesFacade extends AbstractFacade<Measurebases> {
         return getEntityManager().createNamedQuery("Measurebases.findByParentNullID", Measurebases.class).getResultList();
     }
     
-    public List<Measurebases> getByParentID(Integer pid){
+    public List<Measurebases> getByParentID(Measurebases pid){
         return getEntityManager().createNamedQuery("Measurebases.findByMeasurebasesParentid", Measurebases.class).setParameter("measurebasesParentid", pid).getResultList();
     }
 }
