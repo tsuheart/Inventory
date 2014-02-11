@@ -6,6 +6,7 @@
 
 package com.synergytech.ims.facade;
 
+import com.synergytech.ims.entities.Office;
 import com.synergytech.ims.entities.User;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -34,4 +35,15 @@ public class UserFacade extends AbstractFacade<User> {
         return(getEntityManager().createNamedQuery("User.findByUserUsername", User.class).setParameter("userUsername",username).getSingleResult());
     }
     
+    public List<User> getByUserStatusActive(){
+        return(getEntityManager().createNamedQuery("User.findByUserStatusActive", User.class).getResultList());
+    }
+    
+    public List<User> getByUserOfficeId(Office office){
+        return(getEntityManager().createNamedQuery("User.findByUserOfficeId", User.class).setParameter("userOfficeOfficeid",office).getResultList());
+    }
+    
+    public List<User> getByUserOfficeStatus(){
+        return(getEntityManager().createNamedQuery("User.findByOfficeStatus", User.class).getResultList());
+    }
 }

@@ -46,7 +46,7 @@ public class UserController {
     }
 
     public List<User> getUserlist() {
-        userlist = getUserFacade().findAll();
+        userlist = getUserFacade().getByUserOfficeStatus();
         return userlist;
     }
 

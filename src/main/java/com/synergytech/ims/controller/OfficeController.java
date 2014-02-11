@@ -6,8 +6,11 @@
 package com.synergytech.ims.controller;
 
 import com.synergytech.ims.entities.Office;
+import com.synergytech.ims.entities.User;
 import com.synergytech.ims.facade.OfficeFacade;
+import com.synergytech.ims.facade.UserFacade;
 import java.io.Serializable;
+import java.util.Iterator;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -21,7 +24,7 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean
 @SessionScoped
-public class OfficeController implements Serializable{
+public class OfficeController implements Serializable {
 
     /**
      * Creates a new instance of OfficeController
@@ -31,11 +34,21 @@ public class OfficeController implements Serializable{
 
     @EJB
     OfficeFacade officeFacade;
+
+    @EJB
+    UserFacade userFacade;
+
     Office current;
     List<Office> officelist;
 
+    List<User> userlist;
+
     public OfficeFacade getOfficeFacade() {
         return officeFacade;
+    }
+
+    public UserFacade getUserFacade() {
+        return userFacade;
     }
 
     public List<Office> getOfficelist() {
@@ -82,8 +95,17 @@ public class OfficeController implements Serializable{
     public void deleteOffice() {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
-            getOfficeFacade().remove(current);
+            current.setOfficeStatus("Inactive");
+            getOfficeFacade().edit(current);
+//            User user=null;
+//            userlist = getUserFacade().getByUserOfficeId(current);
+//            for (Iterator<User> it = userlist.iterator(); it.hasNext();) {
+//                user = it.next();
+//                user.setUserStatus("Inactive");
+//                getUserFacade().edit(user);
+//            }
             setCurrent(null);
+
             context.addMessage(null, new FacesMessage("Successful!", "Office Deleted"));
         } catch (Exception ex) {
             context.addMessage(null, new FacesMessage("Failed!", "Office Not Edited"));
@@ -91,9 +113,10 @@ public class OfficeController implements Serializable{
 
         }
     }
-    
-    public void prepareCreate(){
-        if (current==null)
-            current=new Office();
+
+    public void prepareCreate() {
+        if (current == null) {
+            current = new Office();
+        }
     }
 }

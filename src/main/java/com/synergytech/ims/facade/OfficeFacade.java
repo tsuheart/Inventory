@@ -7,6 +7,7 @@
 package com.synergytech.ims.facade;
 
 import com.synergytech.ims.entities.Office;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -32,5 +33,9 @@ public class OfficeFacade extends AbstractFacade<Office> {
     public Office getByOfficeId(Integer office){
         Office off=getEntityManager().createNamedQuery("Office.findByOfficeOfficeid",Office.class).setParameter("officeOfficeid",office).getSingleResult();
         return off;
+    }
+    
+    public List<Office> getByOfficeStatusActive(){
+        return(getEntityManager().createNamedQuery("Office.findByOfficeStatusActive", Office.class).getResultList());
     }
 }

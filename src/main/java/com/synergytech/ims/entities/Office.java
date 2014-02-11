@@ -41,7 +41,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Office.findByOfficeName", query = "SELECT o FROM Office o WHERE o.officeName = :officeName"),
     @NamedQuery(name = "Office.findByOfficeAddress", query = "SELECT o FROM Office o WHERE o.officeAddress = :officeAddress"),
     @NamedQuery(name = "Office.findByOfficeContact", query = "SELECT o FROM Office o WHERE o.officeContact = :officeContact"),
-    @NamedQuery(name = "Office.findByOfficeStatus", query = "SELECT o FROM Office o WHERE o.officeStatus = :officeStatus")})
+    @NamedQuery(name = "Office.findByOfficeStatus", query = "SELECT o FROM Office o WHERE o.officeStatus = :officeStatus"),
+    @NamedQuery(name="Office.findByOfficeStatusActive", query="SELECT o FROM Office o WHERE o.officeStatus='Active'")})
 public class Office implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
