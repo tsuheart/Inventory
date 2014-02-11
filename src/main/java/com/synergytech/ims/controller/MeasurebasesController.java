@@ -33,7 +33,7 @@ public class MeasurebasesController implements Serializable {
     MeasurebasesFacade measurebasesFacade;
     Measurebases current, treeObject;
     List<Measurebases> measurebaseslist;
-    List<Measurebases> parentcategorylist;
+    List<Measurebases> parentmeasurebaseslist;
     private TreeNode root;
     private TreeNode actualRoot;
     private TreeNode selectedNode;
@@ -56,13 +56,13 @@ public class MeasurebasesController implements Serializable {
     public MeasurebasesController() {
     }
 
-    public List<Measurebases> getParentcategorylist() {
-        parentcategorylist = getMeasurebasesFacade().getByParentNullID();
-        return parentcategorylist;
+    public List<Measurebases> getParentmeasurebaseslist() {
+        parentmeasurebaseslist = getMeasurebasesFacade().getByParentNullID();
+        return parentmeasurebaseslist;
     }
 
-    public void setParentcategorylist(List<Measurebases> parentcategorylist) {
-        this.parentcategorylist = parentcategorylist;
+    public void setParentmeasurebaseslist(List<Measurebases> parentmeasurebaseslist) {
+        this.parentmeasurebaseslist = parentmeasurebaseslist;
     }
 
     public List<Measurebases> getMeasurebaseslist() {

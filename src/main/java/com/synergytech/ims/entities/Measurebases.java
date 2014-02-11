@@ -12,6 +12,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,9 +38,11 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Measurebases.findAll", query = "SELECT m FROM Measurebases m"),
     @NamedQuery(name = "Measurebases.findByMeasurebasesMeasureid", query = "SELECT m FROM Measurebases m WHERE m.measurebasesMeasureid = :measurebasesMeasureid"),
     @NamedQuery(name = "Measurebases.findByMeasurebasesName", query = "SELECT m FROM Measurebases m WHERE m.measurebasesName = :measurebasesName"),
-    @NamedQuery(name = "Measurebases.findByMeasurebasesUnit", query = "SELECT m FROM Measurebases m WHERE m.measurebasesUnit = :measurebasesUnit"),
+//    @NamedQuery(name = "Measurebases.findByMeasurebasesUnit", query = "SELECT m FROM Measurebases m WHERE m.measurebasesUnit = :measurebasesUnit"),
     @NamedQuery(name = "Measurebases.findByMeasurebasesFactor", query = "SELECT m FROM Measurebases m WHERE m.measurebasesFactor = :measurebasesFactor"),
-    @NamedQuery(name = "Measurebases.findByMeasurebasesHierarchy", query = "SELECT m FROM Measurebases m WHERE m.measurebasesHierarchy = :measurebasesHierarchy")})
+    @NamedQuery(name = "Measurebases.findByMeasurebasesHierarchy", query = "SELECT m FROM Measurebases m WHERE m.measurebasesHierarchy = :measurebasesHierarchy"),
+    @NamedQuery(name = "Measurebases.findByMeasurebasesParentid", query = "SELECT m FROM Measurebases m WHERE m.measurebasesParentid= :measurebasesParentId"),
+    @NamedQuery(name = "Measurebases.findByParentNullID", query = "SELECT m FROM Measurebases m WHERE m.measurebasesParentid IS NULL"),})
 public class Measurebases implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -52,9 +55,9 @@ public class Measurebases implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "measurebases_name")
     private String measurebasesName;
-    @Size(max = 20)
-    @Column(name = "measurebases_unit")
-    private String measurebasesUnit;
+//    @Size(max = 20)
+//    @Column(name = "measurebases_unit")
+//    private String measurebasesUnit;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "measurebases_factor")
     private Double measurebasesFactor;
@@ -66,7 +69,7 @@ public class Measurebases implements Serializable {
     @JoinColumn(name = "measurebases_parentid", referencedColumnName = "measurebases_measureid")
     @ManyToOne
     private Measurebases measurebasesParentid;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "itemMeasurebasesMeasureid")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "itemMeasurebasesMeasureid", orphanRemoval = true)
     private Collection<Item> itemCollection;
 
     public Measurebases() {
@@ -97,13 +100,13 @@ public class Measurebases implements Serializable {
         this.measurebasesName = measurebasesName;
     }
 
-    public String getMeasurebasesUnit() {
-        return measurebasesUnit;
-    }
-
-    public void setMeasurebasesUnit(String measurebasesUnit) {
-        this.measurebasesUnit = measurebasesUnit;
-    }
+//    public String getMeasurebasesUnit() {
+//        return measurebasesUnit;
+//    }
+//
+//    public void setMeasurebasesUnit(String measurebasesUnit) {
+//        this.measurebasesUnit = measurebasesUnit;
+//    }
 
     public Double getMeasurebasesFactor() {
         return measurebasesFactor;
@@ -169,7 +172,7 @@ public class Measurebases implements Serializable {
 
     @Override
     public String toString() {
-        return "com.synergytech.ims.entities.Measurebases[ measurebasesMeasureid=" + measurebasesMeasureid + " ]";
+        return measurebasesName;
     }
     
 }

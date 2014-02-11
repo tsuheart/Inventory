@@ -14,6 +14,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 
 /**
  *
@@ -31,6 +32,8 @@ public class ItemsController implements Serializable {
     Item current;
     List<Item> itemlist;
     
+    @Inject
+    ItemsController itemController;
     
     public ItemsController() {
     }

@@ -35,7 +35,7 @@
                         <p:outputLabel value="ItemMeasurebasesMeasureid:" for="itemMeasurebasesMeasureid" />
                         <p:selectOneMenu id="itemMeasurebasesMeasureid" value="#{itemsController.current.itemMeasurebasesMeasureid}" converter="#{measurebasesConverter}" required="true" requiredMessage="The ItemMeasurebasesMeasureid field is required.">
                             <!-- TODO: update below reference to list of available items-->
-                            <f:selectItems value="#{measurebasesController.measurebaseslist}" var="meas" itemValue="#{meas}" itemLabel="#{meas.measurebasesName}"/>
+                            <f:selectItems value="#{measurebasesController.parentmeasurebaseslist}" var="meas" itemValue="#{meas}" itemLabel="#{meas.measurebasesName}"/>
                         </p:selectOneMenu>
                     </h:panelGrid>
                     <p:commandButton action="#{itemsController.createItem()}" value="Save" update="display,:ItemListForm:datalist,:ItemListForm:growl, :ItemCreateForm" oncomplete="handleSubmit(xhr,status,args,ItemCreateDialog);"/>
