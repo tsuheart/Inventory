@@ -64,6 +64,10 @@ public class ItemsController implements Serializable {
             current = new Item();
         }
     }
+    
+    public List<Item> getAllItem(){
+        return getItemFacade().findAll();
+    }
 
     public void createItem() {
         FacesContext context = FacesContext.getCurrentInstance();
