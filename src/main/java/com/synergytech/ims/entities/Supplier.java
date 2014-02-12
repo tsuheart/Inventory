@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.synergytech.ims.entities;
 
 import java.io.Serializable;
@@ -11,7 +10,6 @@ import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -39,6 +37,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Supplier.findBySupplierContact", query = "SELECT s FROM Supplier s WHERE s.supplierContact = :supplierContact"),
     @NamedQuery(name = "Supplier.findBySupplierStatus", query = "SELECT s FROM Supplier s WHERE s.supplierStatus = :supplierStatus")})
 public class Supplier implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -67,7 +66,6 @@ public class Supplier implements Serializable {
     @JoinTable(name = "officesupplier", joinColumns = {
         @JoinColumn(name = "officesupplier_supplier_supplierid", referencedColumnName = "supplier_supplierid")}, inverseJoinColumns = {
         @JoinColumn(name = "officesupplier_office_officeid", referencedColumnName = "office_officeid", nullable = false)})
-//    @ManyToMany(mappedBy = "supplierCollection", fetch = FetchType.LAZY)
     @ManyToMany
     private Collection<Office> officeCollection;
 
@@ -158,5 +156,5 @@ public class Supplier implements Serializable {
     public String toString() {
         return "com.synergytech.ims.entities.Supplier[ supplierSupplierid=" + supplierSupplierid + " ]";
     }
-    
+
 }

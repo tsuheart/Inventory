@@ -10,7 +10,6 @@ import com.synergytech.ims.entities.User;
 import com.synergytech.ims.facade.OfficeFacade;
 import com.synergytech.ims.facade.UserFacade;
 import java.io.Serializable;
-import java.util.Iterator;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
