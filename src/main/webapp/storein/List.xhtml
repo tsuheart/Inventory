@@ -8,77 +8,67 @@
 
     <h:form id="StoreinListForm">
         <p:growl id="growl" showDetail="true" sticky="false"/>
-        <p:panel header="Store In Item List">
+        <p:panel header="Category List">                        
+            <p:tree value="#{categoryController.rootNode}" var="node" dynamic="true" cache="false"  
+                    selectionMode="single"  selection="#{storeinController.selectedNode}" id="tree" >  
 
-            <p:dataTable id="datalist" value="#{storeinController.storeinlist}" var="item"
-                         selectionMode="single" selection="#{storeinController.current}"
-                         rowKey="#{item.storeinItemItemcode}"
-                         paginator="true" rows="10" rowsPerPageTemplate="10,20,30">
+                <p:ajax event="select" listener="#{storeinController.onNodeSelect}" update=":StoreinListForm:growl,:itemdataTable"/>
+                <p:ajax event="unselect" listener="#{storeinController.onNodeUnselect}" update=":StoreinListForm:growl,:itemdataTable"/>  
 
-                <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                <p:treeNode>  
+                    <h:outputText value="#{node}" />  
+                </p:treeNode>  
+            </p:tree>
+            <f:facet id="footer" name="footer">
+                <div class="footer-section">
 
-                <p:column>
-                    <f:facet name="header">
-                        <p:outputLabel value="StoreinId"/>
-                    </f:facet>
-                    <p:outputLabel value="#{item.storeinId}"/>
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <p:outputLabel value="StoreinSerialno"/>
-                    </f:facet>
-                    <p:outputLabel value="#{item.storeinSerialno}"/>
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <p:outputLabel value="StoreinQuantity"/>
-                    </f:facet>
-                    <p:outputLabel value="#{item.storeinQuantity}"/>
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <p:outputLabel value="StoreinMeasure"/>
-                    </f:facet>
-                    <p:outputLabel value="#{item.storeinMeasure}"/>
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <p:outputLabel value="StoreinCreatedDate"/>
-                    </f:facet>
-                    <p:outputLabel value="#{item.storeinCreatedDate}">
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </p:outputLabel>
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <p:outputLabel value="StoreinItemItemcode"/>
-                    </f:facet>
-                    <p:outputLabel value="#{item.storeinItemItemcode.itemItemcode}(#{item.storeinItemItemcode.itemName})"/>
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <p:outputLabel value="StoreinCreatedby"/>
-                    </f:facet>
-                    <p:outputLabel value="#{item.storeinCreatedby.userFirstname}"/>
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <p:outputLabel value="StoreinOfficeOfficeid"/>
-                    </f:facet>
-                    <p:outputLabel value="#{item.storeinOfficeOfficeid.officeOfficeid}(#{item.storeinOfficeOfficeid.officeName})"/>
-                </p:column>
-                <f:facet name="footer">
-                    <div class="footer-section">
-                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="Create" actionListener="#{storeinController.prepareCreate()}" oncomplete="StoreinCreateDialog.show()"/>
-                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="View" update=":StoreinViewForm" oncomplete="StoreinViewDialog.show()" disabled="#{empty storeinController.current}"/>
-                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Edit" update=":StoreinEditForm" oncomplete="StoreinEditDialog.show()" disabled="#{empty storeinController.current}"/>
-                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="Delete" actionListener="#{storeinController.deleteStorein()}" update=":StoreinListForm:growl,datalist" disabled="#{empty storeinController.current}"/>
-                    </div>
-                </f:facet>
-            </p:dataTable>
+                </div>
+            </f:facet>
         </p:panel>
-
     </h:form>
-
+    <br/><br/>
+    <h:panelGroup>        
+        <h:form id="itemdataTable">
+            <p:panel header="Item List"   rendered="#{storeinController.showItemList}">
+                <p:dataTable value="#{itemsController.itemlist}" var="item" >
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="ItemItemcode"/>
+                    </f:facet>
+                    <h:outputText value="#{item.itemItemcode}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="ItemName"/>
+                    </f:facet>
+                    <h:outputText value="#{item.itemName}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="ItemRemark"/>
+                    </f:facet>
+                    <h:outputText value="#{item.itemRemark}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="ItemStatus"/>
+                    </f:facet>
+                    <h:outputText value="#{item.itemStatus}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="ItemMeasurebasesMeasureid"/>
+                    </f:facet>
+                    <h:outputText value="#{item.itemMeasurebasesMeasureid}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="ItemCategoryCategoryid"/>
+                    </f:facet>
+                    <h:outputText value="#{item.itemCategoryCategoryid}"/>
+                </p:column>
+            </p:dataTable>
+            </p:panel>            
+        </h:form>
+    </h:panelGroup>   
 </ui:composition>

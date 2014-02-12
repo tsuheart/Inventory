@@ -56,7 +56,7 @@ public class Category implements Serializable {
     @JoinColumn(name = "category_parentid", referencedColumnName = "category_categoryid")
     @ManyToOne
     private Category categoryParentid;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "itemCategoryCategoryid")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "itemCategoryCategoryid",orphanRemoval = true)
     private Collection<Item> itemCollection;
 
     public Category() {

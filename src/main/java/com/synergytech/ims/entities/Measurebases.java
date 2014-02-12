@@ -42,7 +42,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Measurebases.findByMeasurebasesFactor", query = "SELECT m FROM Measurebases m WHERE m.measurebasesFactor = :measurebasesFactor"),
     @NamedQuery(name = "Measurebases.findByMeasurebasesHierarchy", query = "SELECT m FROM Measurebases m WHERE m.measurebasesHierarchy = :measurebasesHierarchy"),
     @NamedQuery(name = "Measurebases.findByMeasurebasesParentid", query = "SELECT m FROM Measurebases m WHERE m.measurebasesParentid= :measurebasesParentId"),
-    @NamedQuery(name = "Measurebases.findByParentNullID", query = "SELECT m FROM Measurebases m WHERE m.measurebasesParentid IS NULL"),})
+    @NamedQuery(name = "Measurebases.findByParentNullID", query = "SELECT m FROM Measurebases m WHERE m.measurebasesParentid IS NULL")})
 public class Measurebases implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

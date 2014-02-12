@@ -6,7 +6,9 @@
 
 package com.synergytech.ims.facade;
 
+import com.synergytech.ims.entities.Category;
 import com.synergytech.ims.entities.Item;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -32,5 +34,9 @@ public class ItemFacade extends AbstractFacade<Item> {
     public Item getByItemcode(String itemcode){
         Item itm=getEntityManager().createNamedQuery("Item.findByItemItemcode",Item.class).setParameter("itemItemcode",itemcode).getSingleResult();
         return itm;
+    }
+    
+    public List<Item> getByCategoryId(Category cat){
+        return getEntityManager().createNamedQuery("Item.findByCategoryId",Item.class).setParameter("itemCategoryCategoryid", cat).getResultList();
     }
 }
