@@ -6,6 +6,7 @@
 
 package com.synergytech.ims.controller;
 
+import com.synergytech.ims.entities.Office;
 import com.synergytech.ims.entities.Supplier;
 import com.synergytech.ims.facade.SupplierFacade;
 import java.io.Serializable;
@@ -13,6 +14,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
@@ -24,6 +26,8 @@ import javax.faces.context.FacesContext;
 @SessionScoped
 public class SupplierController implements Serializable {
 
+    @ManagedProperty("#{loginController}")
+    LoginController loginController;
     @EJB
     SupplierFacade supplierfacade;
     Supplier current;
@@ -34,6 +38,10 @@ public class SupplierController implements Serializable {
      */
     public Supplier getCurrent() {       
         return current;
+    }
+
+    public void setLoginController(LoginController loginController) {
+        this.loginController = loginController;
     }
 
     public void setCurrent(Supplier current) {
@@ -64,7 +72,9 @@ public class SupplierController implements Serializable {
     public void createSupplier() {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
-            getSupplierfacade().create(current);
+            current.getOfficeCollection().add(loginController.current.getUserOfficeOfficeid());
+           loginController.current.getUserOfficeOfficeid().getSupplierCollection().add(current);
+            getSupplierfacade().edit(current);
             setCurrent(null);
             context.addMessage(null, new FacesMessage("Successful!", "Supplier Created"));
         } catch (Exception ex) {

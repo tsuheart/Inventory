@@ -7,6 +7,7 @@
 package com.synergytech.ims.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -27,6 +28,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 /**
  *
@@ -71,7 +74,8 @@ public class Office implements Serializable {
     @JoinTable(name = "officesupplier", joinColumns = {
         @JoinColumn(name = "officesupplier_office_officeid", referencedColumnName = "office_officeid")}, inverseJoinColumns = {
         @JoinColumn(name = "officesupplier_supplier_supplierid", referencedColumnName = "supplier_supplierid")})
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private Collection<Supplier> supplierCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "office")
     private Collection<Store> storeCollection;
@@ -83,13 +87,16 @@ public class Office implements Serializable {
     private Collection<Storein> storeinCollection;
 
     public Office() {
+        supplierCollection= new ArrayList<Supplier>();
     }
 
     public Office(Integer officeOfficeid) {
+        this();
         this.officeOfficeid = officeOfficeid;
     }
 
     public Office(Integer officeOfficeid, String officeName, String officeAddress, String officeStatus) {
+        this();
         this.officeOfficeid = officeOfficeid;
         this.officeName = officeName;
         this.officeAddress = officeAddress;
