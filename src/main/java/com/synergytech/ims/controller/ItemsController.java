@@ -31,10 +31,7 @@ public class ItemsController implements Serializable {
     @EJB
     ItemFacade itemFacade;
     Item current;
-    List<Item> itemlist;
-    
-    @Inject
-    ItemsController itemController;
+    List<Item> itemlist;   
     
     public ItemsController() {
     }

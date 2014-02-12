@@ -10,7 +10,7 @@
         <p:growl id="growl" showDetail="true" sticky="false"/>
         <p:panel header="User List">
 
-            <p:dataTable id="datalist" value="#{userController.userlist}" var="item"
+            <p:dataTable id="datalist" value="#{userController.findAllUser()}" var="item"
                          selectionMode="single" selection="#{userController.current}"
                          rowKey="#{item.userUsername}"
                          paginator="true" rows="10" rowsPerPageTemplate="10,20,30">

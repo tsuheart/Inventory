@@ -63,12 +63,8 @@ public class Supplier implements Serializable {
     @NotNull
     @Size(min = 1, max = 8)
     @Column(name = "supplier_status")
-    private String supplierStatus;
-    @JoinTable(name = "officesupplier", joinColumns = {
-        @JoinColumn(name = "officesupplier_supplier_supplierid", referencedColumnName = "supplier_supplierid")}, inverseJoinColumns = {
-        @JoinColumn(name = "officesupplier_office_officeid", referencedColumnName = "office_officeid", nullable = false)})
-//    @ManyToMany(mappedBy = "supplierCollection", fetch = FetchType.LAZY)
-    @ManyToMany
+    private String supplierStatus;   
+    @ManyToMany(mappedBy = "supplierCollection", fetch = FetchType.LAZY)
     private Collection<Office> officeCollection;
 
     public Supplier() {

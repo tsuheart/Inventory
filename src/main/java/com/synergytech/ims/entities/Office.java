@@ -68,12 +68,10 @@ public class Office implements Serializable {
     @Size(min = 1, max = 8)
     @Column(name = "office_status")
     private String officeStatus;
-//    @JoinTable(name = "officesupplier", joinColumns = {
-//        @JoinColumn(name = "officesupplier_office_officeid", referencedColumnName = "office_officeid")}, inverseJoinColumns = {
-//        @JoinColumn(name = "officesupplier_supplier_supplierid", referencedColumnName = "supplier_supplierid")})
-//    @ManyToMany
-//    private Collection<Supplier> supplierCollection;
-    @ManyToMany(mappedBy = "officeCollection", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "officesupplier", joinColumns = {
+        @JoinColumn(name = "officesupplier_office_officeid", referencedColumnName = "office_officeid")}, inverseJoinColumns = {
+        @JoinColumn(name = "officesupplier_supplier_supplierid", referencedColumnName = "supplier_supplierid")})
+    @ManyToMany
     private Collection<Supplier> supplierCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "office")
     private Collection<Store> storeCollection;

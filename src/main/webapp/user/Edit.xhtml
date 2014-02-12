@@ -32,11 +32,7 @@
                             <f:selectItem itemLabel="Active" itemValue="Active" />  
                             <f:selectItem itemLabel="Inactive" itemValue="Inactive" /> 
                         </p:selectOneMenu>
-                        <p:outputLabel value="UserOfficeOfficeid:" for="userOfficeOfficeid" />
-                        <p:selectOneMenu id="userOfficeOfficeid" converter="#{officeConverter}" value="#{userController.current.userOfficeOfficeid}" required="true" requiredMessage="The UserOfficeOfficeid field is required.">
-                            <!-- TODO: update below reference to list of available items-->
-                            <f:selectItems value="#{officeController.officelist}" var="officeid" itemValue="#{officeid}" itemLabel="#{officeid.officeName}"/>
-                        </p:selectOneMenu>
+                       
                     </h:panelGrid>
                     <p:commandButton actionListener="#{userController.editUser()}" value="Save" update="display,:UserListForm:datalist,:UserListForm:growl" oncomplete="handleSubmit(xhr,status,args,UserEditDialog);"/>
                     <p:commandButton value="Cancel" onclick="UserEditDialog.hide()"/>
