@@ -5,6 +5,7 @@
  */
 package com.synergytech.ims.controller;
 
+import com.synergytech.ims.entities.Category;
 import com.synergytech.ims.entities.Item;
 import com.synergytech.ims.facade.ItemFacade;
 import javax.inject.Named;
@@ -51,7 +52,6 @@ public class ItemsController implements Serializable {
     }
 
     public List<Item> getItemlist() {
-        itemlist=itemFacade.findAll();
         return itemlist;
     }
 
@@ -63,6 +63,10 @@ public class ItemsController implements Serializable {
         if (current == null) {
             current = new Item();
         }
+    }
+    
+    public List<Item> getAllItem(){
+        return getItemFacade().findAll();
     }
 
     public void createItem() {
@@ -100,6 +104,10 @@ public class ItemsController implements Serializable {
             setCurrent(null);
 
         }  
+    }
+    
+    public List<Item> itemByCategory(Category cat){
+        return getItemFacade().getByCategoryId(cat);
     }
     
 }

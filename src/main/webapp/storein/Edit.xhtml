@@ -34,8 +34,8 @@
                         <p:outputLabel value="StoreinOfficeOfficeid:" for="storeinOfficeOfficeid" />
                         <p:inputText id="storeinOfficeOfficeid" value="#{loginController.current.userOfficeOfficeid.officeName}" readonly="true"/>
                     </h:panelGrid>
-                    <p:commandButton actionListener="#{storeinController.editStorein()}" value="Save" update="display,:StoreinListForm:datalist,:StoreinListForm:growl" oncomplete="handleSubmit(xhr,status,args,StoreinEditDialog);"/>
-                    <p:commandButton value="Cancel" onclick="StoreinEditDialog.hide()"/>
+                    
+                    <p:commandButton value="Cancel" onclick="StoreinEditDlg.hide()"/>
                 </h:panelGroup>
 
             </h:form>
