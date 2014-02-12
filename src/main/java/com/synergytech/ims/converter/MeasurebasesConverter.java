@@ -6,7 +6,6 @@
 package com.synergytech.ims.converter;
 
 import com.synergytech.ims.entities.Measurebases;
-import com.synergytech.ims.entities.Office;
 import com.synergytech.ims.facade.MeasurebasesFacade;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
