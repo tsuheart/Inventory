@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.synergytech.ims.controller;
 
 import com.synergytech.ims.entities.Office;
@@ -11,6 +10,7 @@ import com.synergytech.ims.entities.Supplier;
 import com.synergytech.ims.facade.SupplierFacade;
 import java.io.Serializable;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -33,10 +33,11 @@ public class SupplierController implements Serializable {
     Supplier current;
 
     List<Supplier> supplierlist;
+
     /**
      * Creates a new instance of SupplierController
      */
-    public Supplier getCurrent() {       
+    public Supplier getCurrent() {
         return current;
     }
 
@@ -44,36 +45,44 @@ public class SupplierController implements Serializable {
         this.loginController = loginController;
     }
 
+    public List<Supplier> findOfficeSupplier() {
+        return (List<Supplier>) loginController.getCurrent().getUserOfficeOfficeid().getSupplierCollection();
+    }
+
     public void setCurrent(Supplier current) {
         this.current = current;
     }
-    
-    public void prepareCreate(){
-        if(current==null)
-            current=new Supplier();
+
+    public void prepareCreate() {
+        if (current == null) {
+            current = new Supplier();
+        }
     }
 
     public SupplierFacade getSupplierfacade() {
         return supplierfacade;
     }
-    
+
     public SupplierController() {
     }
 
+    public List<Supplier> findAllSupplier() {
+        return getSupplierfacade().findAll();
+    }
+
     public List<Supplier> getSupplierlist() {
-        supplierlist=getSupplierfacade().findAll();
         return supplierlist;
     }
 
     public void setSupplierlist(List<Supplier> supplierlist) {
         this.supplierlist = supplierlist;
     }
-    
+
     public void createSupplier() {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
             current.getOfficeCollection().add(loginController.current.getUserOfficeOfficeid());
-           loginController.current.getUserOfficeOfficeid().getSupplierCollection().add(current);
+            loginController.current.getUserOfficeOfficeid().getSupplierCollection().add(current);
             getSupplierfacade().edit(current);
             setCurrent(null);
             context.addMessage(null, new FacesMessage("Successful!", "Supplier Created"));
@@ -107,5 +116,5 @@ public class SupplierController implements Serializable {
 
         }
     }
-    
+
 }
