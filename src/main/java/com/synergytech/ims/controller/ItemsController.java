@@ -140,14 +140,6 @@ public class ItemsController implements Serializable {
         this.selectmeasurebases = selectmeasurebases;
     }
 
-    public StoreFacade getStoreFacade() {
-        return storeFacade;
-    }
-
-    public void setStoreFacade(StoreFacade storeFacade) {
-        this.storeFacade = storeFacade;
-    }
-
     public List<Item> getAllItem() {
         return getItemFacade().findAll();
     }
