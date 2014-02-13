@@ -8,11 +8,14 @@ package com.synergytech.ims.controller;
 import com.synergytech.ims.entities.Category;
 import com.synergytech.ims.entities.Item;
 import com.synergytech.ims.entities.Measurebases;
+import com.synergytech.ims.facade.CategoryFacade;
 import com.synergytech.ims.facade.ItemFacade;
 import com.synergytech.ims.facade.StoreFacade;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -35,16 +38,16 @@ public class ItemsController implements Serializable {
     @EJB
     ItemFacade itemFacade;
     @EJB
-    StoreFacade storeFacade;
-    
+    CategoryFacade categoryFacade;
     Item current;
-    List<Item> itemlist;
+    List<Item> itemlist, tempList;
     private TreeNode selectedcatNode;
     private TreeNode selectedmeaNode;
     boolean selectCat;
     boolean selectMea;
 
     public ItemsController() {
+        tempList=new ArrayList<Item>();
     }
 
     public ItemFacade getItemFacade() {
@@ -81,12 +84,28 @@ public class ItemsController implements Serializable {
         this.selectedcatNode = selectedcatNode;
     }
 
+    public CategoryFacade getCategoryFacade() {
+        return categoryFacade;
+    }
+
+    public void setCategoryFacade(CategoryFacade categoryFacade) {
+        this.categoryFacade = categoryFacade;
+    }
+
     public TreeNode getSelectedmeaNode() {
         return selectedmeaNode;
     }
 
     public void setSelectedmeaNode(TreeNode selectedmeaNode) {
         this.selectedmeaNode = selectedmeaNode;
+    }
+
+    public List<Item> getTempList() {
+        return tempList;
+    }
+
+    public void setTempList(List<Item> tempList) {
+        this.tempList = tempList;
     }
 
     public boolean isSelectCat() {
@@ -205,8 +224,19 @@ public class ItemsController implements Serializable {
         selectmeasurebases = null;
     }
 
-    public List<Item> itemByCategory(Category cat) {
-        return getItemFacade().getByCategoryId(cat);
+    public List<Item> itemByCategory(Category cat) {        
+        tempList=getItemFacade().getByCategoryId(cat);
+        findChild(cat);
+        return tempList;
+    }
+
+    public void findChild(Category category) {
+        List<Category> childList = getCategoryFacade().getByParentID(category);
+        for (Iterator<Category> it = childList.iterator(); it.hasNext();) {
+            Category categoryTemp = it.next();
+            tempList.addAll(getItemFacade().getByCategoryId(categoryTemp));
+            findChild(categoryTemp);            
+        }
     }
 
 }
