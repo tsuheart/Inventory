@@ -16,7 +16,6 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.inject.Inject;
 import org.primefaces.event.NodeSelectEvent;
 import org.primefaces.event.NodeUnselectEvent;
 import org.primefaces.model.TreeNode;
@@ -85,7 +84,6 @@ public class ItemsController implements Serializable {
     public void setSelectedmeaNode(TreeNode selectedmeaNode) {
         this.selectedmeaNode = selectedmeaNode;
     }
-  
 
     public boolean isSelectCat() {
         return selectCat;
@@ -103,20 +101,20 @@ public class ItemsController implements Serializable {
         this.selectMea = selectMea;
     }
 
-    public Category getSelectcat() {
-        return selectcat;
+    public Category getSelectcategory() {
+        return selectcategory;
     }
 
-    public void setSelectcat(Category selectcat) {
-        this.selectcat = selectcat;
+    public void setSelectcategory(Category selectcategory) {
+        this.selectcategory = selectcategory;
     }
 
-    public Measurebases getSelectmea() {
-        return selectmea;
+    public Measurebases getSelectmeasurebases() {
+        return selectmeasurebases;
     }
 
-    public void setSelectmea(Measurebases selectmea) {
-        this.selectmea = selectmea;
+    public void setSelectmeasurebases(Measurebases selectmeasurebases) {
+        this.selectmeasurebases = selectmeasurebases;
     }
 
     public List<Item> getAllItem() {
@@ -126,8 +124,8 @@ public class ItemsController implements Serializable {
     public void createItem() {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
-            current.setItemCategoryCategoryid(selectcat);
-            current.setItemMeasurebasesMeasureid(selectmea);
+            current.setItemCategoryCategoryid(selectcategory);
+            current.setItemMeasurebasesMeasureid(selectmeasurebases);
             getItemFacade().create(current);
             setCurrent(null);
             context.addMessage(null, new FacesMessage("Successful!", "Item Created"));
@@ -161,39 +159,35 @@ public class ItemsController implements Serializable {
 
         }
     }
-    Category selectcat = null;
-    Measurebases selectmea = null;
+    Category selectcategory = null;
+    Measurebases selectmeasurebases = null;
 
     public void onNodeSelect(NodeSelectEvent event) {
         setSelectCat(true);
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Selected", event.getTreeNode().toString());
         FacesContext.getCurrentInstance().addMessage(null, message);
-        Category cat;
-        cat = (Category) selectedcatNode.getData();
-        selectcat = cat;
+        selectcategory = (Category) selectedcatNode.getData();
     }
 
     public void onNodeUnselect(NodeUnselectEvent event) {
         setSelectCat(false);
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Unselected", event.getTreeNode().toString());
         FacesContext.getCurrentInstance().addMessage(null, message);
-        selectcat = null;
+        selectcategory = null;
     }
 
     public void onNodeSelectM(NodeSelectEvent event) {
         setSelectMea(true);
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Selected", event.getTreeNode().toString());
         FacesContext.getCurrentInstance().addMessage(null, message);
-        Measurebases mea;
-        mea = (Measurebases) selectedmeaNode.getData();
-        selectmea = mea;
+        selectmeasurebases = (Measurebases) selectedmeaNode.getData();
     }
 
     public void onNodeUnselectM(NodeUnselectEvent event) {
         setSelectMea(false);
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Unselected", event.getTreeNode().toString());
         FacesContext.getCurrentInstance().addMessage(null, message);
-        selectmea = null;
+        selectmeasurebases = null;
     }
 
     public List<Item> itemByCategory(Category cat) {

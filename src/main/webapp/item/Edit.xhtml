@@ -10,6 +10,40 @@
 
         <p:dialog id="ItemEditDlg" widgetVar="ItemEditDialog" modal="true" resizable="false" appendToBody="true" header="Edit Item" closeOnEscape="true">
 
+            <h:form id="Listeditcategorymeasure">
+
+                <h:panelGroup>
+                    <h:panelGrid columns="2">
+                        <h:column>
+                            <p:outputLabel value="Select a Category"/>
+                            <p:tree value="#{categoryController.rootNode}" var="node" dynamic="true" cache="false"  
+                                    selectionMode="single" selection="#{itemsController.selectcategory}" id="editcattree"> 
+                                
+                                <p:ajax event="select" listener="#{itemsController.onNodeSelect}" update=":ItemCreateForm:growl,:ItemCreateForm"/>
+                                <p:ajax event="unselect" listener="#{itemsController.onNodeUnselect}" update=":ItemCreateForm:growl,:ItemCreateForm"/>  
+                                <p:treeNode>                                      
+                                    <h:outputText value="#{node}" />
+                                </p:treeNode>  
+                            </p:tree>
+                        </h:column>
+
+                        <h:column>
+                            <p:outputLabel value="Select a Measure Bases"/>
+                            <p:tree value="#{measurebasesController.rootNode}" var="node1" dynamic="true" cache="false"  
+                                    selectionMode="single"  selection="#{itemsController.selectmeasurebases}" id="editmeatree"> 
+
+                                <p:ajax event="select" listener="#{itemsController.onNodeSelectM}" update=":ItemCreateForm:growl,:ItemCreateForm"/>
+                                <p:ajax event="unselect" listener="#{itemsController.onNodeUnselectM}" update=":ItemCreateForm:growl,:ItemCreateForm"/>  
+
+                                <p:treeNode>  
+                                    <h:outputText value="#{node1}" />  
+                                </p:treeNode>  
+                            </p:tree>
+                        </h:column>
+                    </h:panelGrid>
+                </h:panelGroup>
+            </h:form>
+            <br/>
             <h:form id="ItemEditForm">
 
                 <h:panelGroup id="display">
@@ -27,19 +61,17 @@
                             <f:selectItem itemLabel="Inactive" itemValue="Inactive" /> 
                         </p:selectOneMenu>
                         <p:outputLabel value="ItemCategoryCategoryid:" for="itemCategoryCategoryid" />
-                        <p:selectOneMenu id="itemCategoryCategoryid" value="#{itemsController.current.itemCategoryCategoryid}" converter="#{categoryConverter}" required="true" requiredMessage="The ItemCategoryCategoryid field is required.">
-                            <!-- TODO: update below reference to list of available items-->
-                            <f:selectItems value="#{categoryController.parentcategorylist}" var="cat" itemValue="#{cat}" itemLabel="#{cat.categoryName}"/>
-                        </p:selectOneMenu>
+                        <p:inputText id="itemCategoryCategoryid" converter="#{categoryConverter}" value="#{itemsController.current.itemCategoryCategoryid}" readonly="true"/>
                         <p:outputLabel value="ItemMeasurebasesMeasureid:" for="itemMeasurebasesMeasureid" />
-                        <p:selectOneMenu id="itemMeasurebasesMeasureid" value="#{itemsController.current.itemMeasurebasesMeasureid}" converter="#{measurebasesConverter}" required="true" requiredMessage="The ItemMeasurebasesMeasureid field is required.">
-                            <!-- TODO: update below reference to list of available items-->
-                            <f:selectItems value="#{measurebasesController.parentmeasurebaseslist}" var="meas" itemValue="#{meas}" itemLabel="#{meas.measurebasesName}"/>
-                        </p:selectOneMenu>
+                        <p:inputText id="itemMeasurebasesMeasureid" converter="#{measurebasesConverter}" value="#{itemsController.current.itemMeasurebasesMeasureid}" readonly="true"/>
                     </h:panelGrid>
-                    <p:commandButton actionListener="#{itemsController.editItem()}" value="Save" update="display,:ItemListForm:datalist,:ItemListForm:growl" oncomplete="handleSubmit(xhr,status,args,ItemEditDialog);"/>
+
+                    <p:commandButton actionListener="#{itemsController.editItem()}" rendered="#{itemsController.selectCat and itemsController.selectMea}" value="Save" update="display,:ItemListForm:datalist,:ItemListForm:growl" oncomplete="handleSubmit(xhr,status,args,ItemEditDialog);"/>
                     <p:commandButton value="Cancel" onclick="ItemEditDialog.hide()"/>
                 </h:panelGroup>
+
+                <br/>
+
 
             </h:form>
 

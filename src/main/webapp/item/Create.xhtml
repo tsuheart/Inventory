@@ -15,21 +15,21 @@
                 <h:panelGroup>
                     <h:panelGrid columns="2">
                         <h:column>
+                            <p:outputLabel value="Select a Category"/>
                             <p:tree value="#{categoryController.rootNode}" var="node" dynamic="true" cache="false"  
-                                    selectionMode="single"  selection="#{itemsController.selectedcatNode}" id="tree1"> 
-
+                                    selectionMode="single"  selection="#{itemsController.selectedcatNode}" id="cattree"> 
                                 <p:ajax event="select" listener="#{itemsController.onNodeSelect}" update=":ItemCreateForm:growl,:ItemCreateForm"/>
                                 <p:ajax event="unselect" listener="#{itemsController.onNodeUnselect}" update=":ItemCreateForm:growl,:ItemCreateForm"/>  
-
                                 <p:treeNode>  
                                     <h:outputText value="#{node}" />  
                                 </p:treeNode>  
                             </p:tree>
                         </h:column>
-                        
+
                         <h:column>
+                            <p:outputLabel value="Select a Measure Bases"/>
                             <p:tree value="#{measurebasesController.rootNode}" var="node1" dynamic="true" cache="false"  
-                                    selectionMode="single"  selection="#{itemsController.selectedmeaNode}" id="tree"> 
+                                    selectionMode="single"  selection="#{itemsController.selectedmeaNode}" id="meatree"> 
 
                                 <p:ajax event="select" listener="#{itemsController.onNodeSelectM}" update=":ItemCreateForm:growl,:ItemCreateForm"/>
                                 <p:ajax event="unselect" listener="#{itemsController.onNodeUnselectM}" update=":ItemCreateForm:growl,:ItemCreateForm"/>  
@@ -42,12 +42,11 @@
                     </h:panelGrid>
                 </h:panelGroup>
             </h:form>
-
-            <h:form id="ItemCreateForm">
+            <br/>
+            <h:form id="ItemCreateForm" >
                 <p:growl id="growl" showDetail="true" sticky="false"/>
-                <h:panelGroup id="display">
+                <h:panelGroup id="display" rendered="#{itemsController.selectCat and itemsController.selectMea}">
                     <h:panelGrid columns="2">
-
                         <p:outputLabel value="ItemItemcode:" for="itemItemcode" />
                         <p:inputText id="itemItemcode" value="#{itemsController.current.itemItemcode}" title="ItemItemcode" required="true" requiredMessage="The ItemItemcode field is required."/>
                         <p:outputLabel value="ItemName:" for="itemName" />
@@ -60,11 +59,6 @@
                             <f:selectItem itemLabel="Active" itemValue="Active" />  
                             <f:selectItem itemLabel="Inactive" itemValue="Inactive" /> 
                         </p:selectOneMenu>
-                        <p:outputLabel value="ItemCategoryCategoryid:" for="itemCategoryCategoryid" />
-                        <p:inputText id="itemCategoryCategoryid" value="#{itemsController.selectcat}" converter="#{categoryConverter}" readonly="true"/>
-                        <p:outputLabel value="ItemMeasurebasesMeasureid:" for="itemMeasurebasesMeasureid" />
-                        <p:inputText id="itemMeasurebasesMeasureid" value="#{itemsController.selectmea}" converter="#{measurebasesConverter}" readonly="true"/>
-                        
                     </h:panelGrid>
                     <p:commandButton action="#{itemsController.createItem()}" value="Save" update="display,:ItemListForm:datalist,:ItemListForm:growl, :ItemCreateForm" oncomplete="handleSubmit(xhr,status,args,ItemCreateDialog);"/>
                     <p:commandButton value="Cancel" onclick="ItemCreateDialog.hide()"/>
