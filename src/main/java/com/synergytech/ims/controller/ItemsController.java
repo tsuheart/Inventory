@@ -124,8 +124,8 @@ public class ItemsController implements Serializable {
     public void createItem() {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
-            current.setItemCategoryCategoryid(selectcategory);
-            current.setItemMeasurebasesMeasureid(selectmeasurebases);
+//            current.setItemCategoryCategoryid(selectcategory);
+//            current.setItemMeasurebasesMeasureid(selectmeasurebases);
             getItemFacade().create(current);
             setCurrent(null);
             context.addMessage(null, new FacesMessage("Successful!", "Item Created"));
@@ -167,6 +167,8 @@ public class ItemsController implements Serializable {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Selected", event.getTreeNode().toString());
         FacesContext.getCurrentInstance().addMessage(null, message);
         selectcategory = (Category) selectedcatNode.getData();
+        current.setItemCategoryCategoryid(selectcategory);
+
     }
 
     public void onNodeUnselect(NodeUnselectEvent event) {
@@ -181,6 +183,7 @@ public class ItemsController implements Serializable {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Selected", event.getTreeNode().toString());
         FacesContext.getCurrentInstance().addMessage(null, message);
         selectmeasurebases = (Measurebases) selectedmeaNode.getData();
+        current.setItemMeasurebasesMeasureid(selectmeasurebases);
     }
 
     public void onNodeUnselectM(NodeUnselectEvent event) {

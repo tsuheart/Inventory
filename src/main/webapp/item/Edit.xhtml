@@ -17,12 +17,11 @@
                         <h:column>
                             <p:outputLabel value="Select a Category"/>
                             <p:tree value="#{categoryController.rootNode}" var="node" dynamic="true" cache="false"  
-                                    selectionMode="single" selection="#{itemsController.selectcategory}" id="editcattree"> 
-                                
-                                <p:ajax event="select" listener="#{itemsController.onNodeSelect}" update=":ItemCreateForm:growl,:ItemCreateForm"/>
-                                <p:ajax event="unselect" listener="#{itemsController.onNodeUnselect}" update=":ItemCreateForm:growl,:ItemCreateForm"/>  
-                                <p:treeNode>                                      
-                                    <h:outputText value="#{node}" />
+                                    selectionMode="single"  selection="#{itemsController.selectedcatNode}" id="cattree"> 
+                                <p:ajax event="select" listener="#{itemsController.onNodeSelect}" update=":ItemCreateForm:growl, :ItemEditForm"/>
+                                <p:ajax event="unselect" listener="#{itemsController.onNodeUnselect}" update=":ItemCreateForm:growl, :ItemEditForm"/>  
+                                <p:treeNode>  
+                                    <h:outputText value="#{node}" />  
                                 </p:treeNode>  
                             </p:tree>
                         </h:column>
@@ -30,10 +29,10 @@
                         <h:column>
                             <p:outputLabel value="Select a Measure Bases"/>
                             <p:tree value="#{measurebasesController.rootNode}" var="node1" dynamic="true" cache="false"  
-                                    selectionMode="single"  selection="#{itemsController.selectmeasurebases}" id="editmeatree"> 
+                                    selectionMode="single"  selection="#{itemsController.selectedmeaNode}" id="meatree"> 
 
-                                <p:ajax event="select" listener="#{itemsController.onNodeSelectM}" update=":ItemCreateForm:growl,:ItemCreateForm"/>
-                                <p:ajax event="unselect" listener="#{itemsController.onNodeUnselectM}" update=":ItemCreateForm:growl,:ItemCreateForm"/>  
+                                <p:ajax event="select" listener="#{itemsController.onNodeSelectM}" update=":ItemCreateForm:growl,:ItemEditForm"/>
+                                <p:ajax event="unselect" listener="#{itemsController.onNodeUnselectM}" update=":ItemCreateForm:growl,:ItemEditForm"/>  
 
                                 <p:treeNode>  
                                     <h:outputText value="#{node1}" />  
