@@ -48,10 +48,10 @@ public class Store implements Serializable {
     @Column(name = "store_unit")
     private String storeUnit;
     @JoinColumn(name = "store_office_officeid", referencedColumnName = "office_officeid", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Office office;
     @JoinColumn(name = "store_item_itemcode", referencedColumnName = "item_itemcode", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Item item;
 
     public Store() {

@@ -65,13 +65,13 @@ public class Storein implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date storeinCreatedDate;
     @JoinColumn(name = "storein_createdby", referencedColumnName = "user_username")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private User storeinCreatedby;
     @JoinColumn(name = "storein_office_officeid", referencedColumnName = "office_officeid")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Office storeinOfficeOfficeid;
     @JoinColumn(name = "storein_item_itemcode", referencedColumnName = "item_itemcode")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Item storeinItemItemcode;
 
     public Storein() {

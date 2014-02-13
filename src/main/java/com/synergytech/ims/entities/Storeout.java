@@ -65,13 +65,13 @@ public class Storeout implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date storeoutCreatedDate;
     @JoinColumn(name = "storeout_createdby", referencedColumnName = "user_username")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private User storeoutCreatedby;
     @JoinColumn(name = "storeout_item_office_officeid", referencedColumnName = "office_officeid")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Office storeoutItemOfficeOfficeid;
     @JoinColumn(name = "storeout_item_itemcode", referencedColumnName = "item_itemcode")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Item storeoutItemItemcode;
 
     public Storeout() {

@@ -62,10 +62,10 @@ public class Item implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "item")
     private Collection<Store> storeCollection;
     @JoinColumn(name = "item_measurebases_measureid", referencedColumnName = "measurebases_measureid")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Measurebases itemMeasurebasesMeasureid;
     @JoinColumn(name = "item_category_categoryid", referencedColumnName = "category_categoryid")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Category itemCategoryCategoryid;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "storeoutItemItemcode")
     private Collection<Storeout> storeoutCollection;

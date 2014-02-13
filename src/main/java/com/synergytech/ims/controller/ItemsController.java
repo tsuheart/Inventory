@@ -9,6 +9,7 @@ import com.synergytech.ims.entities.Category;
 import com.synergytech.ims.entities.Item;
 import com.synergytech.ims.entities.Measurebases;
 import com.synergytech.ims.facade.ItemFacade;
+import com.synergytech.ims.facade.StoreFacade;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -33,6 +34,9 @@ public class ItemsController implements Serializable {
      */
     @EJB
     ItemFacade itemFacade;
+    @EJB
+    StoreFacade storeFacade;
+    
     Item current;
     List<Item> itemlist;
     private TreeNode selectedcatNode;
@@ -115,6 +119,14 @@ public class ItemsController implements Serializable {
 
     public void setSelectmeasurebases(Measurebases selectmeasurebases) {
         this.selectmeasurebases = selectmeasurebases;
+    }
+
+    public StoreFacade getStoreFacade() {
+        return storeFacade;
+    }
+
+    public void setStoreFacade(StoreFacade storeFacade) {
+        this.storeFacade = storeFacade;
     }
 
     public List<Item> getAllItem() {

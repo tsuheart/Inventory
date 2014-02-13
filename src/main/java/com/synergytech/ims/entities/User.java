@@ -80,7 +80,7 @@ public class User implements Serializable {
     @Column(name = "user_status")
     private String userStatus;
     @JoinColumn(name = "user_office_officeid", referencedColumnName = "office_officeid")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Office userOfficeOfficeid;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "storeoutCreatedby")
     private Collection<Storeout> storeoutCollection;
