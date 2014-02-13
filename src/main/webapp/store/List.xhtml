@@ -8,50 +8,56 @@
 
     <h:form id="StoreListForm">
         <p:growl id="growl" showDetail="true" sticky="false"/>
-        <p:panel header="Available Item List">
+        <p:panel header="Available Item List">            
 
-            <p:dataTable id="datalist" value="#{storeController.storelist}" var="item"
-                         selectionMode="single" selection="#{storeController.current}"
-                         rowKey="#{item.storePK}"
-                         paginator="true" rows="10" rowsPerPageTemplate="10,20,30">
+            <p:tree value="#{categoryController.rootNode}" var="node" dynamic="true" cache="false"  
+                    selectionMode="single"  selection="#{storeController.selectedNode}" id="tree" >  
 
-                <p:ajax event="rowSelect"   update="storeoutButton"/>
-                <p:ajax event="rowUnselect" update="storeoutButton"/>
+                <p:ajax event="select" listener="#{storeController.onNodeSelect}" update=":StoreListForm:growl,:itemdataTable"/>
+                <p:ajax event="unselect" listener="#{storeController.onNodeUnselect}" update=":StoreListForm:growl,:itemdataTable"/>  
 
-                <p:column>
-                    <f:facet name="header">
-                        <p:outputLabel value="Office"/>
-                    </f:facet>
-                    <p:outputLabel value="#{item.office}"/>
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <p:outputLabel value="Item"/>
-                    </f:facet>
-                    <p:outputLabel value="#{item.item}"/>
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <p:outputLabel value="StoreQuantity"/>
-                    </f:facet>
-                    <p:outputLabel value="#{item.storeQuantity}"/>
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <p:outputLabel value="StoreUnit"/>
-                    </f:facet>
-                    <p:outputLabel value="#{item.storeUnit}"/>
-                </p:column>
+                <p:treeNode>  
+                    <h:outputText value="#{node}" />  
+                </p:treeNode>  
+            </p:tree>            
+        </p:panel>
+    </h:form>
 
-
+    <h:panelGroup>        
+        <h:form id="itemdataTable">
+            <br/>
+            <p:separator/>
+            <br/>
+            <p:panel header="Item List"   rendered="#{storeController.showItemList}">
+                <p:dataTable value="#{storeController.storelist}" var="item">
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Item"/>
+                        </f:facet>
+                        <h:outputText value="#{item.item}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="StoreQuantity"/>
+                        </f:facet>
+                        <h:outputText value="#{item.storeQuantity}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="StoreUnit"/>
+                        </f:facet>
+                        <h:outputText value="#{item.storeUnit}"/>
+                    </p:column>                    
+                </p:dataTable>
                 <f:facet name="footer">
                     <div class="footer-section">
-                        <p:commandButton id="storeoutButton" value="Store Out" actionListener="#{storeinController.prepareCreate()}" oncomplete=""/>
+                        <p:commandButton id="createstoreinButton" value="Create" action="../item/index.xhtml?faces-redirect=true"/>
+                        <p:commandButton id="storeinButton" value="Store In" actionListener="#{storeinController.prepareCreate()}" oncomplete="" disabled="#{empty storeController.current}"/>
+                        <p:commandButton id="storeoutButton" value="Store Out" actionListener="#{storeinController.prepareCreate()}" oncomplete="" disabled="#{empty storeController.current}"/>
                     </div>
                 </f:facet>
-            </p:dataTable>
-        </p:panel>
-
-    </h:form>
+            </p:panel>            
+        </h:form>
+    </h:panelGroup>
 
 </ui:composition>
