@@ -8,6 +8,7 @@ package com.synergytech.ims.entities;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -62,11 +63,9 @@ public class Supplier implements Serializable {
     @NotNull
     @Size(min = 1, max = 8)
     @Column(name = "supplier_status")
-    private String supplierStatus;
-    @JoinTable(name = "officesupplier", joinColumns = {
-        @JoinColumn(name = "officesupplier_supplier_supplierid", referencedColumnName = "supplier_supplierid")}, inverseJoinColumns = {
-        @JoinColumn(name = "officesupplier_office_officeid", referencedColumnName = "office_officeid", nullable = false)})
-    @ManyToMany
+    private String supplierStatus;   
+    @ManyToMany(mappedBy = "supplierCollection", cascade = CascadeType.ALL)
+    @Lazy
     private Collection<Office> officeCollection;
 
     public Supplier() {

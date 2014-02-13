@@ -126,6 +126,8 @@ public class ItemsController implements Serializable {
     public void createItem() {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
+            current.setItemCategoryCategoryid(selectcat);
+            current.setItemMeasurebasesMeasureid(selectmea);
             getItemFacade().create(current);
             setCurrent(null);
             context.addMessage(null, new FacesMessage("Successful!", "Item Created"));

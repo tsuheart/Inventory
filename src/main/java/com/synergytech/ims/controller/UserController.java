@@ -8,9 +8,11 @@ package com.synergytech.ims.controller;
 import com.synergytech.ims.entities.User;
 import com.synergytech.ims.facade.UserFacade;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
@@ -25,16 +27,28 @@ public class UserController {
     /**
      * Creates a new instance of UserController
      */
+    @ManagedProperty("#{loginController}")
+    LoginController loginController;
+
     @EJB
     UserFacade userFacade;
+
     User current;
     List<User> userlist;
 
     public UserController() {
     }
 
+    public void setLoginController(LoginController loginController) {
+        this.loginController = loginController;
+    }
+
     public UserFacade getUserFacade() {
         return userFacade;
+    }
+
+    public List<User> findAllUser() {
+        return getUserFacade().getByUserOfficeId(loginController.current.getUserOfficeOfficeid());
     }
 
     public User getCurrent() {
@@ -57,6 +71,7 @@ public class UserController {
     public void createUser() {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
+            current.setUserOfficeOfficeid(loginController.current.getUserOfficeOfficeid());
             getUserFacade().create(current);
             setCurrent(null);
             context.addMessage(null, new FacesMessage("Successful!", "User Created"));
@@ -69,6 +84,7 @@ public class UserController {
     public void editUser() {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
+            current.setUserOfficeOfficeid(loginController.current.getUserOfficeOfficeid());
             getUserFacade().edit(current);
             setCurrent(null);
             context.addMessage(null, new FacesMessage("Successful!", "User Edited"));
