@@ -6,6 +6,7 @@
 package com.synergytech.ims.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -22,6 +23,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 /**
  *
@@ -65,17 +68,20 @@ public class Supplier implements Serializable {
     @Column(name = "supplier_status")
     private String supplierStatus;   
     @ManyToMany(mappedBy = "supplierCollection", cascade = CascadeType.ALL)
-    @Lazy
+    @LazyCollection(LazyCollectionOption.FALSE)
     private Collection<Office> officeCollection;
 
     public Supplier() {
+        officeCollection= new ArrayList<Office>();
     }
 
     public Supplier(String supplierSupplierid) {
+        this();
         this.supplierSupplierid = supplierSupplierid;
     }
 
     public Supplier(String supplierSupplierid, String supplierName, String supplierAddress, String supplierStatus) {
+        this();
         this.supplierSupplierid = supplierSupplierid;
         this.supplierName = supplierName;
         this.supplierAddress = supplierAddress;
