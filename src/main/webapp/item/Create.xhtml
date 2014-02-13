@@ -23,9 +23,8 @@
                                 <p:treeNode>  
                                     <h:outputText value="#{node}" />  
                                 </p:treeNode>  
-                            </p:tree>
+                            </p:tree>                       
                         </h:column>
-
                         <h:column>
                             <p:outputLabel value="Select a Measure Bases"/>
                             <p:tree value="#{measurebasesController.rootNode}" var="node1" dynamic="true" cache="false"  
@@ -43,6 +42,7 @@
                 </h:panelGroup>
             </h:form>
             <br/>
+            <p:separator/>
             <h:form id="ItemCreateForm" >
                 <p:growl id="growl" showDetail="true" sticky="false"/>
                 <h:panelGroup id="display" rendered="#{itemsController.selectCat and itemsController.selectMea}">
