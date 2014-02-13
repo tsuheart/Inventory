@@ -46,14 +46,20 @@
                     <f:facet name="header">
                         <p:outputLabel value="ItemCategoryCategoryid"/>
                     </f:facet>
-                    <p:outputLabel value="#{item.itemCategoryCategoryid.categoryName}"/>
+                    <p:outputLabel value="#{item.itemCategoryCategoryid}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <p:outputLabel value="ItemMeasurebasesMeasureid"/>
+                    </f:facet>
+                    <p:outputLabel value="#{item.itemMeasurebasesMeasureid}"/>
                 </p:column>
 
                 <f:facet name="footer">
                     <div class="footer-section">
                         <p:commandButton id="createButton" icon="ui-icon-plus"   value="Create" actionListener="#{itemsController.prepareCreate()}" oncomplete="ItemCreateDialog.show()"/>
                         <p:commandButton id="viewButton"   icon="ui-icon-search" value="View" update=":ItemViewForm" oncomplete="ItemViewDialog.show()" disabled="#{empty itemsController.current}"/>
-                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Edit" update=":ItemEditForm" oncomplete="ItemEditDialog.show()" disabled="#{empty itemsController.current}"/>
+                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Edit" update=":ItemEditForm,:Listeditcategorymeasure" oncomplete="ItemEditDialog.show()" disabled="#{empty itemsController.current}"/>
                         <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="Delete" actionListener="#{itemsController.deleteItem()}" update=":ItemListForm:growl,datalist" disabled="#{empty itemsController.current}"/>
                     </div>
                 </f:facet>

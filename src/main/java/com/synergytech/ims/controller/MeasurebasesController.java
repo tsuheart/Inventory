@@ -40,6 +40,7 @@ public class MeasurebasesController implements Serializable {
 
     /**
      * Creates a new instance of MeasurebasesController
+     * @return 
      */
     public MeasurebasesFacade getMeasurebasesFacade() {
         return measurebasesFacade;

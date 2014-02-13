@@ -10,11 +10,43 @@
 
         <p:dialog id="ItemCreateDlg" widgetVar="ItemCreateDialog" modal="true" resizable="false" appendToBody="true" header="Create Item" closeOnEscape="true">
 
-            <h:form id="ItemCreateForm">
+            <h:form id="Listcategorymeasure">
 
-                <h:panelGroup id="display">
+                <h:panelGroup>
                     <h:panelGrid columns="2">
+                        <h:column>
+                            <p:outputLabel value="Select a Category"/>
+                            <p:tree value="#{categoryController.rootNode}" var="node" dynamic="true" cache="false"  
+                                    selectionMode="single"  selection="#{itemsController.selectedcatNode}" id="cattree"> 
+                                <p:ajax event="select" listener="#{itemsController.onNodeSelect}" update=":ItemCreateForm:growl,:ItemCreateForm"/>
+                                <p:ajax event="unselect" listener="#{itemsController.onNodeUnselect}" update=":ItemCreateForm:growl,:ItemCreateForm"/>  
+                                <p:treeNode>  
+                                    <h:outputText value="#{node}" />  
+                                </p:treeNode>  
+                            </p:tree>
+                        </h:column>
 
+                        <h:column>
+                            <p:outputLabel value="Select a Measure Bases"/>
+                            <p:tree value="#{measurebasesController.rootNode}" var="node1" dynamic="true" cache="false"  
+                                    selectionMode="single"  selection="#{itemsController.selectedmeaNode}" id="meatree"> 
+
+                                <p:ajax event="select" listener="#{itemsController.onNodeSelectM}" update=":ItemCreateForm:growl,:ItemCreateForm"/>
+                                <p:ajax event="unselect" listener="#{itemsController.onNodeUnselectM}" update=":ItemCreateForm:growl,:ItemCreateForm"/>  
+
+                                <p:treeNode>  
+                                    <h:outputText value="#{node1}" />  
+                                </p:treeNode>  
+                            </p:tree>
+                        </h:column>
+                    </h:panelGrid>
+                </h:panelGroup>
+            </h:form>
+            <br/>
+            <h:form id="ItemCreateForm" >
+                <p:growl id="growl" showDetail="true" sticky="false"/>
+                <h:panelGroup id="display" rendered="#{itemsController.selectCat and itemsController.selectMea}">
+                    <h:panelGrid columns="2">
                         <p:outputLabel value="ItemItemcode:" for="itemItemcode" />
                         <p:inputText id="itemItemcode" value="#{itemsController.current.itemItemcode}" title="ItemItemcode" required="true" requiredMessage="The ItemItemcode field is required."/>
                         <p:outputLabel value="ItemName:" for="itemName" />
@@ -26,16 +58,6 @@
                             <f:selectItem itemLabel="Select One..." itemValue="" />
                             <f:selectItem itemLabel="Active" itemValue="Active" />  
                             <f:selectItem itemLabel="Inactive" itemValue="Inactive" /> 
-                        </p:selectOneMenu>
-                        <p:outputLabel value="ItemCategoryCategoryid:" for="itemCategoryCategoryid" />
-                        <p:selectOneMenu id="itemCategoryCategoryid" value="#{itemsController.current.itemCategoryCategoryid}" converter="#{categoryConverter}" required="true" requiredMessage="The ItemCategoryCategoryid field is required.">
-                            <!-- TODO: update below reference to list of available items-->
-                            <f:selectItems value="#{categoryController.parentcategorylist}" var="cat" itemValue="#{cat}" itemLabel="#{cat.categoryName}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="ItemMeasurebasesMeasureid:" for="itemMeasurebasesMeasureid" />
-                        <p:selectOneMenu id="itemMeasurebasesMeasureid" value="#{itemsController.current.itemMeasurebasesMeasureid}" converter="#{measurebasesConverter}" required="true" requiredMessage="The ItemMeasurebasesMeasureid field is required.">
-                            <!-- TODO: update below reference to list of available items-->
-                            <f:selectItems value="#{measurebasesController.parentmeasurebaseslist}" var="meas" itemValue="#{meas}" itemLabel="#{meas.measurebasesName}"/>
                         </p:selectOneMenu>
                     </h:panelGrid>
                     <p:commandButton action="#{itemsController.createItem()}" value="Save" update="display,:ItemListForm:datalist,:ItemListForm:growl, :ItemCreateForm" oncomplete="handleSubmit(xhr,status,args,ItemCreateDialog);"/>

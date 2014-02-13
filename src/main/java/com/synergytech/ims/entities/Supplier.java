@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.synergytech.ims.entities;
 
 import java.io.Serializable;
@@ -13,7 +12,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -43,6 +41,7 @@ import org.hibernate.annotations.LazyCollectionOption;
     @NamedQuery(name = "Supplier.findBySupplierContact", query = "SELECT s FROM Supplier s WHERE s.supplierContact = :supplierContact"),
     @NamedQuery(name = "Supplier.findBySupplierStatus", query = "SELECT s FROM Supplier s WHERE s.supplierStatus = :supplierStatus")})
 public class Supplier implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -162,5 +161,5 @@ public class Supplier implements Serializable {
     public String toString() {
         return "com.synergytech.ims.entities.Supplier[ supplierSupplierid=" + supplierSupplierid + " ]";
     }
-    
+
 }

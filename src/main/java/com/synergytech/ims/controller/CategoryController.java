@@ -42,6 +42,7 @@ public class CategoryController implements Serializable {
 
     /**
      * Creates a new instance of CategoryController
+     * @return 
      */
     public CategoryFacade getCategoryFacade() {
         return categoryFacade;
@@ -65,7 +66,7 @@ public class CategoryController implements Serializable {
 
     public CategoryController() {
     }
-
+    
     public List<Category> getParentcategorylist() {
         parentcategorylist = getCategoryFacade().getByParentNullID();
         return parentcategorylist;
@@ -75,8 +76,11 @@ public class CategoryController implements Serializable {
         this.parentcategorylist = parentcategorylist;
     }
 
+    private List<Category> selectall(){
+        return(getCategoryFacade().findAll());
+    }
     public List<Category> getCategorylist() {
-        categorylist = getCategoryFacade().findAll();
+        categorylist = selectall();
         return categorylist;
     }
 

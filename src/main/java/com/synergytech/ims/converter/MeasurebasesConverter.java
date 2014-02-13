@@ -6,7 +6,6 @@
 package com.synergytech.ims.converter;
 
 import com.synergytech.ims.entities.Measurebases;
-import com.synergytech.ims.entities.Office;
 import com.synergytech.ims.facade.MeasurebasesFacade;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -41,7 +40,7 @@ public class MeasurebasesConverter implements Converter {
         if (newValue == null || newValue.isEmpty()) {
             return null;
         }
-        return (measurebasesFacade.getByMeasurebasesId(Integer.valueOf(newValue)));
+        return (measurebasesFacade.getByMeasurebasesName(newValue));
     }
 
     @Override
@@ -53,8 +52,8 @@ public class MeasurebasesConverter implements Converter {
         if (!(value instanceof Measurebases)) {
             throw new ConverterException("The value is not a valid Measurebase: " + value);
         }
-        Integer measurebasesid = ((Measurebases) value).getMeasurebasesMeasureid();
-        return (measurebasesid != null) ? String.valueOf(measurebasesid) : null;
+        String measurebasesname = ((Measurebases) value).getMeasurebasesName();
+        return (measurebasesname != null) ? String.valueOf(measurebasesname) : null;
     }
 
     public MeasurebasesConverter() {
