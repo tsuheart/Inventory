@@ -29,7 +29,13 @@
             <p:separator/>
             <br/>
             <p:panel header="Item List"   rendered="#{storeController.showItemList}">
-                <p:dataTable value="#{storeController.storelist}" var="item">
+                <p:dataTable value="#{storeController.storelist}" var="item" selectionMode="single"
+                             selection="#{storeController.current}" rowKey="#{item.storePK}"
+                             paginator="true" rows="10" rowsPerPageTemplate="10,20,30">
+                    
+                    <p:ajax event="rowSelect"   update=":itemdataTable:createstoreinButton, :itemdataTable:storeinButton, :itemdataTable:storeoutButton "/>
+                    <p:ajax event="rowUnselect" update=":itemdataTable:createstoreinButton, :itemdataTable:storeinButton, :itemdataTable:storeoutButton"/>
+                    
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="Item"/>

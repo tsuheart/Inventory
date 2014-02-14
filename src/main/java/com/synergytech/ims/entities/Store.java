@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Store.findByStoreItemItemcode", query = "SELECT s FROM Store s WHERE s.storePK.storeItemItemcode = :storeItemItemcode"),
     @NamedQuery(name = "Store.findByStoreOfficeOfficeid", query = "SELECT s FROM Store s WHERE s.storePK.storeOfficeOfficeid = :storeOfficeOfficeid"),
     @NamedQuery(name = "Store.findByStoreQuantity", query = "SELECT s FROM Store s WHERE s.storeQuantity = :storeQuantity"),
+    @NamedQuery(name = "Store.findByStoreItemCategory", query = "SELECT s FROM Store s WHERE s.item.itemCategoryCategoryid = :category"),
     @NamedQuery(name = "Store.findByStoreUnit", query = "SELECT s FROM Store s WHERE s.storeUnit = :storeUnit")})
 public class Store implements Serializable {
     private static final long serialVersionUID = 1L;
