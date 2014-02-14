@@ -5,12 +5,11 @@
  */
 package com.synergytech.ims.controller;
 
-import com.synergytech.ims.entities.Office;
 import com.synergytech.ims.entities.Supplier;
+import com.synergytech.ims.facade.OfficeFacade;
 import com.synergytech.ims.facade.SupplierFacade;
 import java.io.Serializable;
 import java.util.List;
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -30,6 +29,8 @@ public class SupplierController implements Serializable {
     LoginController loginController;
     @EJB
     SupplierFacade supplierfacade;
+    @EJB
+    OfficeFacade officeFacade;
     Supplier current;
 
     List<Supplier> supplierlist;
@@ -57,6 +58,14 @@ public class SupplierController implements Serializable {
         if (current == null) {
             current = new Supplier();
         }
+    }
+
+    public OfficeFacade getOfficeFacade() {
+        return officeFacade;
+    }
+
+    public void setOfficeFacade(OfficeFacade officeFacade) {
+        this.officeFacade = officeFacade;
     }
 
     public SupplierFacade getSupplierfacade() {
@@ -107,6 +116,9 @@ public class SupplierController implements Serializable {
     public void deleteSupplier() {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
+            getCurrent().getOfficeCollection().remove(loginController.current.getUserOfficeOfficeid());
+            loginController.current.getUserOfficeOfficeid().getSupplierCollection().remove(current);            
+            getOfficeFacade().edit(loginController.getCurrent().getUserOfficeOfficeid());
             getSupplierfacade().remove(current);
             setCurrent(null);
             context.addMessage(null, new FacesMessage("Successful!", "Supplier Deleted"));

@@ -182,7 +182,7 @@ public class Item implements Serializable {
 
     @Override
     public String toString() {
-        return "com.synergytech.ims.entities.Item[ itemItemcode=" + itemItemcode + " ]";
+        return itemName;
     }
     
 }

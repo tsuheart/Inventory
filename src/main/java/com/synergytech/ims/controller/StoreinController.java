@@ -41,16 +41,7 @@ public class StoreinController {
     CategoryController categoryController;
     Storein current;
     List<Storein> storeinlist;
-    boolean showItemList;
-
-    public boolean isShowItemList() {
-        return showItemList;
-    }
-
-    public void setShowItemList(boolean showItemList) {
-        this.showItemList = showItemList;
-    }
-
+   
     public StoreinFacade getStoreinFacade() {
         return storeinFacade;
     }
@@ -135,23 +126,5 @@ public class StoreinController {
     private TreeNode selectedNode;
 
     public StoreinController() {
-    }
-
-    public void onNodeSelect(NodeSelectEvent event) {
-        setShowItemList(true);
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Selected", event.getTreeNode().toString());
-        FacesContext.getCurrentInstance().addMessage(null, message);
-        Category cat=new Category();
-        cat=(Category) selectedNode.getData();
-        categoryController.setCurrent(cat);
-        itemController.setItemlist(itemController.itemByCategory(categoryController.current));
-//        RequestContext context = RequestContext.getCurrentInstance();
-//        context.execute("createDialog.show();");
-    }
-
-    public void onNodeUnselect(NodeUnselectEvent event) {
-        setShowItemList(false);
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Unselected", event.getTreeNode().toString());
-        FacesContext.getCurrentInstance().addMessage(null, message);
-    }
+    }    
 }

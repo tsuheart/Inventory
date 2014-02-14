@@ -52,7 +52,7 @@
                 <f:facet name="footer">
                     <div class="footer-section">
                         <p:commandButton id="createstoreinButton" value="Create" action="../item/index.xhtml?faces-redirect=true"/>
-                        <p:commandButton id="storeinButton" value="Store In" actionListener="#{storeinController.prepareCreate()}" oncomplete="" disabled="#{empty storeController.current}"/>
+                        <p:commandButton id="storeinButton" value="Store In" actionListener="#{storeinController.prepareCreate()}" oncomplete=""/>
                         <p:commandButton id="storeoutButton" value="Store Out" actionListener="#{storeinController.prepareCreate()}" oncomplete="" disabled="#{empty storeController.current}"/>
                     </div>
                 </f:facet>
