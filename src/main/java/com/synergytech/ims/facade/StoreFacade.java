@@ -6,7 +6,9 @@
 
 package com.synergytech.ims.facade;
 
+import com.synergytech.ims.entities.Item;
 import com.synergytech.ims.entities.Store;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -29,4 +31,8 @@ public class StoreFacade extends AbstractFacade<Store> {
         super(Store.class);
     }
     
+     public List<Store> getByStoreItemCode(Item item){
+        return getEntityManager().createNamedQuery("Store.findByStoreItemcode",Store.class).setParameter("item",item).getResultList();
+ 
+    }
 }

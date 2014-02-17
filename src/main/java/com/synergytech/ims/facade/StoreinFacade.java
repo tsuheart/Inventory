@@ -6,7 +6,9 @@
 
 package com.synergytech.ims.facade;
 
+import com.synergytech.ims.entities.Item;
 import com.synergytech.ims.entities.Storein;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,8 +30,13 @@ public class StoreinFacade extends AbstractFacade<Storein> {
     public StoreinFacade() {
         super(Storein.class);
     }
-    public Storein getByStoreinId(Integer storein){
-        Storein stor=getEntityManager().createNamedQuery("Store.findByStoreItemItemcode",Storein.class).setParameter("storeItemItemcode",storein).getSingleResult();
-        return stor;
+    public List<Storein> getByStoreinItemCode(Item item){
+        return getEntityManager().createNamedQuery("Store.findByStoreinItemcode",Storein.class).setParameter("storeinItemItemcode",item).getResultList();
+ 
+    }
+    
+    public Storein getByStoreinId(Integer id){
+        return getEntityManager().createNamedQuery("Storein.findByStoreinId",Storein.class).setParameter("storeinId",id).getSingleResult();
+ 
     }
 }

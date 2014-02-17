@@ -65,7 +65,7 @@
                         <p:inputText id="itemMeasurebasesMeasureid" converter="#{measurebasesConverter}" value="#{itemsController.current.itemMeasurebasesMeasureid}" readonly="true"/>
                     </h:panelGrid>
 
-                    <p:commandButton actionListener="#{itemsController.editItem()}" rendered="#{itemsController.selectCat and itemsController.selectMea}" value="Save" update="display,:ItemListForm:datalist,:ItemListForm:growl" oncomplete="handleSubmit(xhr,status,args,ItemEditDialog);"/>
+                    <p:commandButton actionListener="#{itemsController.editItem()}" value="Save" update="display,:ItemListForm:datalist,:ItemListForm:growl" oncomplete="handleSubmit(xhr,status,args,ItemEditDialog);"/>
                     <p:commandButton value="Cancel" onclick="ItemEditDialog.hide()"/>
                 </h:panelGroup>
 

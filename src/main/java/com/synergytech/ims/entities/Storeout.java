@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.synergytech.ims.entities;
 
 import java.io.Serializable;
@@ -38,8 +37,11 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Storeout.findByStoreoutSerialno", query = "SELECT s FROM Storeout s WHERE s.storeoutSerialno = :storeoutSerialno"),
     @NamedQuery(name = "Storeout.findByStoreoutQuantity", query = "SELECT s FROM Storeout s WHERE s.storeoutQuantity = :storeoutQuantity"),
     @NamedQuery(name = "Storeout.findByStoreoutMeasure", query = "SELECT s FROM Storeout s WHERE s.storeoutMeasure = :storeoutMeasure"),
-    @NamedQuery(name = "Storeout.findByStoreoutCreatedDate", query = "SELECT s FROM Storeout s WHERE s.storeoutCreatedDate = :storeoutCreatedDate")})
+    @NamedQuery(name = "Storeout.findByStoreoutCreatedDate", query = "SELECT s FROM Storeout s WHERE s.storeoutCreatedDate = :storeoutCreatedDate"),
+    @NamedQuery(name = "Store.findByStoreoutItemcode", query = "SELECT s FROM Storeout s WHERE s.storeoutItemItemcode = :storeoutItemItemcode")})
+
 public class Storeout implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -176,5 +178,5 @@ public class Storeout implements Serializable {
     public String toString() {
         return "com.synergytech.ims.entities.Storeout[ storeoutId=" + storeoutId + " ]";
     }
-    
+
 }

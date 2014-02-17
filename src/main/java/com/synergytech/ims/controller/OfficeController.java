@@ -96,15 +96,7 @@ public class OfficeController implements Serializable {
         try {
             current.setOfficeStatus("Inactive");
             getOfficeFacade().edit(current);
-//            User user=null;
-//            userlist = getUserFacade().getByUserOfficeId(current);
-//            for (Iterator<User> it = userlist.iterator(); it.hasNext();) {
-//                user = it.next();
-//                user.setUserStatus("Inactive");
-//                getUserFacade().edit(user);
-//            }
             setCurrent(null);
-
             context.addMessage(null, new FacesMessage("Successful!", "Office Deleted"));
         } catch (Exception ex) {
             context.addMessage(null, new FacesMessage("Failed!", "Office Not Edited"));

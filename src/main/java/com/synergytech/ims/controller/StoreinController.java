@@ -5,7 +5,6 @@
  */
 package com.synergytech.ims.controller;
 
-import com.synergytech.ims.entities.Category;
 import com.synergytech.ims.entities.Storein;
 import com.synergytech.ims.facade.StoreinFacade;
 import java.text.SimpleDateFormat;
@@ -15,11 +14,9 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.inject.Inject;
-import org.primefaces.event.NodeSelectEvent;
-import org.primefaces.event.NodeUnselectEvent;
 import org.primefaces.model.TreeNode;
 
 /**
@@ -35,13 +32,12 @@ public class StoreinController {
      */
     @EJB
     StoreinFacade storeinFacade;
-    @Inject
-    ItemsController itemController;
-    @Inject
-    CategoryController categoryController;
     Storein current;
     List<Storein> storeinlist;
    
+    @ManagedProperty("#{itemsController}")
+    ItemsController itemsController;
+    
     public StoreinFacade getStoreinFacade() {
         return storeinFacade;
     }
@@ -127,4 +123,7 @@ public class StoreinController {
 
     public StoreinController() {
     }    
+    
+    
+    
 }

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.synergytech.ims.entities;
 
 import java.io.Serializable;
@@ -23,6 +22,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 /**
  *
@@ -39,6 +40,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Item.findByCategoryId", query = "SELECT i FROM Item i WHERE i.itemCategoryCategoryid = :itemCategoryCategoryid"),
     @NamedQuery(name = "Item.findByItemStatus", query = "SELECT i FROM Item i WHERE i.itemStatus = :itemStatus")})
 public class Item implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -60,6 +62,7 @@ public class Item implements Serializable {
     @Column(name = "item_status")
     private String itemStatus;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "item")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private Collection<Store> storeCollection;
     @JoinColumn(name = "item_measurebases_measureid", referencedColumnName = "measurebases_measureid")
     @ManyToOne
@@ -68,8 +71,10 @@ public class Item implements Serializable {
     @ManyToOne
     private Category itemCategoryCategoryid;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "storeoutItemItemcode")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private Collection<Storeout> storeoutCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "storeinItemItemcode")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private Collection<Storein> storeinCollection;
 
     public Item() {
@@ -184,5 +189,5 @@ public class Item implements Serializable {
     public String toString() {
         return itemName;
     }
-    
+
 }

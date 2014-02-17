@@ -8,9 +8,14 @@ package com.synergytech.ims.controller;
 import com.synergytech.ims.entities.Category;
 import com.synergytech.ims.entities.Item;
 import com.synergytech.ims.entities.Measurebases;
+import com.synergytech.ims.entities.Store;
+import com.synergytech.ims.entities.Storein;
+import com.synergytech.ims.entities.Storeout;
 import com.synergytech.ims.facade.CategoryFacade;
 import com.synergytech.ims.facade.ItemFacade;
 import com.synergytech.ims.facade.StoreFacade;
+import com.synergytech.ims.facade.StoreinFacade;
+import com.synergytech.ims.facade.StoreoutFacade;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -19,6 +24,7 @@ import java.util.Iterator;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.NodeSelectEvent;
 import org.primefaces.event.NodeUnselectEvent;
@@ -39,6 +45,16 @@ public class ItemsController implements Serializable {
     ItemFacade itemFacade;
     @EJB
     CategoryFacade categoryFacade;
+    @EJB
+    StoreinFacade storeinFacade;
+    @EJB
+    StoreoutFacade storeoutFacade;
+    @EJB
+    StoreFacade storeFacade;
+
+    @ManagedProperty("#{loginController}")
+    LoginController loginController;
+
     Item current;
     List<Item> itemlist, tempList;
     private TreeNode selectedcatNode;
@@ -46,12 +62,35 @@ public class ItemsController implements Serializable {
     boolean selectCat;
     boolean selectMea;
 
+    @ManagedProperty("#{storeinController}")
+    StoreinController storeinController;
+
     public ItemsController() {
-        tempList=new ArrayList<Item>();
+        tempList = new ArrayList<Item>();
+    }
+
+    public void setLoginController(LoginController loginController) {
+        this.loginController = loginController;
+    }
+
+    public void setStoreinController(StoreinController storeinController) {
+        this.storeinController = storeinController;
     }
 
     public ItemFacade getItemFacade() {
         return itemFacade;
+    }
+
+    public StoreinFacade getStoreinFacade() {
+        return storeinFacade;
+    }
+
+    public StoreoutFacade getStoreoutFacade() {
+        return storeoutFacade;
+    }
+
+    public StoreFacade getStoreFacade() {
+        return storeFacade;
     }
 
     public Item getCurrent() {
@@ -86,10 +125,6 @@ public class ItemsController implements Serializable {
 
     public CategoryFacade getCategoryFacade() {
         return categoryFacade;
-    }
-
-    public void setCategoryFacade(CategoryFacade categoryFacade) {
-        this.categoryFacade = categoryFacade;
     }
 
     public TreeNode getSelectedmeaNode() {
@@ -147,8 +182,6 @@ public class ItemsController implements Serializable {
     public void createItem() {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
-//            current.setItemCategoryCategoryid(selectcategory);
-//            current.setItemMeasurebasesMeasureid(selectmeasurebases);
             getItemFacade().create(current);
             setCurrent(null);
             context.addMessage(null, new FacesMessage("Successful!", "Item Created"));
@@ -173,6 +206,11 @@ public class ItemsController implements Serializable {
     public void deleteItem() {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
+            getCurrent().getStoreinCollection().removeAll(getByItemCodeStorein(current));
+            getCurrent().getStoreoutCollection().removeAll(getByItemCodeStoreout(current));
+            getCurrent().getStoreCollection().removeAll(getByItemCodeStore(current));
+            current.setItemStatus("Inactive");
+//            getItemFacade().edit(current);
             getItemFacade().remove(current);
             setCurrent(null);
             context.addMessage(null, new FacesMessage("Successful!", "Item Deleted"));
@@ -216,8 +254,8 @@ public class ItemsController implements Serializable {
         selectmeasurebases = null;
     }
 
-    public List<Item> itemByCategory(Category cat) {        
-        tempList=getItemFacade().getByCategoryId(cat);
+    public List<Item> itemByCategory(Category cat) {
+        tempList = getItemFacade().getByCategoryId(cat);
         findChild(cat);
         return tempList;
     }
@@ -227,8 +265,19 @@ public class ItemsController implements Serializable {
         for (Iterator<Category> it = childList.iterator(); it.hasNext();) {
             Category categoryTemp = it.next();
             tempList.addAll(getItemFacade().getByCategoryId(categoryTemp));
-            findChild(categoryTemp);            
+            findChild(categoryTemp);
         }
     }
 
+    public List<Storein> getByItemCodeStorein(Item item) {
+        return getStoreinFacade().getByStoreinItemCode(item);
+    }
+
+    public List<Storeout> getByItemCodeStoreout(Item item) {
+        return getStoreoutFacade().getByStoreoutItemCode(item);
+    }
+
+    public List<Store> getByItemCodeStore(Item item) {
+        return getStoreFacade().getByStoreItemCode(item);
+    }
 }
