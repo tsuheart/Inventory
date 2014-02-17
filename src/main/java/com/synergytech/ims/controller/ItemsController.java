@@ -269,7 +269,8 @@ public class ItemsController implements Serializable {
         setShowItemList(true);
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Selected", event.getTreeNode().toString());
         FacesContext.getCurrentInstance().addMessage(null, message);
-        Category cat = (Category) selectedNode.getData();
+        Category cat = new Category();
+        cat = (Category) selectedNode.getData();
         categoryController.setCurrent(cat);
         setItemlist(itemByCategory(categoryController.current));
     }
