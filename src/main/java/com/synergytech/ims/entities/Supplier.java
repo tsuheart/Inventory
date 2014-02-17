@@ -12,6 +12,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
@@ -42,11 +44,10 @@ public class Supplier implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20)
     @Column(name = "supplier_supplierid")
-    private String supplierSupplierid;
+    private Integer supplierSupplierid;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
@@ -64,21 +65,21 @@ public class Supplier implements Serializable {
     @NotNull
     @Size(min = 1, max = 8)
     @Column(name = "supplier_status")
-    private String supplierStatus;   
+    private String supplierStatus;
     @ManyToMany(mappedBy = "supplierCollection", cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
     private Collection<Office> officeCollection;
 
     public Supplier() {
-        officeCollection= new ArrayList<Office>();
+        officeCollection = new ArrayList<Office>();
     }
 
-    public Supplier(String supplierSupplierid) {
+    public Supplier(Integer supplierSupplierid) {
         this();
         this.supplierSupplierid = supplierSupplierid;
     }
 
-    public Supplier(String supplierSupplierid, String supplierName, String supplierAddress, String supplierStatus) {
+    public Supplier(Integer supplierSupplierid, String supplierName, String supplierAddress, String supplierStatus) {
         this();
         this.supplierSupplierid = supplierSupplierid;
         this.supplierName = supplierName;
@@ -86,11 +87,11 @@ public class Supplier implements Serializable {
         this.supplierStatus = supplierStatus;
     }
 
-    public String getSupplierSupplierid() {
+    public Integer getSupplierSupplierid() {
         return supplierSupplierid;
     }
 
-    public void setSupplierSupplierid(String supplierSupplierid) {
+    public void setSupplierSupplierid(Integer supplierSupplierid) {
         this.supplierSupplierid = supplierSupplierid;
     }
 

@@ -36,7 +36,7 @@ public class SupplierConverter implements Converter{
         if (newValue == null || newValue.isEmpty()) {
             return null;
         }
-        return (supplierFacade.getBySupplierCode(newValue));
+        return (supplierFacade.getBySupplierCode(Integer.valueOf(newValue)));
     }
 
     @Override
@@ -48,7 +48,7 @@ public class SupplierConverter implements Converter{
         if (!(value instanceof Supplier)) {
             throw new ConverterException("The value is not a valid Supplier: " + value);
         }
-        String suppliercode = ((Supplier)value).getSupplierSupplierid();
+        Integer suppliercode = ((Supplier)value).getSupplierSupplierid();
         return (suppliercode != null) ? String.valueOf(suppliercode) : null;
     }
     public SupplierConverter() {

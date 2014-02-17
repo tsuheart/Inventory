@@ -11,9 +11,11 @@
         <p:growl id="growl" showDetail="true" sticky="false"/>
         <p:panel header="Supplier List">
             
-            <p:dataTable id="datalist" selectionMode="single" selection="#{supplierController.current}"
-                         rowKey="#{item.supplierSupplierid}" paginator="true" rows="10" rowsPerPageTemplate="10,20,30" 
-                         value="#{supplierController.findOfficeSupplier()}" var="item">
+            <p:dataTable id="datalist" value="#{supplierController.findOfficeSupplier()}" var="item"
+                         selection="#{supplierController.current}" selectionMode="single" 
+                         rowKey="#{item.supplierSupplierid}" 
+                         paginator="true" rows="10" rowsPerPageTemplate="10,20,30">
+                
                 <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                 <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
                 

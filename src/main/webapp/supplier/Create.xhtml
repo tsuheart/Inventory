@@ -14,8 +14,6 @@
 
                 <h:panelGroup id="display">
                     <h:panelGrid columns="2">
-                        <p:outputLabel value="SupplierSupplierid:" for="supplierSupplierid" />
-                        <p:inputText id="supplierSupplierid" value="#{supplierController.current.supplierSupplierid}" title="SupplierSupplierid" required="true" requiredMessage="The SupplierSupplierid field is required."/>
                         <p:outputLabel value="SupplierName:" for="supplierName" />
                         <p:inputText id="supplierName" value="#{supplierController.current.supplierName}" title="SupplierName" required="true" requiredMessage="The SupplierName field is required."/>
                         <p:outputLabel value="SupplierAddress:" for="supplierAddress" />
@@ -27,10 +25,7 @@
                             <f:selectItem itemLabel="Select One" itemValue="" />
                             <f:selectItem itemLabel="Active" itemValue="Active" />  
                             <f:selectItem itemLabel="Inactive" itemValue="Inactive" /> 
-                        </p:selectOneMenu>   
-<!--                        <p:selectOneMenu id="selectOffice" var="off" value="#{supplierController.current.officeCollection}" required="true" requiredMessage="The SupplierStatus field is required.">  
-                            <f:selectItem itemValue="#{off.officeName}"/>
-                        </p:selectOneMenu>-->
+                        </p:selectOneMenu> 
                     </h:panelGrid>
                     <p:commandButton actionListener="#{supplierController.createSupplier()}" value="Save" update="display,:SupplierListForm:datalist,:SupplierListForm:growl, :SupplierCreateForm" oncomplete="handleSubmit(xhr,status,args,SupplierCreateDialog);"/>
                     <p:commandButton value="Cancel" onclick="SupplierCreateDialog.hide()"/>

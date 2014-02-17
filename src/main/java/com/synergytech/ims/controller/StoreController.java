@@ -8,7 +8,6 @@ package com.synergytech.ims.controller;
 import com.synergytech.ims.entities.Category;
 import com.synergytech.ims.entities.Store;
 import com.synergytech.ims.facade.CategoryFacade;
-import com.synergytech.ims.facade.ItemFacade;
 import com.synergytech.ims.facade.StoreFacade;
 import java.util.Iterator;
 import java.util.List;
@@ -104,8 +103,7 @@ public class StoreController {
         setShowItemList(true);
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Selected", event.getTreeNode().toString());
         FacesContext.getCurrentInstance().addMessage(null, message);
-        Category cat = new Category();
-        cat = (Category) selectedNode.getData();
+        Category cat = (Category) selectedNode.getData();
         categoryController.setCurrent(cat);
         setStorelist(storeItemByCategory(categoryController.current));
     }

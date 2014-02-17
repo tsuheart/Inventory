@@ -215,6 +215,7 @@ public class ItemsController implements Serializable {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
             getCurrent().getStoreinCollection().removeAll(getByItemCodeStorein(current));
+            
 //            storeinController.current.getStoreinItemItemcode().getStoreinCollection().remove(current);
             getCurrent().getStoreoutCollection().removeAll(getByItemCodeStoreout(current));
             
@@ -222,7 +223,7 @@ public class ItemsController implements Serializable {
             
             current.setItemStatus("Inactive");
 //            getItemFacade().edit(current);
-            getItemFacade().remove(current);
+            getItemFacade().edit(current);
             setCurrent(null);
             context.addMessage(null, new FacesMessage("Successful!", "Item Deleted"));
         } catch (Exception ex) {
