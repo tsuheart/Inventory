@@ -8,64 +8,85 @@
 
     <h:form id="ItemListForm">
         <p:growl id="growl" showDetail="true" sticky="false"/>
-        <p:panel header="Item List">
+        <p:panel header="Category List">                        
+            <p:tree value="#{categoryController.rootNode}" var="node" dynamic="true" cache="false"  
+                    selectionMode="single"  selection="#{itemsController.selectedNode}" id="tree" >  
 
-            <p:dataTable id="datalist" value="#{itemsController.allItem}" var="item"
-                         selectionMode="single" selection="#{itemsController.current}"
-                         rowKey="#{item.itemItemcode}"
-                         paginator="true" rows="10" rowsPerPageTemplate="10,20,30">
+                <p:ajax event="select" listener="#{itemsController.onNodeSelectList}" update=":ItemListForm:growl,:itemdataTable"/>
+                <p:ajax event="unselect" listener="#{itemsController.onNodeUnselectList}" update=":ItemListForm:growl,:itemdataTable"/>  
 
-                <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
-
-                <p:column>
-                    <f:facet name="header">
-                        <p:outputLabel value="ItemItemcode"/>
-                    </f:facet>
-                    <p:outputLabel value="#{item.itemItemcode}"/>
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <p:outputLabel value="ItemName"/>
-                    </f:facet>
-                    <p:outputLabel value="#{item.itemName}"/>
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <p:outputLabel value="ItemRemark"/>
-                    </f:facet>
-                    <p:outputLabel value="#{item.itemRemark}"/>
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <p:outputLabel value="ItemStatus"/>
-                    </f:facet>
-                    <p:outputLabel value="#{item.itemStatus}"/>
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <p:outputLabel value="ItemCategoryCategoryid"/>
-                    </f:facet>
-                    <p:outputLabel value="#{item.itemCategoryCategoryid}"/>
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <p:outputLabel value="ItemMeasurebasesMeasureid"/>
-                    </f:facet>
-                    <p:outputLabel value="#{item.itemMeasurebasesMeasureid}"/>
-                </p:column>
-
-                <f:facet name="footer">
-                    <div class="footer-section">
-                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="Create" actionListener="#{itemsController.prepareCreate()}" oncomplete="ItemCreateDialog.show()"/>
-                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="View" update=":ItemViewForm" oncomplete="ItemViewDialog.show()" disabled="#{empty itemsController.current}"/>
-                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Edit" update=":ItemEditForm,:Listeditcategorymeasure" oncomplete="ItemEditDialog.show()" disabled="#{empty itemsController.current}"/>
-                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="Delete" actionListener="#{itemsController.deleteItem()}" update=":ItemListForm:growl,datalist" disabled="#{empty itemsController.current}"/>
-                    </div>
-                </f:facet>
-            </p:dataTable>
-        </p:panel>
-
+                <p:treeNode>  
+                    <h:outputText value="#{node}" />  
+                </p:treeNode>  
+            </p:tree>
+        </p:panel>       
     </h:form>
+
+    <br/><br/>
+    <h:panelGroup>        
+        <h:form id="itemdataTable">
+            <p:panel header="Item List"  rendered="#{itemsController.showItemList}">
+                <p:dataTable value="#{itemsController.itemlist}" id="datalist" var="item" selection="#{itemsController.current}"
+                             selectionMode="single" rowKey="#{item.itemItemcode}"
+                         paginator="true" rows="10" rowsPerPageTemplate="10,20,30">
+                    
+                    <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton storeInNewButton"/>
+                    <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton storeInNewButton"/>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="ItemItemcode"/>
+                        </f:facet>
+                        <h:outputText value="#{item.itemItemcode}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="ItemName"/>
+                        </f:facet>
+                        <h:outputText value="#{item.itemName}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="ItemRemark"/>
+                        </f:facet>
+                        <h:outputText value="#{item.itemRemark}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="ItemStatus"/>
+                        </f:facet>
+                        <h:outputText value="#{item.itemStatus}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="ItemMeasurebasesMeasureid"/>
+                        </f:facet>
+                        <h:outputText value="#{item.itemMeasurebasesMeasureid}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="ItemCategoryCategoryid"/>
+                        </f:facet>
+                        <h:outputText value="#{item.itemCategoryCategoryid}"/>
+                    </p:column>
+                    <f:facet name="footer">
+                        <div class="footer-section">
+                            <p:commandButton id="createButton" icon="ui-icon-plus" value="Create" actionListener="#{itemsController.prepareCreate()}" oncomplete="ItemCreateDialog.show()" />
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="View" update=":ItemViewForm" oncomplete="ItemViewDialog.show()" disabled="#{empty itemsController.current}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Edit" update=":ItemEditForm,:Listeditcategorymeasure" oncomplete="ItemEditDialog.show()" disabled="#{empty itemsController.current}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="Delete" actionListener="#{itemsController.deleteItem()}" update=":ItemListForm:growl,datalist" disabled="#{empty itemsController.current}"/>
+                            <p:commandButton id="storeInNewButton" style="float: right" update=":storeInNewCreateForm"  action="#{storeinController.firstStoreInCreate()}" actionListener="#{storeinController.prepareCreate()}" icon="ui-icon-plus" value="New Store In Create" oncomplete="storeInNewCreateDialog.show()" disabled="#{empty itemsController.current}"/>
+                        </div>
+                    </f:facet> 
+                </p:dataTable>
+            </p:panel>            
+        </h:form>
+    </h:panelGroup> 
+
+
+
+
+
+
 
 </ui:composition>
