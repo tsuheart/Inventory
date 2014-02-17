@@ -10,7 +10,6 @@ import com.synergytech.ims.entities.Item;
 import com.synergytech.ims.entities.Measurebases;
 import com.synergytech.ims.facade.CategoryFacade;
 import com.synergytech.ims.facade.ItemFacade;
-import com.synergytech.ims.facade.StoreFacade;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -20,6 +19,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import org.primefaces.event.NodeSelectEvent;
 import org.primefaces.event.NodeUnselectEvent;
 import org.primefaces.model.TreeNode;
@@ -39,15 +39,19 @@ public class ItemsController implements Serializable {
     ItemFacade itemFacade;
     @EJB
     CategoryFacade categoryFacade;
+    
+    @Inject
+    CategoryController categoryController;
+    
     Item current;
     List<Item> itemlist, tempList;
-    private TreeNode selectedcatNode;
+    private TreeNode selectedcatNode,selectedNode;
     private TreeNode selectedmeaNode;
-    boolean selectCat;
+    boolean selectCat,showItemList;
     boolean selectMea;
 
     public ItemsController() {
-        tempList=new ArrayList<Item>();
+        tempList = new ArrayList<Item>();
     }
 
     public ItemFacade getItemFacade() {
@@ -60,6 +64,22 @@ public class ItemsController implements Serializable {
 
     public void setCurrent(Item current) {
         this.current = current;
+    }
+
+    public TreeNode getSelectedNode() {
+        return selectedNode;
+    }
+
+    public void setSelectedNode(TreeNode selectedNode) {
+        this.selectedNode = selectedNode;
+    }
+
+    public boolean isShowItemList() {
+        return showItemList;
+    }
+
+    public void setShowItemList(boolean showItemList) {
+        this.showItemList = showItemList;
     }
 
     public List<Item> getItemlist() {
@@ -216,8 +236,25 @@ public class ItemsController implements Serializable {
         selectmeasurebases = null;
     }
 
-    public List<Item> itemByCategory(Category cat) {        
-        tempList=getItemFacade().getByCategoryId(cat);
+    public void onNodeSelectList(NodeSelectEvent event) {
+        setShowItemList(true);
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Selected", event.getTreeNode().toString());
+        FacesContext.getCurrentInstance().addMessage(null, message);
+        Category cat = new Category();
+        cat = (Category) selectedNode.getData();
+        categoryController.setCurrent(cat);
+        setItemlist(itemByCategory(categoryController.current));
+    }
+
+    public void onNodeUnselectList(NodeUnselectEvent event) {
+        setShowItemList(false);
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Unselected", event.getTreeNode().toString());
+        FacesContext.getCurrentInstance().addMessage(null, message);
+        selectcategory = null;
+    }
+
+    public List<Item> itemByCategory(Category cat) {
+        tempList = getItemFacade().getByCategoryId(cat);
         findChild(cat);
         return tempList;
     }
@@ -227,7 +264,7 @@ public class ItemsController implements Serializable {
         for (Iterator<Category> it = childList.iterator(); it.hasNext();) {
             Category categoryTemp = it.next();
             tempList.addAll(getItemFacade().getByCategoryId(categoryTemp));
-            findChild(categoryTemp);            
+            findChild(categoryTemp);
         }
     }
 

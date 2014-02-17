@@ -37,14 +37,15 @@ public class StoreController {
     StoreFacade storeFacade;
     @EJB
     CategoryFacade categoryFacade;
-    
+
     @Inject
-    CategoryController categoryController;;
+    CategoryController categoryController;
+    ;
     boolean showItemList;
-    private TreeNode selectedNode;    
-    
+    private TreeNode selectedNode;
+
     Store current;
-    List<Store> storelist,tempList;
+    List<Store> storelist, tempList;
 
     public StoreFacade getStoreFacade() {
         return storeFacade;
@@ -92,13 +93,19 @@ public class StoreController {
 
     public StoreController() {
     }
-    
-     public void onNodeSelect(NodeSelectEvent event) {
+
+    public void prepareCreate() {
+        if (current == null) {
+            current = new Store();
+        }
+    }
+
+    public void onNodeSelect(NodeSelectEvent event) {
         setShowItemList(true);
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Selected", event.getTreeNode().toString());
         FacesContext.getCurrentInstance().addMessage(null, message);
-        Category cat=new Category();
-        cat=(Category) selectedNode.getData();
+        Category cat = new Category();
+        cat = (Category) selectedNode.getData();
         categoryController.setCurrent(cat);
         setStorelist(storeItemByCategory(categoryController.current));
     }
@@ -108,10 +115,10 @@ public class StoreController {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Unselected", event.getTreeNode().toString());
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
-    
-    public List<Store> storeItemByCategory(Category cat) {        
-        tempList=null;
-        tempList=getStoreFacade().getStoreItemByItemCategory(cat);
+
+    public List<Store> storeItemByCategory(Category cat) {
+        tempList = null;
+        tempList = getStoreFacade().getStoreItemByItemCategory(cat);
         findChild(cat);
         return tempList;
     }
@@ -121,7 +128,7 @@ public class StoreController {
         for (Iterator<Category> it = childList.iterator(); it.hasNext();) {
             Category categoryTemp = it.next();
             tempList.addAll(getStoreFacade().getStoreItemByItemCategory(categoryTemp));
-            findChild(categoryTemp);            
+            findChild(categoryTemp);
         }
     }
 
