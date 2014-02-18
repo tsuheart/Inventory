@@ -118,6 +118,7 @@ public class ItemsController implements Serializable {
     }
 
     public void prepareCreate() {
+        setCurrent(null);
         if (current == null) {
             current = new Item();
         }
@@ -240,7 +241,6 @@ public class ItemsController implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, message);
         selectcategory = (Category) selectedcatNode.getData();
         current.setItemCategoryCategoryid(selectcategory);
-
     }
 
     public void onNodeUnselect(NodeUnselectEvent event) {
@@ -307,5 +307,10 @@ public class ItemsController implements Serializable {
 
     public List<Store> getByItemCodeStore(String itemcode) {
         return getStoreFacade().getByStoreItemCode(itemcode);
+    }
+    
+    public void showAll(){
+        setItemlist(getItemFacade().findAll());
+        setShowItemList(true);
     }
 }

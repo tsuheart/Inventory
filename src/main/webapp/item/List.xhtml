@@ -18,7 +18,8 @@
                 <p:treeNode>  
                     <h:outputText value="#{node}" />  
                 </p:treeNode>  
-            </p:tree>
+            </p:tree> <br/>
+            <p:commandButton id="Showall" value="Show All Items" actionListener="#{itemsController.showAll()}" update=":itemdataTable" />
         </p:panel>       
     </h:form>
 
@@ -27,19 +28,19 @@
         <h:form id="itemdataTable">
             <p:panel header="Item List"  rendered="#{itemsController.showItemList}">
                 <p:dataTable value="#{itemsController.itemlist}" id="datalist" var="item" selection="#{itemsController.current}"
-                             selectionMode="single" rowKey="#{item.itemItemcode}"
+                             selectionMode="single" rowKey="#{item.itemItemcode}" emptyMessage="Sorry! No items"
                          paginator="true" rows="10" rowsPerPageTemplate="10,20,30">
                     
                     <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton storeInNewButton"/>
                     <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton storeInNewButton"/>
 
-                    <p:column>
+                    <p:column filterBy="#{item.itemItemcode}" sortBy="#{item.itemItemcode}">
                         <f:facet name="header">
                             <h:outputText value="ItemItemcode"/>
                         </f:facet>
                         <h:outputText value="#{item.itemItemcode}"/>
                     </p:column>
-                    <p:column>
+                    <p:column filterBy="#{item.itemName}">
                         <f:facet name="header">
                             <h:outputText value="ItemName"/>
                         </f:facet>

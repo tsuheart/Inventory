@@ -130,27 +130,19 @@ public class StoreinController {
         }
     }
 
-    public void firstStoreInCreate() throws ParseException {
+    public void firstStoreInCreate(){
         try {
             Date date = new Date();
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String dateString = dateFormat.format(date);
             getCurrent().setStoreinCreatedDate(dateFormat.parse(dateString));
+            getCurrent().setStoreinMeasure(itemsController.getCurrent().getItemMeasurebasesMeasureid().getMeasurebasesName());
             getCurrent().setStoreinCreatedby(loginController.getCurrent());
             getCurrent().setStoreinItemItemcode(itemsController.getCurrent());
             getCurrent().setStoreinOfficeOfficeid(loginController.getCurrent().getUserOfficeOfficeid());
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
-    }
-
-    public String getCurrentDate() {
-        String dateString = null;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Calendar calendar = Calendar.getInstance();
-        Date date = calendar.getTime();
-        dateString = sdf.format(date);
-        return dateString;
     }
 
     private TreeNode selectedNode;

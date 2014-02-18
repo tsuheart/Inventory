@@ -60,7 +60,7 @@
                             <f:selectItem itemLabel="Inactive" itemValue="Inactive" /> 
                         </p:selectOneMenu>
                     </h:panelGrid>
-                    <p:commandButton action="#{itemsController.createItem()}" value="Save" update="display,:ItemListForm:datalist,:ItemListForm:growl, :ItemCreateForm" oncomplete="handleSubmit(xhr,status,args,ItemCreateDialog);"/>
+                    <p:commandButton action="#{itemsController.createItem()}" value="Save" update="display,:itemdataTable:datalist,:ItemListForm:growl, :ItemCreateForm" oncomplete="handleSubmit(xhr,status,args,ItemCreateDialog);"/>
                     <p:commandButton value="Cancel" onclick="ItemCreateDialog.hide()"/>
                 </h:panelGroup>
 
