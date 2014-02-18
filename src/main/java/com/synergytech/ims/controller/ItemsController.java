@@ -118,6 +118,7 @@ public class ItemsController implements Serializable {
     }
 
     public void prepareCreate() {
+        selectedcatNode=null;
         setCurrent(null);
         if (current == null) {
             current = new Item();
@@ -216,6 +217,7 @@ public class ItemsController implements Serializable {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
             getCurrent().getStoreinCollection().removeAll(getByItemCodeStorein(current));
+            
 //            storeinController.current.getStoreinItemItemcode().getStoreinCollection().remove(current);
             getCurrent().getStoreoutCollection().removeAll(getByItemCodeStoreout(current));
             
@@ -223,7 +225,7 @@ public class ItemsController implements Serializable {
             
             current.setItemStatus("Inactive");
 //            getItemFacade().edit(current);
-            getItemFacade().remove(current);
+            getItemFacade().edit(current);
             setCurrent(null);
             context.addMessage(null, new FacesMessage("Successful!", "Item Deleted"));
         } catch (Exception ex) {
@@ -266,7 +268,7 @@ public class ItemsController implements Serializable {
     }
 
     public void onNodeSelectList(NodeSelectEvent event) {
-        setShowItemList(true);
+//        setShowItemList(true);
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Selected", event.getTreeNode().toString());
         FacesContext.getCurrentInstance().addMessage(null, message);
         Category cat = new Category();
@@ -276,7 +278,7 @@ public class ItemsController implements Serializable {
     }
 
     public void onNodeUnselectList(NodeUnselectEvent event) {
-        setShowItemList(false);
+//        setShowItemList(false);
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Unselected", event.getTreeNode().toString());
         FacesContext.getCurrentInstance().addMessage(null, message);
         selectcategory = null;

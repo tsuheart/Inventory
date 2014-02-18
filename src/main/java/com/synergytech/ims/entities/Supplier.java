@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.synergytech.ims.entities;
 
 import java.io.Serializable;
@@ -39,7 +34,6 @@ import org.hibernate.annotations.LazyCollectionOption;
     @NamedQuery(name = "Supplier.findBySupplierContact", query = "SELECT s FROM Supplier s WHERE s.supplierContact = :supplierContact"),
     @NamedQuery(name = "Supplier.findBySupplierStatus", query = "SELECT s FROM Supplier s WHERE s.supplierStatus = :supplierStatus")})
 public class Supplier implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -64,13 +58,13 @@ public class Supplier implements Serializable {
     @NotNull
     @Size(min = 1, max = 8)
     @Column(name = "supplier_status")
-    private String supplierStatus;   
+    private String supplierStatus;
     @ManyToMany(mappedBy = "supplierCollection", cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
     private Collection<Office> officeCollection;
 
     public Supplier() {
-        officeCollection= new ArrayList<Office>();
+        officeCollection = new ArrayList<Office>();
     }
 
     public Supplier(String supplierSupplierid) {
