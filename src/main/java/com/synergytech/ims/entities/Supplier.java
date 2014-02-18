@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.synergytech.ims.entities;
 
 import java.io.Serializable;
@@ -12,8 +7,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
@@ -41,13 +34,13 @@ import org.hibernate.annotations.LazyCollectionOption;
     @NamedQuery(name = "Supplier.findBySupplierContact", query = "SELECT s FROM Supplier s WHERE s.supplierContact = :supplierContact"),
     @NamedQuery(name = "Supplier.findBySupplierStatus", query = "SELECT s FROM Supplier s WHERE s.supplierStatus = :supplierStatus")})
 public class Supplier implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 20)
     @Column(name = "supplier_supplierid")
-    private Integer supplierSupplierid;
+    private String supplierSupplierid;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
@@ -74,12 +67,12 @@ public class Supplier implements Serializable {
         officeCollection = new ArrayList<Office>();
     }
 
-    public Supplier(Integer supplierSupplierid) {
+    public Supplier(String supplierSupplierid) {
         this();
         this.supplierSupplierid = supplierSupplierid;
     }
 
-    public Supplier(Integer supplierSupplierid, String supplierName, String supplierAddress, String supplierStatus) {
+    public Supplier(String supplierSupplierid, String supplierName, String supplierAddress, String supplierStatus) {
         this();
         this.supplierSupplierid = supplierSupplierid;
         this.supplierName = supplierName;
@@ -87,11 +80,11 @@ public class Supplier implements Serializable {
         this.supplierStatus = supplierStatus;
     }
 
-    public Integer getSupplierSupplierid() {
+    public String getSupplierSupplierid() {
         return supplierSupplierid;
     }
 
-    public void setSupplierSupplierid(Integer supplierSupplierid) {
+    public void setSupplierSupplierid(String supplierSupplierid) {
         this.supplierSupplierid = supplierSupplierid;
     }
 

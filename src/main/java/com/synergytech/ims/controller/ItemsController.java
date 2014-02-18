@@ -118,6 +118,7 @@ public class ItemsController implements Serializable {
     }
 
     public void prepareCreate() {
+        selectedcatNode=null;
         if (current == null) {
             current = new Item();
         }
@@ -267,7 +268,7 @@ public class ItemsController implements Serializable {
     }
 
     public void onNodeSelectList(NodeSelectEvent event) {
-        setShowItemList(true);
+//        setShowItemList(true);
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Selected", event.getTreeNode().toString());
         FacesContext.getCurrentInstance().addMessage(null, message);
         Category cat = new Category();
@@ -277,7 +278,7 @@ public class ItemsController implements Serializable {
     }
 
     public void onNodeUnselectList(NodeUnselectEvent event) {
-        setShowItemList(false);
+//        setShowItemList(false);
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Unselected", event.getTreeNode().toString());
         FacesContext.getCurrentInstance().addMessage(null, message);
         selectcategory = null;

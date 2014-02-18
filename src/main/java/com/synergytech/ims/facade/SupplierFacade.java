@@ -29,7 +29,7 @@ public class SupplierFacade extends AbstractFacade<Supplier> {
         super(Supplier.class);
     }
 
-    public Supplier getBySupplierCode(Integer supplier) {
+    public Supplier getBySupplierCode(String supplier) {
         Supplier sup = getEntityManager().createNamedQuery("Supplier.findBySupplierSupplierid", Supplier.class).setParameter("supplierSupplierid", supplier).getSingleResult();
         return sup;
     }

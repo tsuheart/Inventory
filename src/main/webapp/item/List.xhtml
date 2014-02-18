@@ -25,7 +25,7 @@
     <br/><br/>
     <h:panelGroup>        
         <h:form id="itemdataTable">
-            <p:panel header="Item List"  rendered="#{itemsController.showItemList}">
+            <p:panel header="Item List" >
                 <p:dataTable value="#{itemsController.itemlist}" id="datalist" var="item" selection="#{itemsController.current}"
                              selectionMode="single" rowKey="#{item.itemItemcode}"
                          paginator="true" rows="10" rowsPerPageTemplate="10,20,30">
@@ -74,7 +74,7 @@
                             <p:commandButton id="createButton" icon="ui-icon-plus" value="Create" actionListener="#{itemsController.prepareCreate()}" oncomplete="ItemCreateDialog.show()" />
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="View" update=":ItemViewForm" oncomplete="ItemViewDialog.show()" disabled="#{empty itemsController.current}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Edit" update=":ItemEditForm,:Listeditcategorymeasure" oncomplete="ItemEditDialog.show()" disabled="#{empty itemsController.current}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="Delete" actionListener="#{itemsController.deleteItem()}" update=":ItemListForm:growl,datalist" disabled="#{empty itemsController.current}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="Delete" actionListener="#{itemsController.deleteItem()}" update=":ItemListForm:growl,:itemdataTable:datalist" disabled="#{empty itemsController.current}"/>
                             <p:commandButton id="storeInNewButton" style="float: right" update=":storeInNewCreateForm"  action="#{storeinController.firstStoreInCreate()}" actionListener="#{storeinController.prepareCreate()}" icon="ui-icon-plus" value="New Store In Create" oncomplete="storeInNewCreateDialog.show()" disabled="#{empty itemsController.current}"/>
                         </div>
                     </f:facet> 
