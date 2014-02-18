@@ -7,9 +7,7 @@ package com.synergytech.ims.controller;
 
 import com.synergytech.ims.entities.Storein;
 import com.synergytech.ims.facade.StoreinFacade;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
@@ -90,7 +88,7 @@ public class StoreinController {
     public void createStorein() {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
-            getStoreinFacade().create(current);
+            getStoreinFacade().edit(current);
             setCurrent(null);
             context.addMessage(null, new FacesMessage("Successful!", "Item Stored"));
         } catch (Exception ex) {

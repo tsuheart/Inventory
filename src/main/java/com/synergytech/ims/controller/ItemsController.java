@@ -26,6 +26,7 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ValueChangeEvent;
 import javax.inject.Inject;
 import org.primefaces.event.NodeSelectEvent;
 import org.primefaces.event.NodeUnselectEvent;
@@ -54,17 +55,18 @@ public class ItemsController implements Serializable {
     StoreFacade storeFacade;
     @Inject
     CategoryController categoryController;
-    
+
     Item current;
     List<Item> itemlist, tempList;
-    private TreeNode selectedcatNode,selectedNode;
+    private TreeNode selectedcatNode, selectedNode;
     private TreeNode selectedmeaNode;
-    boolean selectCat,showItemList;
+    boolean selectCat, showItemList;
     boolean selectMea;
 
     @ManagedProperty("#{storeinController}")
     StoreinController storeinController;
-
+    @ManagedProperty("#{storeController}")
+    StoreController storeController;
     public ItemsController() {
         tempList = new ArrayList<Item>();
     }
@@ -118,7 +120,7 @@ public class ItemsController implements Serializable {
     }
 
     public void prepareCreate() {
-        selectedcatNode=null;
+        selectedcatNode = null;
         setCurrent(null);
         if (current == null) {
             current = new Item();
@@ -194,6 +196,8 @@ public class ItemsController implements Serializable {
         try {
             getItemFacade().create(current);
             setCurrent(null);
+            selectedcatNode = null;
+            selectedmeaNode = null;
             context.addMessage(null, new FacesMessage("Successful!", "Item Created"));
         } catch (Exception ex) {
             context.addMessage(null, new FacesMessage("Failed!", "Item Not Created"));
@@ -217,12 +221,12 @@ public class ItemsController implements Serializable {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
             getCurrent().getStoreinCollection().removeAll(getByItemCodeStorein(current));
-            
+
 //            storeinController.current.getStoreinItemItemcode().getStoreinCollection().remove(current);
             getCurrent().getStoreoutCollection().removeAll(getByItemCodeStoreout(current));
-            
+
             getCurrent().getStoreCollection().removeAll(getByItemCodeStore(current.getItemItemcode()));
-            
+                    
             current.setItemStatus("Inactive");
 //            getItemFacade().edit(current);
             getItemFacade().edit(current);
@@ -271,8 +275,7 @@ public class ItemsController implements Serializable {
 //        setShowItemList(true);
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Selected", event.getTreeNode().toString());
         FacesContext.getCurrentInstance().addMessage(null, message);
-        Category cat = new Category();
-        cat = (Category) selectedNode.getData();
+        Category cat = (Category) selectedNode.getData();
         categoryController.setCurrent(cat);
         setItemlist(itemByCategory(categoryController.current));
     }
@@ -310,9 +313,10 @@ public class ItemsController implements Serializable {
     public List<Store> getByItemCodeStore(String itemcode) {
         return getStoreFacade().getByStoreItemCode(itemcode);
     }
-    
-    public void showAll(){
+
+    public void showAll() {
         setItemlist(getItemFacade().findAll());
         setShowItemList(true);
     }
+
 }
