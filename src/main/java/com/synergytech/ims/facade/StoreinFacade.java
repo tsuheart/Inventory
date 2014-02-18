@@ -30,8 +30,9 @@ public class StoreinFacade extends AbstractFacade<Storein> {
     public StoreinFacade() {
         super(Storein.class);
     }
+    
     public List<Storein> getByStoreinItemCode(Item item){
-        return getEntityManager().createNamedQuery("Store.findByStoreinItemcode",Storein.class).setParameter("storeinItemItemcode",item).getResultList();
+        return getEntityManager().createNamedQuery("Storein.findByStoreinItemcode",Storein.class).setParameter("storeinItemItemcode",item).getResultList();
  
     }
     

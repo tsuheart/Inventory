@@ -6,7 +6,9 @@
 package com.synergytech.ims.controller;
 
 import com.synergytech.ims.entities.Category;
+import com.synergytech.ims.entities.Item;
 import com.synergytech.ims.entities.Store;
+import com.synergytech.ims.entities.Storein;
 import com.synergytech.ims.facade.CategoryFacade;
 import com.synergytech.ims.facade.StoreFacade;
 import java.util.Iterator;
@@ -129,5 +131,3 @@ public class StoreController {
             findChild(categoryTemp);
         }
     }
-
-}
