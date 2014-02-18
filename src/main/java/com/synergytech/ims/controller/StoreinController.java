@@ -5,11 +5,12 @@
  */
 package com.synergytech.ims.controller;
 
+import com.synergytech.ims.entities.Store;
+import com.synergytech.ims.entities.StorePK;
 import com.synergytech.ims.entities.Storein;
+import com.synergytech.ims.facade.StoreFacade;
 import com.synergytech.ims.facade.StoreinFacade;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
@@ -19,6 +20,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.persistence.NoResultException;
 import org.primefaces.model.TreeNode;
 
 /**
@@ -34,6 +36,8 @@ public class StoreinController {
      */
     @EJB
     StoreinFacade storeinFacade;
+    @EJB
+    StoreFacade storeFacade;
 
     @Inject
     CategoryController categoryController;
@@ -87,10 +91,38 @@ public class StoreinController {
         this.selectedNode = selectedNode;
     }
 
-    public void createStorein() {
+    public StoreFacade getStoreFacade() {
+        return storeFacade;
+    }
+
+    public void setStoreFacade(StoreFacade storeFacade) {
+        this.storeFacade = storeFacade;
+    }
+
+    public void createStorein() throws NoResultException {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
-            getStoreinFacade().create(current);
+            List<Store> newstore = getStoreFacade().getByStoreItemCode(getCurrent().getStoreinItemItemcode().getItemItemcode());
+            if (newstore.isEmpty()) {
+                Store newStoreItem = new Store();
+                newStoreItem.setItem(getCurrent().getStoreinItemItemcode());
+                newStoreItem.setOffice(loginController.getCurrent().getUserOfficeOfficeid());
+                newStoreItem.setStoreQuantity(getCurrent().getStoreinQuantity());
+                StorePK s=new StorePK();
+                s.setStoreItemItemcode(getCurrent().getStoreinItemItemcode().getItemItemcode());
+                s.setStoreOfficeOfficeid(loginController.getCurrent().getUserOfficeOfficeid().getOfficeOfficeid());
+                newStoreItem.setStorePK(s);
+                newStoreItem.setStoreUnit(getCurrent().getStoreinItemItemcode().getItemMeasurebasesMeasureid().getMeasurebasesName());
+                getStoreFacade().create(newStoreItem);
+                getStoreinFacade().edit(current);
+            } else {
+                Store currentStoreItem = newstore.get(0);
+                int sum;
+                sum = Integer.valueOf(currentStoreItem.getStoreQuantity()) + Integer.valueOf(getCurrent().getStoreinQuantity());
+                currentStoreItem.setStoreQuantity(String.valueOf(sum));
+                getStoreFacade().edit(currentStoreItem);
+                getStoreinFacade().edit(current);
+            }
             setCurrent(null);
             context.addMessage(null, new FacesMessage("Successful!", "Item Stored"));
         } catch (Exception ex) {
@@ -130,12 +162,12 @@ public class StoreinController {
         }
     }
 
-    public void firstStoreInCreate(){
+    public void firstStoreInCreate() {
         try {
             Date date = new Date();
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String dateString = dateFormat.format(date);
-            getCurrent().setStoreinCreatedDate(dateFormat.parse(dateString));
+            getCurrent().setStoreinCreatedDate(new java.sql.Date(date.getTime()));
             getCurrent().setStoreinMeasure(itemsController.getCurrent().getItemMeasurebasesMeasureid().getMeasurebasesName());
             getCurrent().setStoreinCreatedby(loginController.getCurrent());
             getCurrent().setStoreinItemItemcode(itemsController.getCurrent());

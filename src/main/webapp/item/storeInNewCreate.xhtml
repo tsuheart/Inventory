@@ -11,9 +11,7 @@
         <p:dialog id="storeInNewCreateDlg" widgetVar="storeInNewCreateDialog" modal="true" resizable="false" appendToBody="true" header="Create New Storein Item" closeOnEscape="true">
 
                 <h:form id="storeInNewCreateForm">
-                    <h:panelGrid columns="2">
-                        <h:outputLabel value="StoreinId:" for="storeinId" />
-                        <h:inputText id="storeinId" value="#{storeinController.current.storeinId}" title="StoreinId" required="true" requiredMessage="The StoreinId field is required."/>
+                    <h:panelGrid columns="2">                        
                         <h:outputLabel value="StoreinSerialno:" for="storeinSerialno" />
                         <h:inputText id="storeinSerialno" value="#{storeinController.current.storeinSerialno}" title="StoreinSerialno" />
                         <h:outputLabel value="StoreinQuantity:" for="storeinQuantity" />
@@ -31,7 +29,7 @@
                         <h:outputLabel value="StoreinItemItemcode:" for="storeinItemItemcode" />
                         <h:inputText id="storeinItemItemcode" value="#{storeinController.current.storeinItemItemcode.itemName}" readonly="true"/>
                     </h:panelGrid>
-                    <p:commandButton action="#{storeinController.createStorein()}" value="Save" oncomplete="handleSubmit(xhr,status,args,storeInNewCreateDialog);"/>
+                    <p:commandButton action="#{storeinController.createStorein()}" value="Save" update=":ItemListForm:growl" oncomplete="handleSubmit(xhr,status,args,storeInNewCreateDialog);"/>
                     <p:commandButton value="Cancel" onclick="storeInNewCreateDialog.hide()"/>
                 </h:form>
         
