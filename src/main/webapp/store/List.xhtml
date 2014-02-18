@@ -29,7 +29,7 @@
             <br/>
             <p:separator/>
             <br/>
-            <p:panel header="Item List"   rendered="#{storeController.showItemList}">
+            <p:panel header="Store Item List"   rendered="#{storeController.showItemList}">
                 <p:dataTable id="storeDatalist" value="#{storeController.storelist}" var="item" selectionMode="single"
                              selection="#{storeController.current}" rowKey="#{item.storePK}"
                              paginator="true" rows="10" rowsPerPageTemplate="10,20,30">
