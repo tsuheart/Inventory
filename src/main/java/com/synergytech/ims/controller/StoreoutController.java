@@ -7,9 +7,12 @@ package com.synergytech.ims.controller;
 
 import com.synergytech.ims.entities.Storeout;
 import com.synergytech.ims.facade.StoreoutFacade;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 /**
@@ -25,6 +28,14 @@ public class StoreoutController {
      */
     @EJB
     StoreoutFacade storeoutFacade;
+
+    @ManagedProperty("#{loginController}")
+    LoginController loginController;
+    @ManagedProperty("#{itemsController}")
+    ItemsController itemsController;
+    @ManagedProperty("#{storeController}")
+    StoreController storeController;
+
     Storeout current;
     List<Storeout> storeoutlist;
 
@@ -49,7 +60,39 @@ public class StoreoutController {
         this.storeoutlist = storeoutlist;
     }
 
+    public void setLoginController(LoginController loginController) {
+        this.loginController = loginController;
+    }
+
+    public void setItemsController(ItemsController itemsController) {
+        this.itemsController = itemsController;
+    }
+
+    public void setStoreController(StoreController storeController) {
+        this.storeController = storeController;
+    }
+
     public StoreoutController() {
     }
 
+    public void prepareCreate() {
+        if (current == null) {
+            current = new Storeout();
+        }
+    }
+
+    public void itemStoreout() {
+        try {
+            Date date = new Date();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String dateString = dateFormat.format(date);
+            getCurrent().setStoreoutCreatedDate(new java.sql.Date(date.getTime()));
+            getCurrent().setStoreoutMeasure(storeController.current.getItem().getItemMeasurebasesMeasureid().getMeasurebasesName());
+            getCurrent().setStoreoutCreatedby(loginController.getCurrent());
+            getCurrent().setStoreoutItemItemcode(itemsController.getCurrent());
+            getCurrent().setStoreoutItemOfficeOfficeid(loginController.getCurrent().getUserOfficeOfficeid());
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
 }

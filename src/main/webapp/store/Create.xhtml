@@ -11,29 +11,19 @@
         <p:dialog id="ItemStoreoutDlg" widgetVar="ItemStoreoutDialog" modal="true" resizable="false" appendToBody="true" header="Create Item" closeOnEscape="true">
 
             <h:form id="StoreoutItemForm" >
-                <p:growl id="growl" showDetail="true" sticky="false"/>
                 <h:panelGroup id="display">
                     <h:panelGrid columns="2">
-                        <p:outputLabel value="StoreoutSerialno:" for="storeoutSerialno" />
-                        <p:inputText id="storeoutSerialno" value="#{storeController.current.}" readonly="true" title="StoreoutSerialno" />
-                        <p:outputLabel value="StoreoutQuantity:" for="storeoutQuantity" />
-                        <p:inputText id="storeoutQuantity" value="#{storeoutController.current.storeoutQuantity}" title="StoreoutQuantity" required="true" requiredMessage="The StoreoutQuantity field is required."/>
-                        <p:outputLabel value="StoreoutMeasure:" for="storeoutMeasure" />
-                        <p:inputText id="storeoutMeasure" value="#{storeoutController.current.storeoutMeasure}" readonly="true" title="StoreoutMeasure" required="true" requiredMessage="The StoreoutMeasure field is required."/>
-                        <p:outputLabel value="StoreoutCreatedDate:" for="storeoutCreatedDate" />
-                        <p:inputText id="storeoutCreatedDate" value="#{storeoutController.current.storeoutCreatedDate}" readonly="true" title="StoreoutCreatedDate" required="true" requiredMessage="The StoreoutCreatedDate field is required.">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
-                        </p:inputText>
-                        <p:outputLabel value="StoreoutCreatedby:" for="storeoutCreatedby" />
-                        <p:inputText id="storeoutCreatedby" value="#{storeoutController.current.storeoutCreatedby}" readonly="true" title="StoreoutCreatedby" />
-                        <p:outputLabel value="StoreoutItemOfficeOfficeid:" for="storeoutItemOfficeOfficeid" />
-                        <p:inputText id="storeoutItemOfficeOfficeid" value="#{storeoutController.current.storeoutItemOfficeOfficeid}" readonly="true" title="StoreoutItemOfficeOfficeid" />
-                        <p:outputLabel value="StoreoutItemItemcode:" for="storeoutItemItemcode" />
-                        <p:inputText id="storeoutItemItemcode" value="#{storeoutController.current.storeoutItemItemcode}" readonly="true" title="StoreoutItemItemcode" />
-                    </h:panelGrid>
+                        <p:outputLabel value="Item:" for="item" />
+                        <p:inputText id="item" value="#{storeController.current.item.itemItemcode}" readonly="true" title="Item" />
+                        <p:outputLabel value="StoreQuantity:" for="storeQuantity" />
+                        <p:inputText id="storeQuantity" value="#{storeController.current.storeQuantity}" title="StoreQuantity" required="true" requiredMessage="The StoreQuantity field is required."/>
+                        <p:outputLabel value="StoreUnit:" for="storeUnit" />
+                        <p:inputText id="storeUnit" value="#{storeController.current.storeUnit}" title="StoreUnit" required="true" readonly="true" requiredMessage="The StoreUnit field is required."/>
 
-                    <p:commandButton value="Save" update="display,:itemdataTable:datalist,:ItemListForm:growl, :ItemCreateForm" oncomplete="handleSubmit(xhr,status,args,ItemCreateDialog);"/>
-                    <p:commandButton value="Cancel" onclick="ItemCreateDialog.hide()"/>
+                    </h:panelGrid>
+                    <p:commandButton action="#{storeController.storeoutItem()}" value="Ok" update="display,:panel,:itemdataTable:datalist,:StoreListForm:storegrowl, :StoreoutItemForm" oncomplete="handleSubmit(xhr,status,args,ItemStoreoutDialog);"/>
+                    <p:commandButton value="Cancel" onclick="ItemStoreoutDialog.hide()"/>
+                
                 </h:panelGroup>
 
             </h:form>

@@ -6,16 +6,16 @@
 package com.synergytech.ims.controller;
 
 import com.synergytech.ims.entities.Category;
-import com.synergytech.ims.entities.Item;
 import com.synergytech.ims.entities.Store;
-import com.synergytech.ims.entities.Storein;
 import com.synergytech.ims.facade.CategoryFacade;
 import com.synergytech.ims.facade.StoreFacade;
+import com.synergytech.ims.facade.StoreoutFacade;
 import java.util.Iterator;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -38,10 +38,11 @@ public class StoreController {
     StoreFacade storeFacade;
     @EJB
     CategoryFacade categoryFacade;
-
+    @EJB
+    StoreoutFacade storeoutFacade;
     @Inject
     CategoryController categoryController;
-    ;
+
     boolean showItemList;
     private TreeNode selectedNode;
 
@@ -50,6 +51,19 @@ public class StoreController {
 
     public StoreFacade getStoreFacade() {
         return storeFacade;
+    }
+
+    public void setStoreFacade(StoreFacade storeFacade) {
+        this.storeFacade = storeFacade;
+    }
+
+   
+    public StoreoutFacade getStoreoutFacade() {
+        return storeoutFacade;
+    }
+
+    public void setStoreoutFacade(StoreoutFacade storeoutFacade) {
+        this.storeoutFacade = storeoutFacade;
     }
 
     public CategoryFacade getCategoryFacade() {
@@ -131,3 +145,30 @@ public class StoreController {
             findChild(categoryTemp);
         }
     }
+
+    public void storeoutItem() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        try {
+            try {
+                List<Store> newstore = getStoreFacade().getByStoreItemCode(getCurrent().getStorePK().getStoreItemItemcode());
+                if (newstore.isEmpty() == false) {
+                    Store currentStoreItem = newstore.get(0);
+                    float res;
+                    res = Float.valueOf(currentStoreItem.getStoreQuantity()) - Float.valueOf(getCurrent().getStoreQuantity());
+                    currentStoreItem.setStoreQuantity(String.valueOf(res));
+                    getStoreFacade().edit(currentStoreItem);
+                            
+//                    getStoreoutFacade().edit();
+                }
+                setCurrent(null);
+                context.addMessage(null, new FacesMessage("Successful!", "Item Stored"));
+            } catch (Exception ex) {
+                context.addMessage(null, new FacesMessage("Failed!", "Item Not Stored"));
+                setCurrent(null);
+            }
+        } catch (Exception ex) {
+            context.addMessage(null, new FacesMessage("Failed!", "Item Not Stored Out"));
+            setCurrent(null);
+        }
+    }
+}

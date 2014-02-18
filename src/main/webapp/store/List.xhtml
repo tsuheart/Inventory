@@ -24,13 +24,13 @@
         </p:panel>
     </h:form>
 
-    <h:panelGroup>        
+    <h:panelGroup id="panel">        
         <h:form id="itemdataTable">
             <br/>
             <p:separator/>
             <br/>
             <p:panel header="Item List"   rendered="#{storeController.showItemList}">
-                <p:dataTable value="#{storeController.storelist}" var="item" selectionMode="single"
+                <p:dataTable id="datalist" value="#{storeController.storelist}" var="item" selectionMode="single"
                              selection="#{storeController.current}" rowKey="#{item.storePK}"
                              paginator="true" rows="10" rowsPerPageTemplate="10,20,30">
                     
@@ -41,7 +41,7 @@
                         <f:facet name="header">
                             <h:outputText value="Item"/>
                         </f:facet>
-                        <h:outputText value="#{item.item}"/>
+                        <h:outputText value="#{item.item.itemName}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
