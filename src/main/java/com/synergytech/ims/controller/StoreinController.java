@@ -46,6 +46,8 @@ public class StoreinController {
     LoginController loginController;
     @ManagedProperty("#{itemsController}")
     ItemsController itemsController;
+    @ManagedProperty("#{storeController}")
+    StoreController storeController;
 
     Storein current;
     List<Storein> storeinlist;
@@ -56,6 +58,10 @@ public class StoreinController {
 
     public LoginController getLoginController() {
         return loginController;
+    }
+
+    public void setStoreController(StoreController storeController) {
+        this.storeController = storeController;
     }
 
     public void setLoginController(LoginController loginController) {
@@ -99,7 +105,7 @@ public class StoreinController {
         this.storeFacade = storeFacade;
     }
 
-    public void createStorein() throws NoResultException {
+    public String createStorein() throws NoResultException {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
             List<Store> newstore = getStoreFacade().getByStoreItemCode(getCurrent().getStoreinItemItemcode().getItemItemcode());
@@ -107,27 +113,41 @@ public class StoreinController {
                 Store newStoreItem = new Store();
                 newStoreItem.setItem(getCurrent().getStoreinItemItemcode());
                 newStoreItem.setOffice(loginController.getCurrent().getUserOfficeOfficeid());
-                newStoreItem.setStoreQuantity(getCurrent().getStoreinQuantity());
-                StorePK s=new StorePK();
-                s.setStoreItemItemcode(getCurrent().getStoreinItemItemcode().getItemItemcode());
-                s.setStoreOfficeOfficeid(loginController.getCurrent().getUserOfficeOfficeid().getOfficeOfficeid());
-                newStoreItem.setStorePK(s);
-                newStoreItem.setStoreUnit(getCurrent().getStoreinItemItemcode().getItemMeasurebasesMeasureid().getMeasurebasesName());
-                getStoreFacade().create(newStoreItem);
-                getStoreinFacade().edit(current);
+                int a = Integer.valueOf(getCurrent().getStoreinQuantity());
+                if (a > 0) {
+                    newStoreItem.setStoreQuantity(getCurrent().getStoreinQuantity());
+                    StorePK s = new StorePK();
+                    s.setStoreItemItemcode(getCurrent().getStoreinItemItemcode().getItemItemcode());
+                    s.setStoreOfficeOfficeid(loginController.getCurrent().getUserOfficeOfficeid().getOfficeOfficeid());
+                    newStoreItem.setStorePK(s);
+                    newStoreItem.setStoreUnit(getCurrent().getStoreinItemItemcode().getItemMeasurebasesMeasureid().getMeasurebasesName());
+                    getStoreFacade().create(newStoreItem);
+                    getStoreinFacade().edit(current);
+                    context.addMessage(null, new FacesMessage("Successful!", "Item Stored"));
+                }
+                else{
+                    context.addMessage(null, new FacesMessage("Error", "Quantity not valid"));
+                }
             } else {
                 Store currentStoreItem = newstore.get(0);
-                int sum;
-                sum = Integer.valueOf(currentStoreItem.getStoreQuantity()) + Integer.valueOf(getCurrent().getStoreinQuantity());
-                currentStoreItem.setStoreQuantity(String.valueOf(sum));
-                getStoreFacade().edit(currentStoreItem);
-                getStoreinFacade().edit(current);
+                int a, b;
+                a = Integer.valueOf(getCurrent().getStoreinQuantity());
+                b = Integer.valueOf(currentStoreItem.getStoreQuantity());
+                if (a < 0) {
+                    context.addMessage(null, new FacesMessage("Error", "Quantity not valid"));
+                } else {
+                    currentStoreItem.setStoreQuantity(String.valueOf(a + b));
+                    getStoreFacade().edit(currentStoreItem);
+                    context.addMessage(null, new FacesMessage("Successful!", "Item Stored"));
+                    getStoreinFacade().edit(current);
+                }                
             }
             setCurrent(null);
-            context.addMessage(null, new FacesMessage("Successful!", "Item Stored"));
+            return "../store/index.xhtml?faces-redirect=true";
         } catch (Exception ex) {
             context.addMessage(null, new FacesMessage("Failed!", "Item Not Stored"));
             setCurrent(null);
+            return null;
         }
     }
 
@@ -167,10 +187,25 @@ public class StoreinController {
             Date date = new Date();
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String dateString = dateFormat.format(date);
-            getCurrent().setStoreinCreatedDate(new java.sql.Date(date.getTime()));
+            getCurrent().setStoreinCreatedDate(dateFormat.parse(dateString));
             getCurrent().setStoreinMeasure(itemsController.getCurrent().getItemMeasurebasesMeasureid().getMeasurebasesName());
             getCurrent().setStoreinCreatedby(loginController.getCurrent());
             getCurrent().setStoreinItemItemcode(itemsController.getCurrent());
+            getCurrent().setStoreinOfficeOfficeid(loginController.getCurrent().getUserOfficeOfficeid());
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public void existStoreInCreate() {
+        try {
+            Date date = new Date();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String dateString = dateFormat.format(date);
+            getCurrent().setStoreinCreatedDate(dateFormat.parse(dateString));
+            getCurrent().setStoreinMeasure(storeController.getCurrent().getItem().getItemMeasurebasesMeasureid().getMeasurebasesName());
+            getCurrent().setStoreinCreatedby(loginController.getCurrent());
+            getCurrent().setStoreinItemItemcode(storeController.getCurrent().getItem());
             getCurrent().setStoreinOfficeOfficeid(loginController.getCurrent().getUserOfficeOfficeid());
         } catch (Exception ex) {
             System.out.println(ex.getMessage());

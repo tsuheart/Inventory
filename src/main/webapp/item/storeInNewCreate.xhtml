@@ -9,27 +9,28 @@
     <ui:composition>
 
         <p:dialog id="storeInNewCreateDlg" widgetVar="storeInNewCreateDialog" modal="true" resizable="false" appendToBody="true" header="Create New Storein Item" closeOnEscape="true">
-
+                <p:growl id="growl" showDetail="true" sticky="false"/>
                 <h:form id="storeInNewCreateForm">
                     <h:panelGrid columns="2">                        
-                        <h:outputLabel value="StoreinSerialno:" for="storeinSerialno" />
-                        <h:inputText id="storeinSerialno" value="#{storeinController.current.storeinSerialno}" title="StoreinSerialno" />
-                        <h:outputLabel value="StoreinQuantity:" for="storeinQuantity" />
-                        <h:inputText id="storeinQuantity" value="#{storeinController.current.storeinQuantity}" title="StoreinQuantity" required="true" requiredMessage="The StoreinQuantity field is required."/>
-                        <h:outputLabel value="StoreinMeasure:" for="storeinMeasure" />
-                        <h:inputText id="storeinMeasure" value="#{storeinController.current.storeinMeasure}" title="StoreinMeasure" required="true" requiredMessage="The StoreinMeasure field is required."/>
-                        <h:outputLabel value="StoreinCreatedDate:" for="storeinCreatedDate" />
-                        <h:inputText id="storeinCreatedDate" value="#{storeinController.current.storeinCreatedDate}" readonly="true" title="StoreinCreatedDate" required="true" requiredMessage="The StoreinCreatedDate field is required.">
+                        <p:outputLabel value="Storein Item Name:" for="StoreinItemitemName" />
+                        <p:inputText id="StoreinItemitemName" value="#{storeinController.current.storeinItemItemcode.itemName}" readonly="true"/>
+                        <p:outputLabel value="Storein Serial no:" for="storeinSerialno" />
+                        <p:inputText id="storeinSerialno" value="#{storeinController.current.storeinSerialno}" title="StoreinSerialno" />
+                        <p:outputLabel value="Storein Quantity:" for="storeinQuantity" />
+                        <p:inputText id="storeinQuantity" value="#{storeinController.current.storeinQuantity}" title="StoreinQuantity" required="true" requiredMessage="The StoreinQuantity field is required."/>
+                        <p:outputLabel value="Storein Measure:" for="storeinMeasure" />
+                        <p:inputText id="storeinMeasure" value="#{storeinController.current.storeinMeasure}" title="StoreinMeasure" readonly="true" required="true" requiredMessage="The StoreinMeasure field is required."/>
+                        <p:outputLabel value="Storein Created Date:" for="storeinCreatedDate" />
+                        <p:inputText id="storeinCreatedDate" value="#{storeinController.current.storeinCreatedDate}" readonly="true" title="StoreinCreatedDate" required="true" requiredMessage="The StoreinCreatedDate field is required.">
                             <f:convertDateTime pattern="yyyy-MM-dd" />
-                        </h:inputText>
-                        <h:outputLabel value="StoreinCreatedby:" for="storeinCreatedby" />
-                        <h:inputText id="storeinCreatedby" value="#{storeinController.current.storeinCreatedby.userUsername}" readonly="true"/>
-                        <h:outputLabel value="StoreinOfficeOfficeid:" for="storeinOfficeOfficeid" />
-                        <h:inputText id="storeinOfficeOfficeid" value="#{storeinController.current.storeinOfficeOfficeid.officeName}" readonly="true"/>
-                        <h:outputLabel value="StoreinItemItemcode:" for="storeinItemItemcode" />
-                        <h:inputText id="storeinItemItemcode" value="#{storeinController.current.storeinItemItemcode.itemName}" readonly="true"/>
+                        </p:inputText>
+                        <p:outputLabel value="Storein Created By:" for="storeinCreatedby" />
+                        <p:inputText id="storeinCreatedby" value="#{storeinController.current.storeinCreatedby.userUsername}" readonly="true"/>
+                        <p:outputLabel value="Storein Office ID:" for="storeinOfficeOfficeid" />
+                        <p:inputText id="storeinOfficeOfficeid" value="#{storeinController.current.storeinOfficeOfficeid.officeName}" readonly="true"/>
+                        
                     </h:panelGrid>
-                    <p:commandButton action="#{storeinController.createStorein()}" value="Save" update=":ItemListForm:growl" oncomplete="handleSubmit(xhr,status,args,storeInNewCreateDialog);"/>
+                    <p:commandButton action="#{storeinController.createStorein()}" value="Save" update=":growl" oncomplete="handleSubmit(xhr,status,args,storeInNewCreateDialog);"/>
                     <p:commandButton value="Cancel" onclick="storeInNewCreateDialog.hide()"/>
                 </h:form>
         
