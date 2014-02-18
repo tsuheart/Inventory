@@ -125,17 +125,18 @@ public class StoreinController {
                 Store currentStoreItem = newstore.get(0);
                 int a, b;
                 a = Integer.valueOf(getCurrent().getStoreinQuantity());
-                b = Integer.valueOf(currentStoreItem.getStoreQuantity());                
+                b = Integer.valueOf(currentStoreItem.getStoreQuantity());
                 if (a < 0) {
                     context.addMessage(null, new FacesMessage("Error", "Quantity not valid"));
-                    break;
-                }                
-                currentStoreItem.setStoreQuantity(String.valueOf(a+b));
-                getStoreFacade().edit(currentStoreItem);
+                } else {
+                    currentStoreItem.setStoreQuantity(String.valueOf(a + b));
+                    getStoreFacade().edit(currentStoreItem);
+                    context.addMessage(null, new FacesMessage("Successful!", "Item Stored"));
+                }
                 getStoreinFacade().edit(current);
             }
             setCurrent(null);
-            context.addMessage(null, new FacesMessage("Successful!", "Item Stored"));
+
         } catch (Exception ex) {
             context.addMessage(null, new FacesMessage("Failed!", "Item Not Stored"));
             setCurrent(null);
@@ -187,8 +188,8 @@ public class StoreinController {
             System.out.println(ex.getMessage());
         }
     }
-    
-     public void existStoreInCreate() {
+
+    public void existStoreInCreate() {
         try {
             Date date = new Date();
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
