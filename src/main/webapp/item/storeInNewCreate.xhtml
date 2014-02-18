@@ -9,7 +9,7 @@
     <ui:composition>
 
         <p:dialog id="storeInNewCreateDlg" widgetVar="storeInNewCreateDialog" modal="true" resizable="false" appendToBody="true" header="Create New Storein Item" closeOnEscape="true">
-
+                <p:growl id="growl" showDetail="true" sticky="false"/>
                 <h:form id="storeInNewCreateForm">
                     <h:panelGrid columns="2">                        
                         <h:outputLabel value="StoreinSerialno:" for="storeinSerialno" />
@@ -29,7 +29,7 @@
                         <h:outputLabel value="StoreinItemItemcode:" for="storeinItemItemcode" />
                         <h:inputText id="storeinItemItemcode" value="#{storeinController.current.storeinItemItemcode.itemName}" readonly="true"/>
                     </h:panelGrid>
-                    <p:commandButton action="#{storeinController.createStorein()}" value="Save" update=":ItemListForm:growl" oncomplete="handleSubmit(xhr,status,args,storeInNewCreateDialog);"/>
+                    <p:commandButton action="#{storeinController.createStorein()}" value="Save" update=":itemdataTable,:growl" oncomplete="handleSubmit(xhr,status,args,storeInNewCreateDialog);"/>
                     <p:commandButton value="Cancel" onclick="storeInNewCreateDialog.hide()"/>
                 </h:form>
         
