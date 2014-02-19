@@ -50,19 +50,19 @@
                     <f:facet name="header">
                         <p:outputLabel value="StoreinCreatedby"/>
                     </f:facet>
-                    <p:outputLabel value="#{item.storeinCreatedby}"/>
+                    <p:outputLabel value="#{item.storeinCreatedby.userFirstname}"/>
                 </p:column>
                 <p:column>
                     <f:facet name="header">
                         <p:outputLabel value="StoreinOfficeOfficeid"/>
                     </f:facet>
-                    <p:outputLabel value="#{item.storeinOfficeOfficeid}"/>
+                    <p:outputLabel value="#{item.storeinOfficeOfficeid.officeName}"/>
                 </p:column>
                 <p:column>
                     <f:facet name="header">
                         <p:outputLabel value="StoreinItemItemcode"/>
                     </f:facet>
-                    <p:outputLabel value="#{item.storeinItemItemcode}"/>
+                    <p:outputLabel value="#{item.storeinItemItemcode.itemName}"/>
                 </p:column>
 
             </p:dataTable>

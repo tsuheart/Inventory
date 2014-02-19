@@ -50,19 +50,19 @@
                     <f:facet name="header">
                         <p:outputLabel value="StoreoutCreatedby"/>
                     </f:facet>
-                    <p:outputLabel value="#{item.storeoutCreatedby}"/>
+                    <p:outputLabel value="#{item.storeoutCreatedby.userFirstname}"/>
                 </p:column>
                 <p:column>
                     <f:facet name="header">
                         <p:outputLabel value="StoreoutItemOfficeOfficeid"/>
                     </f:facet>
-                    <p:outputLabel value="#{item.storeoutItemOfficeOfficeid}"/>
+                    <p:outputLabel value="#{item.storeoutItemOfficeOfficeid.officeName}"/>
                 </p:column>
                 <p:column>
                     <f:facet name="header">
                         <p:outputLabel value="StoreoutItemItemcode"/>
                     </f:facet>
-                    <p:outputLabel value="#{item.storeoutItemItemcode}"/>
+                    <p:outputLabel value="#{item.storeoutItemItemcode.itemName}"/>
                 </p:column>
                 
             </p:dataTable>

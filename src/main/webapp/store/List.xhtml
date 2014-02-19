@@ -8,21 +8,23 @@
 
     <h:form id="StoreListForm">
         <p:growl id="storegrowl" showDetail="true" sticky="false"/>
-        <p:panel header="Category available in the Store">            
-            * Select Category:<br/><br/>
-            <p:tree value="#{categoryController.rootNode}" var="node" dynamic="true" cache="false"  
-                    selectionMode="single"  selection="#{storeController.selectedNode}" id="tree">  
+        <p:accordionPanel> 
+            <p:tab title="Available Item Categories">
+                <p:tree value="#{categoryController.rootNode}" var="node" dynamic="true" cache="false"  
+                        selectionMode="single"  selection="#{storeController.selectedNode}" id="tree">  
 
-                <p:ajax event="select"  listener="#{storeController.onNodeSelect}" update=":StoreListForm:storegrowl,:itemdataTable"/>
-                <p:ajax event="unselect" listener="#{storeController.onNodeUnselect}" update=":StoreListForm:storegrowl,:itemdataTable"/>  
+                    <p:ajax event="select"  listener="#{storeController.onNodeSelect}" update=":StoreListForm:storegrowl,:itemdataTable"/>
+                    <p:ajax event="unselect" listener="#{storeController.onNodeUnselect}" update=":StoreListForm:storegrowl,:itemdataTable"/>  
 
-                <p:treeNode>  
-                    <h:outputText value="#{node}" />  
-                </p:treeNode>  
-            </p:tree>
-            <br/>
-            <p:commandButton id="showallbtn" value="Show all Store Item" action="#{storeController.showALLStoreItem()}" update=":itemdataTable" />
-        </p:panel>        
+                    <p:treeNode>  
+                        <h:outputText value="#{node}" />  
+                    </p:treeNode>  
+                </p:tree>
+
+                <br/>
+                <p:commandButton id="showallbtn" value="Show all Store Item" action="#{storeController.showALLStoreItem()}" update=":itemdataTable" />
+            </p:tab>
+        </p:accordionPanel>       
     </h:form> 
 
     <h:panelGroup id="panel">        
@@ -34,10 +36,10 @@
                 <p:dataTable id="datalist" value="#{storeController.storelist}" var="item" selectionMode="single"
                              selection="#{storeController.current}" rowKey="#{item.storePK}"
                              paginator="true" rows="10" rowsPerPageTemplate="10,20,30">
-                    
+
                     <p:ajax event="rowSelect"   update=":itemdataTable:createstoreinButton, :itemdataTable:storeinButton, :itemdataTable:storeoutButton "/>
                     <p:ajax event="rowUnselect" update=":itemdataTable:createstoreinButton, :itemdataTable:storeinButton, :itemdataTable:storeoutButton"/>
-                    
+
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="Item"/>
