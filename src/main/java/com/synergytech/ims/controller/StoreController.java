@@ -12,6 +12,7 @@ import com.synergytech.ims.entities.Storeout;
 import com.synergytech.ims.facade.CategoryFacade;
 import com.synergytech.ims.facade.StoreFacade;
 import com.synergytech.ims.facade.StoreoutFacade;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
@@ -33,7 +34,7 @@ import org.primefaces.model.TreeNode;
  */
 @ManagedBean
 @SessionScoped
-public class StoreController {
+public class StoreController implements Serializable{
 
     /**
      * Creates a new instance of StoreinController
