@@ -113,7 +113,7 @@ public class StoreinController {
                 Store newStoreItem = new Store();
                 newStoreItem.setItem(getCurrent().getStoreinItemItemcode());
                 newStoreItem.setOffice(loginController.getCurrent().getUserOfficeOfficeid());
-                int a = Integer.valueOf(getCurrent().getStoreinQuantity());
+                float a = Float.valueOf(getCurrent().getStoreinQuantity());
                 if (a > 0) {
                     newStoreItem.setStoreQuantity(getCurrent().getStoreinQuantity());
                     StorePK s = new StorePK();
@@ -130,9 +130,9 @@ public class StoreinController {
                 }
             } else {
                 Store currentStoreItem = newstore.get(0);
-                int a, b;
-                a = Integer.valueOf(getCurrent().getStoreinQuantity());
-                b = Integer.valueOf(currentStoreItem.getStoreQuantity());
+                float a, b;
+                a = Float.valueOf(getCurrent().getStoreinQuantity());
+                b = Float.valueOf(currentStoreItem.getStoreQuantity());
                 if (a < 0) {
                     context.addMessage(null, new FacesMessage("Error", "Quantity not valid"));
                 } else {
