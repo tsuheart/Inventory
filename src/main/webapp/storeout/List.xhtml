@@ -6,71 +6,67 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui">
 
-    <h:form id="StoreinListForm">
+    <h:form id="StoreoutListForm">
         <p:growl id="growl" showDetail="true" sticky="false"/>
-        <p:panel header="Store In Item History List">
+        <p:panel header="Store Out Item History List">
 
-            <p:dataTable id="datalist" value="#{storeinController.storeinlist}" var="item"
-                         rowKey="#{item.storeinId}"
+            <p:dataTable id="datalist" value="#{storeoutController.storeoutlist}" var="item"
+                         rowKey="#{item.storeoutId}"
                          paginator="true" rows="10" rowsPerPageTemplate="10,20,30">
              
                 <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                 <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
-
-                            <p:column>
+                 <h:column>
                                 <f:facet name="header">
-                                    <p:outputLabel value="StoreinId"/>
+                                    <h:outputText value="StoreoutId"/>
                                 </f:facet>
-                                <p:outputLabel value="#{item.storeinId}"/>
-                            </p:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="StoreinSerialno"/>
-                                </f:facet>
-                                <h:outputText value="#{item.storeinSerialno}"/>
+                                <h:outputText value="#{item.storeoutId}"/>
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputText value="StoreinQuantity"/>
+                                    <h:outputText value="StoreoutSerialno"/>
                                 </f:facet>
-                                <h:outputText value="#{item.storeinQuantity}"/>
+                                <h:outputText value="#{item.storeoutSerialno}"/>
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputText value="StoreinMeasure"/>
+                                    <h:outputText value="StoreoutQuantity"/>
                                 </f:facet>
-                                <h:outputText value="#{item.storeinMeasure}"/>
+                                <h:outputText value="#{item.storeoutQuantity}"/>
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputText value="StoreinCreatedDate"/>
+                                    <h:outputText value="StoreoutMeasure"/>
                                 </f:facet>
-                                <h:outputText value="#{item.storeinCreatedDate}">
+                                <h:outputText value="#{item.storeoutMeasure}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="StoreoutCreatedDate"/>
+                                </f:facet>
+                                <h:outputText value="#{item.storeoutCreatedDate}">
                                     <f:convertDateTime pattern="MM/dd/yyyy" />
                                 </h:outputText>
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputText value="StoreinCreatedby"/>
+                                    <h:outputText value="StoreoutCreatedby"/>
                                 </f:facet>
-                                <h:outputText value="#{item.storeinCreatedby}"/>
+                                <h:outputText value="#{item.storeoutCreatedby}"/>
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputText value="StoreinOfficeOfficeid"/>
+                                    <h:outputText value="StoreoutItemOfficeOfficeid"/>
                                 </f:facet>
-                                <h:outputText value="#{item.storeinOfficeOfficeid}"/>
+                                <h:outputText value="#{item.storeoutItemOfficeOfficeid}"/>
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputText value="StoreinItemItemcode"/>
+                                    <h:outputText value="StoreoutItemItemcode"/>
                                 </f:facet>
-                                <h:outputText value="#{item.storeinItemItemcode}"/>
+                                <h:outputText value="#{item.storeoutItemItemcode}"/>
                             </h:column>
-                        </h:dataTable>
-                    </h:form>
-                </f:view>
-
+           
                 <f:facet name="footer">
                     <div class="footer-section">
                         <p:commandButton id="createButton" icon="ui-icon-plus"   value="Create" actionListener="#{officeController.prepareCreate()}" oncomplete="OfficeCreateDialog.show()"/>

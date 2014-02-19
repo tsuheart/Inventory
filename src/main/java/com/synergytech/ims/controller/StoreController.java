@@ -160,8 +160,8 @@ public class StoreController {
             if (newstore.isEmpty() == false) {
                 Store currentStoreItem = newstore.get(0);
                 float res;
-                if (Float.valueOf(getCurrent().getStoreQuantity())<0 || Float.valueOf(getCurrent().getStoreQuantity()) < Float.valueOf(currentStoreItem.getStoreQuantity())) {
-                    context.addMessage(null, new FacesMessage("Error!", "Store Quantity is greater than available quantity."));
+                if (Float.valueOf(getCurrent().getStoreQuantity())<=0 || (Float.valueOf(getCurrent().getStoreQuantity()) > Float.valueOf(currentStoreItem.getStoreQuantity()))) {
+                    context.addMessage(null, new FacesMessage("Error!", "Wrong input."));
                 } else {
                     res = Float.valueOf(currentStoreItem.getStoreQuantity()) - Float.valueOf(getCurrent().getStoreQuantity());
                     if (res == 0.0) {
@@ -182,7 +182,7 @@ public class StoreController {
                     sout.setStoreoutMeasure(currentStoreItem.getStoreUnit());
                     sout.setStoreoutQuantity(getCurrent().getStoreQuantity());
                     storeoutFacade.edit(sout);
-
+                    current.setStoreQuantity(String.valueOf(res));
                     setCurrent(null);
                     context.addMessage(null, new FacesMessage("Successful!", "Item Stored Out"));
                 }
