@@ -7,9 +7,13 @@ package com.synergytech.ims.controller;
 
 import com.synergytech.ims.entities.Category;
 import com.synergytech.ims.entities.Store;
+import com.synergytech.ims.entities.StorePK;
+import com.synergytech.ims.entities.Storeout;
 import com.synergytech.ims.facade.CategoryFacade;
 import com.synergytech.ims.facade.StoreFacade;
 import com.synergytech.ims.facade.StoreoutFacade;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import javax.ejb.EJB;
@@ -112,6 +116,10 @@ public class StoreController {
         this.storelist = storeinlist;
     }
 
+    public void setLoginController(LoginController loginController) {
+        this.loginController = loginController;
+    }
+
     public StoreController() {
     }
 
@@ -160,26 +168,42 @@ public class StoreController {
     public void storeoutItem() {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
-            try {
-                List<Store> newstore = getStoreFacade().getByStoreItemCode(getCurrent().getStorePK().getStoreItemItemcode());
-                if (newstore.isEmpty() == false) {
-                    Store currentStoreItem = newstore.get(0);
-                    float res;
+            List<Store> newstore = getStoreFacade().getByStoreItemCode(getCurrent().getStorePK().getStoreItemItemcode());
+            if (newstore.isEmpty() == false) {
+                Store currentStoreItem = newstore.get(0);
+                float res;
+                if (Float.valueOf(getCurrent().getStoreQuantity())<=0 || (Float.valueOf(getCurrent().getStoreQuantity()) > Float.valueOf(currentStoreItem.getStoreQuantity()))) {
+                    context.addMessage(null, new FacesMessage("Error!", "Wrong input."));
+                } else {
                     res = Float.valueOf(currentStoreItem.getStoreQuantity()) - Float.valueOf(getCurrent().getStoreQuantity());
                     if (res == 0.0) {
-                        getStoreFacade().remove(current);
-                    } else {
                         currentStoreItem.setStoreQuantity(String.valueOf(res));
-                        getStoreFacade().edit(current);
+                        StorePK s=new StorePK();
+                        s.setStoreItemItemcode(current.getItem().getItemItemcode());
+                        s.setStoreOfficeOfficeid(loginController.getCurrent().getUserOfficeOfficeid().getOfficeOfficeid());
+                        currentStoreItem.setStorePK(s);
+                        getStoreFacade().remove(currentStoreItem);
+                    } else {
+                        currentStoreItem.setStoreQuantity(String.valueOf(res));                        
+                        getStoreFacade().edit(currentStoreItem);
                     }
-//                    getStoreoutFacade().edit();
+                    Date date = new Date();
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    String dateString = dateFormat.format(date);
+                    Storeout sout = new Storeout();
+                    sout.setStoreoutCreatedDate(dateFormat.parse(dateString));
+                    sout.setStoreoutCreatedby(loginController.getCurrent());
+                    sout.setStoreoutItemItemcode(current.getItem());
+                    sout.setStoreoutItemOfficeOfficeid(loginController.getCurrent().getUserOfficeOfficeid());
+                    sout.setStoreoutMeasure(currentStoreItem.getStoreUnit());
+                    sout.setStoreoutQuantity(getCurrent().getStoreQuantity());
+                    storeoutFacade.edit(sout);
+                    current.setStoreQuantity(String.valueOf(res));
+                    setCurrent(null);
+                    context.addMessage(null, new FacesMessage("Successful!", "Item Stored Out"));
                 }
-                setCurrent(null);
-                context.addMessage(null, new FacesMessage("Successful!", "Item Stored"));
-            } catch (Exception ex) {
-                context.addMessage(null, new FacesMessage("Failed!", "Item Not Stored"));
-                setCurrent(null);
             }
+
         } catch (Exception ex) {
             context.addMessage(null, new FacesMessage("Failed!", "Item Not Stored Out"));
             setCurrent(null);

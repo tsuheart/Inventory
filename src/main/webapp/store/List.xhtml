@@ -8,7 +8,7 @@
 
     <h:form id="StoreListForm">
         <p:growl id="storegrowl" showDetail="true" sticky="false"/>
-        <p:panel header="Item in the Store">            
+        <p:panel header="Category available in the Store">            
             * Select Category:<br/><br/>
             <p:tree value="#{categoryController.rootNode}" var="node" dynamic="true" cache="false"  
                     selectionMode="single"  selection="#{storeController.selectedNode}" id="tree">  
@@ -60,8 +60,8 @@
                 <f:facet name="footer">
                     <div class="footer-section">
                         <p:commandButton id="createstoreinButton" value="New Store In" action="../item/index.xhtml?faces-redirect=true" disabled="#{not empty storeController.current}"/>
-                        <p:commandButton id="storeinButton" value="Store In" action="#{storeinController.existStoreInCreate()}" actionListener="#{storeinController.prepareCreate()}" update=":storeInNewCreateForm,:StoreListForm:storegrowl" oncomplete="storeInNewCreateDialog.show()" disabled="#{empty storeController.current}"/>
-                        <p:commandButton id="storeoutButton" value="Store Out" action="#{storeController.storeoutItem()}" oncomplete="ItemStoreoutDialog.show()" disabled="#{empty storeController.current}"/>
+                        <p:commandButton id="storeinButton" value="Store In" action="#{storeinController.existStoreInCreate()}" actionListener="#{storeinController.prepareCreate()}" update=":storeInNewCreateForm" oncomplete="storeInNewCreateDialog.show()" disabled="#{empty storeController.current}"/>
+                        <p:commandButton id="storeoutButton" value="Store Out" oncomplete="ItemStoreoutDialog.show()" disabled="#{empty storeController.current}"/>
                     </div>
                 </f:facet>
             </p:panel>            
