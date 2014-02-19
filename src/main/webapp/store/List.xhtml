@@ -60,7 +60,7 @@
                     <div class="footer-section">
                         <p:commandButton id="createstoreinButton" value="New Store In" action="../item/index.xhtml?faces-redirect=true" disabled="#{not empty storeController.current}"/>
                         <p:commandButton id="storeinButton" value="Store In" action="#{storeinController.existStoreInCreate()}" actionListener="#{storeinController.prepareCreate()}" update=":storeInNewCreateForm" oncomplete="storeInNewCreateDialog.show()" disabled="#{empty storeController.current}"/>
-                        <p:commandButton id="storeoutButton" value="Store Out" action="#{storeController.storeoutItem()}" oncomplete="ItemStoreoutDialog.show()" disabled="#{empty storeController.current}"/>
+                        <p:commandButton id="storeoutButton" value="Store Out" action="#{storeController.storeoutItem()}" oncomplete="ItemStoreoutDialog.show()" update=":StoreoutItemForm:display" disabled="#{empty storeController.current}"/>
                     </div>
                 </f:facet>
             </p:panel>            
