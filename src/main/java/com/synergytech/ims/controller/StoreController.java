@@ -7,6 +7,7 @@ package com.synergytech.ims.controller;
 
 import com.synergytech.ims.entities.Category;
 import com.synergytech.ims.entities.Store;
+import com.synergytech.ims.entities.StorePK;
 import com.synergytech.ims.entities.Storeout;
 import com.synergytech.ims.facade.CategoryFacade;
 import com.synergytech.ims.facade.StoreFacade;
@@ -166,9 +167,13 @@ public class StoreController {
                     res = Float.valueOf(currentStoreItem.getStoreQuantity()) - Float.valueOf(getCurrent().getStoreQuantity());
                     if (res == 0.0) {
                         currentStoreItem.setStoreQuantity(String.valueOf(res));
+                        StorePK s=new StorePK();
+                        s.setStoreItemItemcode(current.getItem().getItemItemcode());
+                        s.setStoreOfficeOfficeid(loginController.getCurrent().getUserOfficeOfficeid().getOfficeOfficeid());
+                        currentStoreItem.setStorePK(s);
                         getStoreFacade().remove(currentStoreItem);
                     } else {
-                        currentStoreItem.setStoreQuantity(String.valueOf(res));
+                        currentStoreItem.setStoreQuantity(String.valueOf(res));                        
                         getStoreFacade().edit(currentStoreItem);
                     }
                     Date date = new Date();

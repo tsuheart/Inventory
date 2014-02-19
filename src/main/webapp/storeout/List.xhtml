@@ -13,68 +13,60 @@
             <p:dataTable id="datalist" value="#{storeoutController.storeoutlist}" var="item"
                          rowKey="#{item.storeoutId}"
                          paginator="true" rows="10" rowsPerPageTemplate="10,20,30">
-             
+
                 <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                 <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
-                 <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="StoreoutId"/>
-                                </f:facet>
-                                <h:outputText value="#{item.storeoutId}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="StoreoutSerialno"/>
-                                </f:facet>
-                                <h:outputText value="#{item.storeoutSerialno}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="StoreoutQuantity"/>
-                                </f:facet>
-                                <h:outputText value="#{item.storeoutQuantity}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="StoreoutMeasure"/>
-                                </f:facet>
-                                <h:outputText value="#{item.storeoutMeasure}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="StoreoutCreatedDate"/>
-                                </f:facet>
-                                <h:outputText value="#{item.storeoutCreatedDate}">
-                                    <f:convertDateTime pattern="MM/dd/yyyy" />
-                                </h:outputText>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="StoreoutCreatedby"/>
-                                </f:facet>
-                                <h:outputText value="#{item.storeoutCreatedby}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="StoreoutItemOfficeOfficeid"/>
-                                </f:facet>
-                                <h:outputText value="#{item.storeoutItemOfficeOfficeid}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="StoreoutItemItemcode"/>
-                                </f:facet>
-                                <h:outputText value="#{item.storeoutItemItemcode}"/>
-                            </h:column>
-           
-                <f:facet name="footer">
-                    <div class="footer-section">
-                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="Create" actionListener="#{officeController.prepareCreate()}" oncomplete="OfficeCreateDialog.show()"/>
-                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="View" update=":OfficeViewForm" oncomplete="OfficeViewDialog.show()" disabled="#{empty officeController.current}"/>
-                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Edit" update=":OfficeEditForm" oncomplete="OfficeEditDialog.show()" disabled="#{empty officeController.current}"/>
-                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="Delete" actionListener="#{officeController.deleteOffice()}" update=":OfficeListForm:growl,datalist" disabled="#{empty officeController.current}"/>
-                    </div>
-                </f:facet>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="StoreoutId"/>
+                    </f:facet>
+                    <h:outputText value="#{item.storeoutId}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="StoreoutSerialno"/>
+                    </f:facet>
+                    <h:outputText value="#{item.storeoutSerialno}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="StoreoutQuantity"/>
+                    </f:facet>
+                    <h:outputText value="#{item.storeoutQuantity}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="StoreoutMeasure"/>
+                    </f:facet>
+                    <h:outputText value="#{item.storeoutMeasure}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="StoreoutCreatedDate"/>
+                    </f:facet>
+                    <h:outputText value="#{item.storeoutCreatedDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="StoreoutCreatedby"/>
+                    </f:facet>
+                    <h:outputText value="#{item.storeoutCreatedby}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="StoreoutItemOfficeOfficeid"/>
+                    </f:facet>
+                    <h:outputText value="#{item.storeoutItemOfficeOfficeid}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="StoreoutItemItemcode"/>
+                    </f:facet>
+                    <h:outputText value="#{item.storeoutItemItemcode}"/>
+                </h:column>
+                
             </p:dataTable>
         </p:panel>
 
