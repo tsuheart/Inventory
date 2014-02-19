@@ -14,58 +14,56 @@
                          rowKey="#{item.storeinId}"
                          paginator="true" rows="10" rowsPerPageTemplate="10,20,30">
 
-                <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
-                <h:column>
+                <p:column>
                     <f:facet name="header">
-                        <h:outputText value="StoreinId"/>
+                        <p:outputLabel value="StoreinId"/>
                     </f:facet>
-                    <h:outputText value="#{item.storeinId}"/>
-                </h:column>
-                <h:column>
+                    <p:outputLabel value="#{item.storeinId}"/>
+                </p:column>
+                <p:column>
                     <f:facet name="header">
-                        <h:outputText value="StoreinSerialno"/>
+                        <p:outputLabel value="StoreinSerialno"/>
                     </f:facet>
-                    <h:outputText value="#{item.storeinSerialno}"/>
-                </h:column>
-                <h:column>
+                    <p:outputLabel value="#{item.storeinSerialno}"/>
+                </p:column>
+                <p:column>
                     <f:facet name="header">
-                        <h:outputText value="StoreinQuantity"/>
+                        <p:outputLabel value="StoreinQuantity"/>
                     </f:facet>
-                    <h:outputText value="#{item.storeinQuantity}"/>
-                </h:column>
-                <h:column>
+                    <p:outputLabel value="#{item.storeinQuantity}"/>
+                </p:column>
+                <p:column>
                     <f:facet name="header">
-                        <h:outputText value="StoreinMeasure"/>
+                        <p:outputLabel value="StoreinMeasure"/>
                     </f:facet>
-                    <h:outputText value="#{item.storeinMeasure}"/>
-                </h:column>
-                <h:column>
+                    <p:outputLabel value="#{item.storeinMeasure}"/>
+                </p:column>
+                <p:column>
                     <f:facet name="header">
-                        <h:outputText value="StoreinCreatedDate"/>
+                        <p:outputLabel value="StoreinCreatedDate"/>
                     </f:facet>
-                    <h:outputText value="#{item.storeinCreatedDate}">
+                    <p:outputLabel value="#{item.storeinCreatedDate}">
                         <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:outputText>
-                </h:column>
-                <h:column>
+                    </p:outputLabel>
+                </p:column>
+                <p:column>
                     <f:facet name="header">
-                        <h:outputText value="StoreinCreatedby"/>
+                        <p:outputLabel value="StoreinCreatedby"/>
                     </f:facet>
-                    <h:outputText value="#{item.storeinCreatedby}"/>
-                </h:column>
-                <h:column>
+                    <p:outputLabel value="#{item.storeinCreatedby}"/>
+                </p:column>
+                <p:column>
                     <f:facet name="header">
-                        <h:outputText value="StoreinOfficeOfficeid"/>
+                        <p:outputLabel value="StoreinOfficeOfficeid"/>
                     </f:facet>
-                    <h:outputText value="#{item.storeinOfficeOfficeid}"/>
-                </h:column>
-                <h:column>
+                    <p:outputLabel value="#{item.storeinOfficeOfficeid}"/>
+                </p:column>
+                <p:column>
                     <f:facet name="header">
-                        <h:outputText value="StoreinItemItemcode"/>
+                        <p:outputLabel value="StoreinItemItemcode"/>
                     </f:facet>
-                    <h:outputText value="#{item.storeinItemItemcode}"/>
-                </h:column>
+                    <p:outputLabel value="#{item.storeinItemItemcode}"/>
+                </p:column>
 
             </p:dataTable>
         </p:panel>
