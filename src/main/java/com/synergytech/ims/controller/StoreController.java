@@ -47,8 +47,10 @@ public class StoreController implements Serializable{
     StoreoutFacade storeoutFacade;
     @Inject
     CategoryController categoryController;
+
     @ManagedProperty("#{loginController}")
     LoginController loginController;
+
     boolean showItemList;
     private TreeNode selectedNode;
 
@@ -61,6 +63,10 @@ public class StoreController implements Serializable{
 
     public void setStoreFacade(StoreFacade storeFacade) {
         this.storeFacade = storeFacade;
+    }
+
+    public void setLoginController(LoginController loginController) {
+        this.loginController = loginController;
     }
 
     public StoreoutFacade getStoreoutFacade() {
@@ -111,9 +117,7 @@ public class StoreController implements Serializable{
         this.storelist = storeinlist;
     }
 
-    public void setLoginController(LoginController loginController) {
-        this.loginController = loginController;
-    }
+    
 
     public StoreController() {
     }
@@ -139,9 +143,14 @@ public class StoreController implements Serializable{
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
+    public void showALLStoreItem() {
+        setShowItemList(true);
+        setStorelist(getStoreFacade().getStoreItemByOfficeid(loginController.getCurrent().getUserOfficeOfficeid().getOfficeOfficeid()));
+    }
+
     public List<Store> storeItemByCategory(Category cat) {
         tempList = null;
-        tempList = getStoreFacade().getStoreItemByItemCategory(cat);
+        tempList = getStoreFacade().getStoreItemByItemCategoryAndOfficeid(cat, loginController.getCurrent().getUserOfficeOfficeid().getOfficeOfficeid());
         findChild(cat);
         return tempList;
     }
@@ -150,7 +159,7 @@ public class StoreController implements Serializable{
         List<Category> childList = getCategoryFacade().getByParentID(category);
         for (Iterator<Category> it = childList.iterator(); it.hasNext();) {
             Category categoryTemp = it.next();
-            tempList.addAll(getStoreFacade().getStoreItemByItemCategory(categoryTemp));
+            tempList.addAll(getStoreFacade().getStoreItemByItemCategoryAndOfficeid(categoryTemp, loginController.getCurrent().getUserOfficeOfficeid().getOfficeOfficeid()));
             findChild(categoryTemp);
         }
     }

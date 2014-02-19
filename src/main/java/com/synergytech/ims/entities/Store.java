@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.synergytech.ims.entities;
 
 import java.io.Serializable;
@@ -31,10 +30,13 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Store.findAll", query = "SELECT s FROM Store s"),
     @NamedQuery(name = "Store.findByStoreItemItemcode", query = "SELECT s FROM Store s WHERE s.storePK.storeItemItemcode = :storeItemItemcode"),
     @NamedQuery(name = "Store.findByStoreOfficeOfficeid", query = "SELECT s FROM Store s WHERE s.storePK.storeOfficeOfficeid = :storeOfficeOfficeid"),
+    @NamedQuery(name = "Store.findByStoreOfficeOfficeidAndItemItemcode", query = "SELECT s FROM Store s WHERE s.storePK.storeOfficeOfficeid = :storeOfficeOfficeid AND s.item.itemItemcode = :storeItemItemcode"),
     @NamedQuery(name = "Store.findByStoreQuantity", query = "SELECT s FROM Store s WHERE s.storeQuantity = :storeQuantity"),
     @NamedQuery(name = "Store.findByStoreItemCategory", query = "SELECT s FROM Store s WHERE s.item.itemCategoryCategoryid = :category"),
+    @NamedQuery(name = "Store.findByStoreItemCategoryAndOfficeid", query = "SELECT s FROM Store s WHERE s.item.itemCategoryCategoryid = :category AND s.storePK.storeOfficeOfficeid=:storeOfficeOfficeid"),
     @NamedQuery(name = "Store.findByStoreUnit", query = "SELECT s FROM Store s WHERE s.storeUnit = :storeUnit")})
 public class Store implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected StorePK storePK;
@@ -136,5 +138,5 @@ public class Store implements Serializable {
     public String toString() {
         return "com.synergytech.ims.entities.Store[ storePK=" + storePK + " ]";
     }
-    
+
 }

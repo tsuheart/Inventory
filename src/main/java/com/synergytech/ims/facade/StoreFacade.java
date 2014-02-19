@@ -31,12 +31,19 @@ public class StoreFacade extends AbstractFacade<Store> {
         super(Store.class);
     }
     
-    public List<Store> getStoreItemByItemCategory(Category category){
-        return getEntityManager().createNamedQuery("Store.findByStoreItemCategory",Store.class).setParameter("category", category).getResultList();
+    public List<Store> getStoreItemByItemCategoryAndOfficeid(Category category,int officeID){
+        return getEntityManager().createNamedQuery("Store.findByStoreItemCategoryAndOfficeid",Store.class).setParameter("category", category).setParameter("storeOfficeOfficeid", officeID).getResultList();
     }
     
      public List<Store> getByStoreItemCode(String itemcode){
-        return getEntityManager().createNamedQuery("Store.findByStoreItemItemcode",Store.class).setParameter("storeItemItemcode", itemcode).getResultList();
- 
+        return getEntityManager().createNamedQuery("Store.findByStoreItemItemcode",Store.class).setParameter("storeItemItemcode", itemcode).getResultList(); 
+    }
+     
+     public List<Store> getStoreItemByOfficeid(int officeID){
+         return getEntityManager().createNamedQuery("Store.findByStoreOfficeOfficeid",Store.class).setParameter("storeOfficeOfficeid", officeID).getResultList(); 
+     }
+     
+      public List<Store> getByStoreItemCodeAndOfficeid(String itemcode,int officeID){
+        return getEntityManager().createNamedQuery("Store.findByStoreOfficeOfficeidAndItemItemcode",Store.class).setParameter("storeOfficeOfficeid", officeID).setParameter("storeItemItemcode", itemcode).getResultList(); 
     }
 }
