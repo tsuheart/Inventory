@@ -20,11 +20,11 @@
                     </f:facet>
                     <p:outputLabel value="#{item.storeoutId}"/>
                 </p:column>
-                <p:column>
+                <p:column filterBy="#{item.storeoutItemItemcode}">
                     <f:facet name="header">
-                        <p:outputLabel value="StoreoutSerialno"/>
+                        <p:outputLabel value="StoreoutItemItemcode"/>
                     </f:facet>
-                    <p:outputLabel value="#{item.storeoutSerialno}"/>
+                    <p:outputLabel value="#{item.storeoutItemItemcode.itemName}"/>
                 </p:column>
                 <p:column>
                     <f:facet name="header">
@@ -38,7 +38,7 @@
                     </f:facet>
                     <p:outputLabel value="#{item.storeoutMeasure}"/>
                 </p:column>
-                <p:column>
+                <p:column sortBy="#{item.storeoutCreatedDate}">
                     <f:facet name="header">
                         <p:outputLabel value="StoreoutCreatedDate"/>
                     </f:facet>
@@ -58,12 +58,7 @@
                     </f:facet>
                     <p:outputLabel value="#{item.storeoutItemOfficeOfficeid.officeName}"/>
                 </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <p:outputLabel value="StoreoutItemItemcode"/>
-                    </f:facet>
-                    <p:outputLabel value="#{item.storeoutItemItemcode.itemName}"/>
-                </p:column>
+                
                 
             </p:dataTable>
         </p:panel>

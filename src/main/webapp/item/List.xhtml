@@ -8,7 +8,7 @@
 
     <h:form id="ItemListForm">
         <p:growl id="growl" showDetail="true" sticky="false"/>
-        <p:accordionPanel> 
+        <p:accordionPanel dynamic="true"> 
             <p:tab title="Available Item Categories">
                 <p:outputLabel value="Select the category"/>
                 <p:tree value="#{categoryController.rootNode}" var="node" dynamic="true" cache="false"  
@@ -25,10 +25,9 @@
             </p:tab>
         </p:accordionPanel>      
     </h:form>
-
-    <br/><br/>
     <h:panelGroup>        
         <h:form id="itemdataTable">
+             <br/> <p:separator/>  <br/>
             <p:panel header="Item List" >
                 <p:dataTable value="#{itemsController.itemlist}" id="datalist" var="item" selection="#{itemsController.current}"
                              selectionMode="single" rowKey="#{item.itemItemcode}" emptyMessage="Sorry! No items"
@@ -49,12 +48,7 @@
                         </f:facet>
                         <h:outputText value="#{item.itemName}"/>
                     </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="ItemRemark"/>
-                        </f:facet>
-                        <h:outputText value="#{item.itemRemark}"/>
-                    </p:column>
+                   
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="ItemStatus"/>
@@ -72,6 +66,12 @@
                             <h:outputText value="ItemCategoryCategoryid"/>
                         </f:facet>
                         <h:outputText value="#{item.itemCategoryCategoryid}"/>
+                    </p:column>
+                     <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="ItemRemark"/>
+                        </f:facet>
+                        <h:outputText value="#{item.itemRemark}"/>
                     </p:column>
                     <f:facet name="footer">
                         <div class="footer-section">
