@@ -116,9 +116,7 @@ public class StoreController {
         this.storelist = storeinlist;
     }
 
-    public void setLoginController(LoginController loginController) {
-        this.loginController = loginController;
-    }
+    
 
     public StoreController() {
     }
