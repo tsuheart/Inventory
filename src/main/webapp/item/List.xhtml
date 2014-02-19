@@ -12,8 +12,8 @@
             <p:tree value="#{categoryController.rootNode}" var="node" dynamic="true" cache="false"  
                     selectionMode="single"  selection="#{itemsController.selectedNode}" id="tree" >  
 
-                <p:ajax event="select" listener="#{itemsController.onNodeSelectList}" update=":ItemListForm:growl,:itemdataTable"/>
-                <p:ajax event="unselect" listener="#{itemsController.onNodeUnselectList}" update=":ItemListForm:growl,:itemdataTable"/>  
+                <p:ajax event="select" listener="#{itemsController.onNodeSelectList}" update=":ItemListForm:growl,:itemdataTable,:itemdataTable:datalist"/>
+                <p:ajax event="unselect" listener="#{itemsController.onNodeUnselectList}" update=":ItemListForm:growl,:itemdataTable,:itemdataTable:datalist"/>  
 
                 <p:treeNode>  
                     <h:outputText value="#{node}" />  

@@ -105,10 +105,10 @@ public class StoreinController {
         this.storeFacade = storeFacade;
     }
 
-    public String createStorein() throws NoResultException {
+    public void createStorein() throws NoResultException {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
-            List<Store> newstore = getStoreFacade().getByStoreItemCode(getCurrent().getStoreinItemItemcode().getItemItemcode());
+            List<Store> newstore = getStoreFacade().getByStoreItemCodeAndOfficeid(getCurrent().getStoreinItemItemcode().getItemItemcode(), loginController.getCurrent().getUserOfficeOfficeid().getOfficeOfficeid());
             if (newstore.isEmpty()) {
                 Store newStoreItem = new Store();
                 newStoreItem.setItem(getCurrent().getStoreinItemItemcode());
@@ -138,16 +138,14 @@ public class StoreinController {
                 } else {
                     currentStoreItem.setStoreQuantity(String.valueOf(a + b));
                     getStoreFacade().edit(currentStoreItem);
-                    context.addMessage(null, new FacesMessage("Successful!", "Item Stored"));
+                    context.addMessage(null, new FacesMessage("Successful!", "Item In Store Updated"));
                     getStoreinFacade().edit(current);
                 }                
             }
             setCurrent(null);
-            return "../store/index.xhtml?faces-redirect=true";
         } catch (Exception ex) {
             context.addMessage(null, new FacesMessage("Failed!", "Item Not Stored"));
             setCurrent(null);
-            return null;
         }
     }
 

@@ -15,6 +15,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -42,6 +43,9 @@ public class StoreController {
     @Inject
     CategoryController categoryController;
 
+    @ManagedProperty("#{loginController}")
+    LoginController loginController;
+
     boolean showItemList;
     private TreeNode selectedNode;
 
@@ -54,6 +58,10 @@ public class StoreController {
 
     public void setStoreFacade(StoreFacade storeFacade) {
         this.storeFacade = storeFacade;
+    }
+
+    public void setLoginController(LoginController loginController) {
+        this.loginController = loginController;
     }
 
     public StoreoutFacade getStoreoutFacade() {
@@ -128,9 +136,14 @@ public class StoreController {
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
+    public void showALLStoreItem() {
+        setShowItemList(true);
+        setStorelist(getStoreFacade().getStoreItemByOfficeid(loginController.getCurrent().getUserOfficeOfficeid().getOfficeOfficeid()));
+    }
+
     public List<Store> storeItemByCategory(Category cat) {
         tempList = null;
-        tempList = getStoreFacade().getStoreItemByItemCategory(cat);
+        tempList = getStoreFacade().getStoreItemByItemCategoryAndOfficeid(cat, loginController.getCurrent().getUserOfficeOfficeid().getOfficeOfficeid());
         findChild(cat);
         return tempList;
     }
@@ -139,7 +152,7 @@ public class StoreController {
         List<Category> childList = getCategoryFacade().getByParentID(category);
         for (Iterator<Category> it = childList.iterator(); it.hasNext();) {
             Category categoryTemp = it.next();
-            tempList.addAll(getStoreFacade().getStoreItemByItemCategory(categoryTemp));
+            tempList.addAll(getStoreFacade().getStoreItemByItemCategoryAndOfficeid(categoryTemp, loginController.getCurrent().getUserOfficeOfficeid().getOfficeOfficeid()));
             findChild(categoryTemp);
         }
     }
