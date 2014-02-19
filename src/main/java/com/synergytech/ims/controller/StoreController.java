@@ -160,30 +160,32 @@ public class StoreController {
             if (newstore.isEmpty() == false) {
                 Store currentStoreItem = newstore.get(0);
                 float res;
-                res = Float.valueOf(currentStoreItem.getStoreQuantity()) - Float.valueOf(getCurrent().getStoreQuantity());
-                if (res == 0.0) {
-                    currentStoreItem.setStoreQuantity(String.valueOf(res));
-                    getStoreFacade().remove(currentStoreItem);
+                if (Float.valueOf(getCurrent().getStoreQuantity())<0 || Float.valueOf(getCurrent().getStoreQuantity()) < Float.valueOf(currentStoreItem.getStoreQuantity())) {
+                    context.addMessage(null, new FacesMessage("Error!", "Store Quantity is greater than available quantity."));
                 } else {
-                    currentStoreItem.setStoreQuantity(String.valueOf(res));
-                    getStoreFacade().edit(currentStoreItem);
+                    res = Float.valueOf(currentStoreItem.getStoreQuantity()) - Float.valueOf(getCurrent().getStoreQuantity());
+                    if (res == 0.0) {
+                        currentStoreItem.setStoreQuantity(String.valueOf(res));
+                        getStoreFacade().remove(currentStoreItem);
+                    } else {
+                        currentStoreItem.setStoreQuantity(String.valueOf(res));
+                        getStoreFacade().edit(currentStoreItem);
+                    }
+                    Date date = new Date();
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    String dateString = dateFormat.format(date);
+                    Storeout sout = new Storeout();
+                    sout.setStoreoutCreatedDate(dateFormat.parse(dateString));
+                    sout.setStoreoutCreatedby(loginController.getCurrent());
+                    sout.setStoreoutItemItemcode(current.getItem());
+                    sout.setStoreoutItemOfficeOfficeid(loginController.getCurrent().getUserOfficeOfficeid());
+                    sout.setStoreoutMeasure(currentStoreItem.getStoreUnit());
+                    sout.setStoreoutQuantity(getCurrent().getStoreQuantity());
+                    storeoutFacade.edit(sout);
+
+                    setCurrent(null);
+                    context.addMessage(null, new FacesMessage("Successful!", "Item Stored Out"));
                 }
-                Date date = new Date();
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                String dateString = dateFormat.format(date);
-                Storeout sout = new Storeout();
-                sout.setStoreoutCreatedDate(dateFormat.parse(dateString));
-                sout.setStoreoutCreatedby(loginController.getCurrent());
-                sout.setStoreoutItemItemcode(current.getItem());
-                sout.setStoreoutItemOfficeOfficeid(loginController.getCurrent().getUserOfficeOfficeid());
-                sout.setStoreoutMeasure(currentStoreItem.getStoreUnit());
-                sout.setStoreoutQuantity(getCurrent().getStoreQuantity());
-                storeoutFacade.edit(sout);
-
-                setCurrent(null);
-                context.addMessage(null, new FacesMessage("Successful!", "Item Stored Out"));
-
-//                    getStoreoutFacade().edit();
             }
 
         } catch (Exception ex) {
