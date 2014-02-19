@@ -15,7 +15,6 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -57,7 +56,6 @@ public class StoreController {
         this.storeFacade = storeFacade;
     }
 
-   
     public StoreoutFacade getStoreoutFacade() {
         return storeoutFacade;
     }
@@ -155,9 +153,12 @@ public class StoreController {
                     Store currentStoreItem = newstore.get(0);
                     float res;
                     res = Float.valueOf(currentStoreItem.getStoreQuantity()) - Float.valueOf(getCurrent().getStoreQuantity());
-                    currentStoreItem.setStoreQuantity(String.valueOf(res));
-                    getStoreFacade().edit(currentStoreItem);
-                            
+                    if (res == 0.0) {
+                        getStoreFacade().remove(current);
+                    } else {
+                        currentStoreItem.setStoreQuantity(String.valueOf(res));
+                        getStoreFacade().edit(current);
+                    }
 //                    getStoreoutFacade().edit();
                 }
                 setCurrent(null);
