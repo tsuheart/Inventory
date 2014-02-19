@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.synergytech.ims.facade;
 
 import com.synergytech.ims.entities.Item;
+import com.synergytech.ims.entities.Office;
+import static com.synergytech.ims.entities.Store_.item;
 import com.synergytech.ims.entities.Storein;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -19,6 +20,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class StoreinFacade extends AbstractFacade<Storein> {
+
     @PersistenceContext(unitName = "com.synergytech.ims_Project_Inventory_war_1.0-SNAPSHOTPU")
     private EntityManager em;
 
@@ -30,14 +32,18 @@ public class StoreinFacade extends AbstractFacade<Storein> {
     public StoreinFacade() {
         super(Storein.class);
     }
-    
-    public List<Storein> getByStoreinItemCode(Item item){
-        return getEntityManager().createNamedQuery("Storein.findByStoreinItemcode",Storein.class).setParameter("storeinItemItemcode",item).getResultList();
- 
+
+    public List<Storein> getByStoreinItemCode(Item item) {
+        return getEntityManager().createNamedQuery("Storein.findByStoreinItemcode", Storein.class).setParameter("storeinItemItemcode", item).getResultList();
+
     }
-    
-    public Storein getByStoreinId(Integer id){
-        return getEntityManager().createNamedQuery("Storein.findByStoreinId",Storein.class).setParameter("storeinId",id).getSingleResult();
- 
+
+    public Storein getByStoreinId(Integer id) {
+        return getEntityManager().createNamedQuery("Storein.findByStoreinId", Storein.class).setParameter("storeinId", id).getSingleResult();
+
+    }
+
+    public List<Storein> getByStoreinOfficeId(Office office) {
+        return getEntityManager().createNamedQuery("Storein.findByStoreinOfficeid", Storein.class).setParameter("storeinOfficeid", office).getResultList();
     }
 }

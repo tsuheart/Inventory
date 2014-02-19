@@ -52,7 +52,7 @@ public class StoreoutController {
     }
 
     public List<Storeout> getStoreoutlist() {
-        storeoutlist = getStoreoutFacade().findAll();
+        storeoutlist = getStoreoutFacade().getByStoreoutOfficeId(loginController.current.getUserOfficeOfficeid());
         return storeoutlist;
     }
 

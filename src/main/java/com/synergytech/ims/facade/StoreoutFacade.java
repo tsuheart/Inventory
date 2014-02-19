@@ -7,6 +7,7 @@
 package com.synergytech.ims.facade;
 
 import com.synergytech.ims.entities.Item;
+import com.synergytech.ims.entities.Office;
 import com.synergytech.ims.entities.Storeout;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -34,5 +35,9 @@ public class StoreoutFacade extends AbstractFacade<Storeout> {
      public List<Storeout> getByStoreoutItemCode(Item item){
         return getEntityManager().createNamedQuery("Store.findByStoreoutItemcode",Storeout.class).setParameter("storeoutItemItemcode",item).getResultList();
  
+    }
+     
+     public List<Storeout> getByStoreoutOfficeId(Office office) {
+        return getEntityManager().createNamedQuery("Storeout.findByStoreoutOfficeid", Storeout.class).setParameter("storeoutOfficeid", office).getResultList();
     }
 }

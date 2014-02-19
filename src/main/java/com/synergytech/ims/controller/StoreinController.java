@@ -81,7 +81,7 @@ public class StoreinController {
     }
 
     public List<Storein> getStoreinlist() {
-        storeinlist = storeinFacade.findAll();
+        storeinlist = storeinFacade.getByStoreinOfficeId(loginController.current.getUserOfficeOfficeid());
         return storeinlist;
     }
 

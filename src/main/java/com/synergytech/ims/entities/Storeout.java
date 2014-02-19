@@ -38,6 +38,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Storeout.findByStoreoutQuantity", query = "SELECT s FROM Storeout s WHERE s.storeoutQuantity = :storeoutQuantity"),
     @NamedQuery(name = "Storeout.findByStoreoutMeasure", query = "SELECT s FROM Storeout s WHERE s.storeoutMeasure = :storeoutMeasure"),
     @NamedQuery(name = "Storeout.findByStoreoutCreatedDate", query = "SELECT s FROM Storeout s WHERE s.storeoutCreatedDate = :storeoutCreatedDate"),
+    @NamedQuery(name = "Storeout.findByStoreoutOfficeid", query = "SELECT s FROM Storeout s WHERE s.storeoutItemOfficeOfficeid = :storeoutOfficeid"),
     @NamedQuery(name = "Store.findByStoreoutItemcode", query = "SELECT s FROM Storeout s WHERE s.storeoutItemItemcode = :storeoutItemItemcode")})
 
 public class Storeout implements Serializable {

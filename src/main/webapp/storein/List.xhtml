@@ -14,12 +14,7 @@
                          rowKey="#{item.storeinId}"
                          paginator="true" rows="10" rowsPerPageTemplate="10,20,30">
 
-                <p:column>
-                    <f:facet name="header">
-                        <p:outputLabel value="StoreinId"/>
-                    </f:facet>
-                    <p:outputLabel value="#{item.storeinId}"/>
-                </p:column>
+                
                 <p:column filterBy="#{item.storeinItemItemcode}">
                     <f:facet name="header">
                         <p:outputLabel value="StoreinItemItemcode"/>

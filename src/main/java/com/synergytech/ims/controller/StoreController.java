@@ -166,7 +166,7 @@ public class StoreController implements Serializable{
     public void storeoutItem() {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
-            List<Store> newstore = getStoreFacade().getByStoreItemCode(getCurrent().getStorePK().getStoreItemItemcode());
+            List<Store> newstore = getStoreFacade().getByStoreItemCodeAndOfficeid(getCurrent().getStorePK().getStoreItemItemcode(), getCurrent().getStorePK().getStoreOfficeOfficeid());
             if (newstore.isEmpty() == false) {
                 Store currentStoreItem = newstore.get(0);
                 float res;
