@@ -8,29 +8,31 @@
 
     <h:form id="ItemListForm">
         <p:growl id="growl" showDetail="true" sticky="false"/>
-        <p:panel header="Category List">                        
-            <p:tree value="#{categoryController.rootNode}" var="node" dynamic="true" cache="false"  
-                    selectionMode="single"  selection="#{itemsController.selectedNode}" id="tree" >  
+        <p:accordionPanel dynamic="true"> 
+            <p:tab title="Available Item Categories">
+                <p:outputLabel value="Select the category"/>
+                <p:tree value="#{categoryController.rootNode}" var="node" dynamic="true" cache="false"  
+                        selectionMode="single"  selection="#{itemsController.selectedNode}" id="tree" >  
 
-                <p:ajax event="select" listener="#{itemsController.onNodeSelectList}" update=":ItemListForm:growl,:itemdataTable,:itemdataTable:datalist"/>
-                <p:ajax event="unselect" listener="#{itemsController.onNodeUnselectList}" update=":ItemListForm:growl,:itemdataTable,:itemdataTable:datalist"/>  
+                    <p:ajax event="select" listener="#{itemsController.onNodeSelectList}" update=":ItemListForm:growl,:itemdataTable,:itemdataTable:datalist"/>
+                    <p:ajax event="unselect" listener="#{itemsController.onNodeUnselectList}" update=":ItemListForm:growl,:itemdataTable,:itemdataTable:datalist"/>  
 
-                <p:treeNode>  
-                    <h:outputText value="#{node}" />  
-                </p:treeNode>  
-            </p:tree> <br/>
-            <p:commandButton id="Showall" value="Show All Items" actionListener="#{itemsController.showAll()}" update=":itemdataTable" />
-        </p:panel>       
+                    <p:treeNode>  
+                        <h:outputText value="#{node}" />  
+                    </p:treeNode>  
+                </p:tree> <br/>
+                <p:commandButton id="Showall" value="Show All Items" actionListener="#{itemsController.showAll()}" update=":itemdataTable" />
+            </p:tab>
+        </p:accordionPanel>      
     </h:form>
-
-    <br/><br/>
     <h:panelGroup>        
         <h:form id="itemdataTable">
+             <br/> <p:separator/>  <br/>
             <p:panel header="Item List" >
                 <p:dataTable value="#{itemsController.itemlist}" id="datalist" var="item" selection="#{itemsController.current}"
-                             selectionMode="single" rowKey="#{item.itemItemcode}" emptyMessage="Sorry! No items"
-                         paginator="true" rows="10" rowsPerPageTemplate="10,20,30">
-                    
+                             selectionMode="single" rowKey="#{item.itemItemcode}"
+                             paginator="true" rows="10" rowsPerPageTemplate="10,20,30">
+
                     <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton storeInNewButton"/>
                     <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton storeInNewButton"/>
 
@@ -46,12 +48,7 @@
                         </f:facet>
                         <h:outputText value="#{item.itemName}"/>
                     </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="ItemRemark"/>
-                        </f:facet>
-                        <h:outputText value="#{item.itemRemark}"/>
-                    </p:column>
+                   
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="ItemStatus"/>
@@ -60,15 +57,21 @@
                     </p:column>
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="ItemMeasurebasesMeasureid"/>
+                            <h:outputText value="ItemMeasurebasesMeasureName"/>
                         </f:facet>
                         <h:outputText value="#{item.itemMeasurebasesMeasureid}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="ItemCategoryCategoryid"/>
+                            <h:outputText value="ItemCategoryCategoryName"/>
                         </f:facet>
                         <h:outputText value="#{item.itemCategoryCategoryid}"/>
+                    </p:column>
+                     <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="ItemRemark"/>
+                        </f:facet>
+                        <h:outputText value="#{item.itemRemark}"/>
                     </p:column>
                     <f:facet name="footer">
                         <div class="footer-section">

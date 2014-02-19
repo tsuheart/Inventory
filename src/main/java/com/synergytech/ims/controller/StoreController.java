@@ -7,7 +7,6 @@ package com.synergytech.ims.controller;
 
 import com.synergytech.ims.entities.Category;
 import com.synergytech.ims.entities.Store;
-import com.synergytech.ims.entities.StorePK;
 import com.synergytech.ims.entities.Storeout;
 import com.synergytech.ims.facade.CategoryFacade;
 import com.synergytech.ims.facade.StoreFacade;

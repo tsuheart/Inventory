@@ -8,21 +8,21 @@
 
     <ui:composition>
 
-        <p:dialog id="OfficeEditDlg" widgetVar="OfficeEditDialog" modal="true" resizable="false" appendToBody="true" header="Edit Office" closeOnEscape="true">
+        <p:dialog id="OfficeEditDlg" widgetVar="OfficeEditDialog" modal="true" resizable="false" appendToBody="true" header="Edit Department" closeOnEscape="true">
 
             <h:form id="OfficeEditForm">
 
                 <h:panelGroup id="display">
                     <h:panelGrid  columns="2" rendered="#{officeController.current != null}">
-                        <p:outputLabel value="OfficeOfficeid:" for="officeOfficeid" />
+                        <p:outputLabel value="Departmentid:" for="officeOfficeid" />
                         <p:inputText id="officeOfficeid" value="#{officeController.current.officeOfficeid}" readonly="true" title="OfficeOfficeid" required="true" requiredMessage="The OfficeOfficeid field is required."/>
-                        <p:outputLabel value="OfficeName:" for="officeName" />
+                        <p:outputLabel value="DepartmentName:" for="officeName" />
                         <p:inputText id="officeName" value="#{officeController.current.officeName}" title="OfficeName" required="true" requiredMessage="The OfficeName field is required."/>
-                        <p:outputLabel value="OfficeAddress:" for="officeAddress" />
+                        <p:outputLabel value="DepartmentAddress:" for="officeAddress" />
                         <p:inputText id="officeAddress" value="#{officeController.current.officeAddress}" title="OfficeAddress" required="true" requiredMessage="The OfficeAddress field is required."/>
-                        <p:outputLabel value="OfficeContact:" for="officeContact" />
+                        <p:outputLabel value="DepartmentContact:" for="officeContact" />
                         <p:inputText id="officeContact" value="#{officeController.current.officeContact}" title="OfficeContact" />
-                        <p:outputLabel value="OfficeStatus:" for="officeStatus" />
+                        <p:outputLabel value="DepartmentStatus:" for="officeStatus" />
                         <p:selectOneMenu id="officeStatus" value="#{officeController.current.officeStatus}" required="true" requiredMessage="The OfficeStatus field is required.">  
                             <f:selectItem itemLabel="Select One..." itemValue="" />
                             <f:selectItem itemLabel="Active" itemValue="Active" />  

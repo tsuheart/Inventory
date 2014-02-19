@@ -8,7 +8,7 @@
 
     <h:form id="OfficeListForm">
         <p:growl id="growl" showDetail="true" sticky="false"/>
-        <p:panel header="Office List">
+        <p:panel header="Department List">
 
             <p:dataTable id="datalist" value="#{officeController.officelist}" var="item"
                          selectionMode="single" selection="#{officeController.current}"
@@ -20,31 +20,25 @@
 
                 <p:column>
                     <f:facet name="header">
-                        <p:outputLabel value="OfficeOfficeid"/>
-                    </f:facet>
-                    <p:outputLabel value="#{item.officeOfficeid}"/>
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <p:outputLabel value="OfficeName"/>
+                        <p:outputLabel value="DepartmentName"/>
                     </f:facet>
                     <p:outputLabel value="#{item.officeName}"/>
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <p:outputLabel value="OfficeAddress"/>
+                        <p:outputLabel value="DepartmentAddress"/>
                     </f:facet>
                     <p:outputLabel value="#{item.officeAddress}"/>
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <p:outputLabel value="OfficeContact"/>
+                        <p:outputLabel value="DepartmentContact"/>
                     </f:facet>
                     <p:outputLabel value="#{item.officeContact}"/>
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <p:outputLabel value="OfficeStatus"/>
+                        <p:outputLabel value="DepartmentStatus"/>
                     </f:facet>
                     <p:outputLabel value="#{item.officeStatus}"/>
                 </p:column>
