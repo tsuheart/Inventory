@@ -17,18 +17,15 @@
                     <p:menuitem value="Category" outcome="/category/index"/>
                     <p:menuitem value="Measure Bases" outcome="/measurebases/index"/>
                 </p:submenu>
-                <p:submenu label="Office Items/Store Items">
-                    <p:menuitem value="Office Items" outcome="/item/index"/>
-                    <p:menuitem value="Store Items" outcome="/store/index"/>
-                </p:submenu>
-                <p:submenu label="Store In/Store Out/Store">
-                    <p:menuitem value="Store In Form" />
-                    <p:menuitem value="Store Out Form" />
-                    <p:menuitem value="Store Items"  />
+                <p:menuitem value="Office Items" outcome="/item/index"/>
+                <p:menuitem value="Store Items" outcome="/store/index"/>
+                <p:submenu label="Store In/Store Out">
+                    <p:menuitem value="Store In List" outcome="/storein/index"/>
+                    <p:menuitem value="Store Out List" outcome="/storeout/index"/>
                 </p:submenu>                
                 <p:menuitem value="Log Out" action="#{loginController.logout()}" icon="ui-icon-power" style="float:right; color: black; position: absolute; top: 3px; right: 10px; "/>               
             </p:menubar>
-            
-    </h:form>
-</ui:composition>
+
+        </h:form>
+    </ui:composition>
 </html>

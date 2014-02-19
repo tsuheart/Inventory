@@ -173,15 +173,17 @@ public class StoreController implements Serializable{
                 float res;
                 if (Float.valueOf(getCurrent().getStoreQuantity())<=0 || (Float.valueOf(getCurrent().getStoreQuantity()) > Float.valueOf(currentStoreItem.getStoreQuantity()))) {
                     context.addMessage(null, new FacesMessage("Error!", "Wrong input."));
+                    
                 } else {
                     res = Float.valueOf(currentStoreItem.getStoreQuantity()) - Float.valueOf(getCurrent().getStoreQuantity());
                     if (res == 0.0) {
+//                        getStoreFacade().edit(current);
                         currentStoreItem.setStoreQuantity(String.valueOf(res));
-                        StorePK s=new StorePK();
-                        s.setStoreItemItemcode(current.getItem().getItemItemcode());
-                        s.setStoreOfficeOfficeid(loginController.getCurrent().getUserOfficeOfficeid().getOfficeOfficeid());
-                        currentStoreItem.setStorePK(s);
-                        getStoreFacade().remove(currentStoreItem);
+//                        StorePK s=new StorePK();
+//                        s.setStoreItemItemcode(current.getItem().getItemItemcode());
+//                        s.setStoreOfficeOfficeid(loginController.getCurrent().getUserOfficeOfficeid().getOfficeOfficeid());
+//                        currentStoreItem.setStorePK(s);
+                        getStoreFacade().edit(currentStoreItem);
                     } else {
                         currentStoreItem.setStoreQuantity(String.valueOf(res));                        
                         getStoreFacade().edit(currentStoreItem);
