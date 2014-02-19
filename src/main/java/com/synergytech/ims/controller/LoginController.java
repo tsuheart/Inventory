@@ -14,6 +14,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -27,6 +28,7 @@ public class LoginController implements Serializable {
     UserFacade userfacade;
     User current;
     List<User> userlist;
+    int count;
 
     boolean loggedIn;
 
@@ -34,6 +36,7 @@ public class LoginController implements Serializable {
      * Creates a new instance of LoginController
      */
     public LoginController() {
+        count = 0;
     }
 
     public User getCurrent() {
@@ -68,26 +71,37 @@ public class LoginController implements Serializable {
     }
 
     public String login() {
-        User loginusr;
         FacesContext context = FacesContext.getCurrentInstance();
-        try {
-            loginusr = getUserfacade().getByUserName(current.getUserUsername());
-            if (loginusr.getUserUserpassword().equals(current.getUserUserpassword())) {
-
-                setLoggedIn(true);
-                setCurrent(loginusr);
-                context.addMessage(null, new FacesMessage("Logged In!", "Log In Successfull"));
-                return "/home.xhtml?faces-redirect=true";
-            } else {
-                context.addMessage(null, new FacesMessage("Error!", "Invalid Log In! Try Again!"));
+        RequestContext request = RequestContext.getCurrentInstance();
+        if (count < 3) {
+            User loginusr;
+            try {
+                loginusr = getUserfacade().getByUserName(current.getUserUsername());
+                if (loginusr.getUserUserpassword().equals(current.getUserUserpassword())) {
+                    setLoggedIn(true);
+                    count = 1;
+                    setCurrent(loginusr);
+                    context.addMessage(null, new FacesMessage("Logged In!", "Log In Successfull"));
+                    return "/home.xhtml?faces-redirect=true";
+                } else {
+                    count++;
+                    context.addMessage(null, new FacesMessage("Invalid Log In! Try Again! ", " You have "+(3-count)+" try left"));                                        
+                    getCurrent().setUserUserpassword(null);
+                    setLoggedIn(false);
+                    return null;
+                }
+            } catch (Exception ex) {
+                count++;
+                context.addMessage(null, new FacesMessage("Invalid Log In! Try Again! ", " You have "+(3-count)+" try left"));
                 setLoggedIn(false);
+                getCurrent().setUserUserpassword(null);
                 return null;
             }
-        } catch (Exception ex) {
-            context.addMessage(null, new FacesMessage("Error!", "Invalid Log In! Try Again!"));
-            setLoggedIn(false);
+        } else {            
+            context.addMessage(null, new FacesMessage("Invalid Log in Try for 3 times","Try after 5 Minutes."));
             return null;
         }
+
     }
 
     public String logout() {
