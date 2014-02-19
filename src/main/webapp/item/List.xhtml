@@ -30,7 +30,7 @@
              <br/> <p:separator/>  <br/>
             <p:panel header="Item List" >
                 <p:dataTable value="#{itemsController.itemlist}" id="datalist" var="item" selection="#{itemsController.current}"
-                             selectionMode="single" rowKey="#{item.itemItemcode}" emptyMessage="Sorry! No items"
+                             selectionMode="single" rowKey="#{item.itemItemcode}"
                              paginator="true" rows="10" rowsPerPageTemplate="10,20,30">
 
                     <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton storeInNewButton"/>
@@ -57,13 +57,13 @@
                     </p:column>
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="ItemMeasurebasesMeasureid"/>
+                            <h:outputText value="ItemMeasurebasesMeasureName"/>
                         </f:facet>
                         <h:outputText value="#{item.itemMeasurebasesMeasureid}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="ItemCategoryCategoryid"/>
+                            <h:outputText value="ItemCategoryCategoryName"/>
                         </f:facet>
                         <h:outputText value="#{item.itemCategoryCategoryid}"/>
                     </p:column>
