@@ -13,9 +13,7 @@
             <h:form id="SupplierEditForm">
 
                 <h:panelGroup id="display">
-                    <h:panelGrid  columns="2" rendered="#{supplierController.current != null}">
-                        <p:outputLabel value="SupplierSupplierid:" for="supplierSupplierid" />
-                        <p:inputText id="supplierSupplierid" value="#{supplierController.current.supplierSupplierid}" title="SupplierSupplierid" readonly="true" required="true" requiredMessage="The SupplierSupplierid field is required."/>
+                    <h:panelGrid  columns="2" rendered="#{supplierController.current != null}">                        
                         <p:outputLabel value="SupplierName:" for="supplierName" />
                         <p:inputText id="supplierName" value="#{supplierController.current.supplierName}" title="SupplierName" required="true" requiredMessage="The SupplierName field is required."/>
                         <p:outputLabel value="SupplierAddress:" for="supplierAddress" />

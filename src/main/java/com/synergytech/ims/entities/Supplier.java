@@ -7,6 +7,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
@@ -36,11 +38,10 @@ import org.hibernate.annotations.LazyCollectionOption;
 public class Supplier implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20)
     @Column(name = "supplier_supplierid")
-    private String supplierSupplierid;
+    private Integer supplierSupplierid;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
@@ -67,12 +68,12 @@ public class Supplier implements Serializable {
         officeCollection = new ArrayList<Office>();
     }
 
-    public Supplier(String supplierSupplierid) {
+    public Supplier(Integer supplierSupplierid) {
         this();
         this.supplierSupplierid = supplierSupplierid;
     }
 
-    public Supplier(String supplierSupplierid, String supplierName, String supplierAddress, String supplierStatus) {
+    public Supplier(Integer supplierSupplierid, String supplierName, String supplierAddress, String supplierStatus) {
         this();
         this.supplierSupplierid = supplierSupplierid;
         this.supplierName = supplierName;
@@ -80,11 +81,11 @@ public class Supplier implements Serializable {
         this.supplierStatus = supplierStatus;
     }
 
-    public String getSupplierSupplierid() {
+    public Integer getSupplierSupplierid() {
         return supplierSupplierid;
     }
 
-    public void setSupplierSupplierid(String supplierSupplierid) {
+    public void setSupplierSupplierid(Integer supplierSupplierid) {
         this.supplierSupplierid = supplierSupplierid;
     }
 
