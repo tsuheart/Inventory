@@ -17,25 +17,25 @@
                 
                 <p:column filterBy="#{item.storeoutItemItemcode}">
                     <f:facet name="header">
-                        <p:outputLabel value="StoreoutItemItemcode"/>
+                        <p:outputLabel value="Item"/>
                     </f:facet>
                     <p:outputLabel value="#{item.storeoutItemItemcode.itemName}"/>
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <p:outputLabel value="StoreoutQuantity"/>
+                        <p:outputLabel value="Quantity"/>
                     </f:facet>
                     <p:outputLabel value="#{item.storeoutQuantity}"/>
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <p:outputLabel value="StoreoutMeasure"/>
+                        <p:outputLabel value="Measure"/>
                     </f:facet>
                     <p:outputLabel value="#{item.storeoutMeasure}"/>
                 </p:column>
                 <p:column sortBy="#{item.storeoutCreatedDate}">
                     <f:facet name="header">
-                        <p:outputLabel value="StoreoutCreatedDate"/>
+                        <p:outputLabel value="Date"/>
                     </f:facet>
                     <p:outputLabel value="#{item.storeoutCreatedDate}">
                         <f:convertDateTime pattern="MM/dd/yyyy" />
@@ -43,17 +43,22 @@
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <p:outputLabel value="StoreoutCreatedby"/>
+                        <p:outputLabel value="User"/>
                     </f:facet>
                     <p:outputLabel value="#{item.storeoutCreatedby.userFirstname}"/>
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <p:outputLabel value="StoreoutItemOfficeOfficeid"/>
+                        <p:outputLabel value="Department"/>
                     </f:facet>
                     <p:outputLabel value="#{item.storeoutItemOfficeOfficeid.officeName}"/>
                 </p:column>
-                
+                <p:column>
+                    <f:facet name="header">
+                        <p:outputLabel value="Remark"/>
+                    </f:facet>
+                    <p:outputLabel value="#{item.storeoutSerialno}"/>
+                </p:column>
                 
             </p:dataTable>
         </p:panel>

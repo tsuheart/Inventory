@@ -14,11 +14,9 @@
 
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{categoryController.current != null}">
-                        <p:outputLabel value="Category id:"/>
-                        <p:outputLabel value="#{categoryController.current.categoryCategoryid}" title="CategoryCategoryid"/>
                         <p:outputLabel value="Category Name:"/>
                         <p:outputLabel value="#{categoryController.current.categoryName}" title="CategoryName"/>
-                        <p:outputLabel value="Category Parentid:"/>
+                        <p:outputLabel value="Category Parent:"/>
                         <p:outputLabel value="#{categoryController.current.categoryParentid}" title="CategoryParentid"/>
                     </p:panelGrid>
                     <p:commandButton value="Close" onclick="CategoryViewDialog.hide()"/>

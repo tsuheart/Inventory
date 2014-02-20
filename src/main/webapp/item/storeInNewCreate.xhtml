@@ -8,22 +8,18 @@
 
     <ui:composition>
 
-        <p:dialog id="storeInNewCreateDlg" widgetVar="storeInNewCreateDialog" modal="true" resizable="false" appendToBody="true" header="Create New Storein Item" closeOnEscape="true">
+        <p:dialog id="storeInNewCreateDlg" widgetVar="storeInNewCreateDialog" modal="true" resizable="false" appendToBody="true" header="Item Store In" closeOnEscape="true">
             <p:growl id="growl" showDetail="true" sticky="false"/>
             <h:form id="storeInNewCreateForm">
                 <h:panelGrid columns="2">                        
-                    <p:outputLabel value="Storein Item Name:" for="StoreinItemitemName" />
+                    <p:outputLabel value="Item Name:" for="StoreinItemitemName" />
                     <p:inputText id="StoreinItemitemName" value="#{storeinController.current.storeinItemItemcode.itemName}" readonly="true"/>
-                    <p:outputLabel value="Storein Quantity:" for="storeinQuantity" />
+                    <p:outputLabel value="Quantity:" for="storeinQuantity" />
                     <p:inputText id="storeinQuantity" value="#{storeinController.current.storeinQuantity}" title="StoreinQuantity" required="true" requiredMessage="The StoreinQuantity field is required."/>
-                    <p:outputLabel value="Storein Measure:" for="storeinMeasure" />
+                    <p:outputLabel value="Measure Base:" for="storeinMeasure" />
                     <p:inputText id="storeinMeasure" value="#{storeinController.current.storeinMeasure}" title="StoreinMeasure" readonly="true" required="true" requiredMessage="The StoreinMeasure field is required."/>
-                    <p:outputLabel value="StoreinRemark:" for="storeinRemark" />
+                    <p:outputLabel value="Remark:" for="storeinRemark" />
                     <p:inputText id="storeinRemark" value="#{storeinController.current.storeinSerialno}" title="StoreinSerialno" />
-                    
-
-                    
-
                 </h:panelGrid>
                 <p:commandButton action="#{storeinController.createStorein()}" value="Save" update=":growl" oncomplete="handleSubmit(xhr,status,args,storeInNewCreateDialog);"/>
                 <p:commandButton value="Cancel" onclick="storeInNewCreateDialog.hide()"/>

@@ -13,29 +13,28 @@
             <p:dataTable id="datalist" value="#{storeinController.storeinlist}" var="item"
                          rowKey="#{item.storeinId}"
                          paginator="true" rows="10" rowsPerPageTemplate="10,20,30">
-
                 
                 <p:column filterBy="#{item.storeinItemItemcode}">
                     <f:facet name="header">
-                        <p:outputLabel value="StoreinItemItemcode"/>
+                        <p:outputLabel value="Item"/>
                     </f:facet>
                     <p:outputLabel value="#{item.storeinItemItemcode.itemName}"/>
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <p:outputLabel value="StoreinQuantity"/>
+                        <p:outputLabel value="Quantity"/>
                     </f:facet>
                     <p:outputLabel value="#{item.storeinQuantity}"/>
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <p:outputLabel value="StoreinMeasure"/>
+                        <p:outputLabel value="Measure"/>
                     </f:facet>
                     <p:outputLabel value="#{item.storeinMeasure}"/>
                 </p:column>
                 <p:column sortBy="#{item.storeinCreatedDate}">
                     <f:facet name="header">
-                        <p:outputLabel value="StoreinCreatedDate"/>
+                        <p:outputLabel value="Date"/>
                     </f:facet>
                     <p:outputLabel value="#{item.storeinCreatedDate}">
                         <f:convertDateTime pattern="MM/dd/yyyy" />
@@ -43,17 +42,22 @@
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <p:outputLabel value="StoreinCreatedby"/>
+                        <p:outputLabel value="User"/>
                     </f:facet>
                     <p:outputLabel value="#{item.storeinCreatedby.userFirstname}"/>
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <p:outputLabel value="StoreinOfficeOfficeid"/>
+                        <p:outputLabel value="Department"/>
                     </f:facet>
                     <p:outputLabel value="#{item.storeinOfficeOfficeid.officeName}"/>
                 </p:column>
-               
+               <p:column>
+                    <f:facet name="header">
+                        <p:outputLabel value="Remark"/>
+                    </f:facet>
+                   <p:outputLabel value="#{item.storeinSerialno}"/>
+                </p:column>
 
             </p:dataTable>
         </p:panel>

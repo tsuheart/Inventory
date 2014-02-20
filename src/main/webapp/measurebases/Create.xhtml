@@ -14,13 +14,13 @@
 
                 <h:panelGroup id="display">
                     <h:panelGrid columns="2">
-                        <p:outputLabel value="MeasurebasesName:" for="measurebasesName" />
+                        <p:outputLabel value="Name:" for="measurebasesName" />
                         <p:inputText id="measurebasesName" value="#{measurebasesController.current.measurebasesName}" title="MeasurebasesName" required="true" requiredMessage="The MeasurebasesName field is required."/>
-                        <p:outputLabel value="MeasurebasesFactor:" for="measurebasesFactor" />
+                        <p:outputLabel value="Factor:" for="measurebasesFactor" />
                         <p:inputText id="measurebasesFactor" value="#{measurebasesController.current.measurebasesFactor}" title="MeasurebasesFactor" />
-                        <p:outputLabel value="MeasurebasesParentid:" for="measurebasesParentid" />
+                        <p:outputLabel value="Parent:" for="measurebasesParentid" />
                         <p:inputText id="measurebasesParentid" value="#{measurebasesController.current.measurebasesParentid}" readonly="true" title="MeasurebasesParentid" />
-                        <p:outputLabel value="MeasurebasesHierarchy:" for="measurebasesHierarchy" />
+                        <p:outputLabel value="Hierarchy:" for="measurebasesHierarchy" />
                         <p:selectOneMenu id="measurebasesHierarchy" value="#{measurebasesController.current.measurebasesHierarchy}" >  
                             <f:selectItem itemLabel="Select One..." itemValue="" />
                             <f:selectItem itemLabel="-1" itemValue="-1" />  

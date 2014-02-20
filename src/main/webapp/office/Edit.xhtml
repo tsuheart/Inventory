@@ -14,15 +14,13 @@
 
                 <h:panelGroup id="display">
                     <h:panelGrid  columns="2" rendered="#{officeController.current != null}">
-                        <p:outputLabel value="Departmentid:" for="officeOfficeid" />
-                        <p:inputText id="officeOfficeid" value="#{officeController.current.officeOfficeid}" readonly="true" title="OfficeOfficeid" required="true" requiredMessage="The OfficeOfficeid field is required."/>
-                        <p:outputLabel value="DepartmentName:" for="officeName" />
+                        <p:outputLabel value="Name:" for="officeName" />
                         <p:inputText id="officeName" value="#{officeController.current.officeName}" title="OfficeName" required="true" requiredMessage="The OfficeName field is required."/>
-                        <p:outputLabel value="DepartmentAddress:" for="officeAddress" />
+                        <p:outputLabel value="Address:" for="officeAddress" />
                         <p:inputText id="officeAddress" value="#{officeController.current.officeAddress}" title="OfficeAddress" required="true" requiredMessage="The OfficeAddress field is required."/>
-                        <p:outputLabel value="DepartmentContact:" for="officeContact" />
+                        <p:outputLabel value="Contact:" for="officeContact" />
                         <p:inputText id="officeContact" value="#{officeController.current.officeContact}" title="OfficeContact" />
-                        <p:outputLabel value="DepartmentStatus:" for="officeStatus" />
+                        <p:outputLabel value="Status:" for="officeStatus" />
                         <p:selectOneMenu id="officeStatus" value="#{officeController.current.officeStatus}" required="true" requiredMessage="The OfficeStatus field is required.">  
                             <f:selectItem itemLabel="Select One..." itemValue="" />
                             <f:selectItem itemLabel="Active" itemValue="Active" />  

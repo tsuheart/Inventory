@@ -7,7 +7,6 @@ package com.synergytech.ims.facade;
 
 import com.synergytech.ims.entities.Item;
 import com.synergytech.ims.entities.Office;
-import static com.synergytech.ims.entities.Store_.item;
 import com.synergytech.ims.entities.Storein;
 import java.util.List;
 import javax.ejb.Stateless;

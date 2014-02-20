@@ -14,18 +14,18 @@
 
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{itemsController != null}">
-                        <p:outputLabel value="ItemItemcode:"/>
+                        <p:outputLabel value="Item Code:"/>
                         <p:outputLabel value="#{itemsController.current.itemItemcode}" title="ItemItemcode"/>
-                        <p:outputLabel value="ItemName:"/>
+                        <p:outputLabel value="Name:"/>
                         <p:outputLabel value="#{itemsController.current.itemName}" title="ItemName"/>
-                        <p:outputLabel value="ItemRemark:"/>
-                        <p:outputLabel value="#{itemsController.current.itemRemark}" title="ItemRemark"/>
-                        <p:outputLabel value="ItemStatus:"/>
-                        <p:outputLabel value="#{itemsController.current.itemStatus}" title="ItemStatus"/>
-                        <p:outputLabel value="ItemCategoryCategoryid:"/>
+                        <p:outputLabel value="Category:"/>
                         <p:outputLabel value="#{itemsController.current.itemCategoryCategoryid}" title="ItemCategoryCategoryid"/>
-                        <p:outputLabel value="ItemMeasurebasesMeasureid:"/>
+                        <p:outputLabel value="Measure Base:"/>
                         <p:outputLabel value="#{itemsController.current.itemMeasurebasesMeasureid}" title="ItemMeasurebasesMeasureid"/>
+                        <p:outputLabel value="Status:"/>
+                        <p:outputLabel value="#{itemsController.current.itemStatus}" title="ItemStatus"/>
+                        <p:outputLabel value="Remark:"/>
+                        <p:outputLabel value="#{itemsController.current.itemRemark}" title="ItemRemark"/>                        
                     </p:panelGrid>
                     <p:commandButton value="Close" onclick="ItemViewDialog.hide()"/>
                 </h:panelGroup>

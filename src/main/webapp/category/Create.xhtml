@@ -16,7 +16,7 @@
                     <h:panelGrid  columns="2">
                         <p:outputLabel value="Category Name:" for="categoryName" />
                         <p:inputText id="categoryName" value="#{categoryController.current.categoryName}" title="CategoryName" required="true" requiredMessage="The CategoryName field is required."/>
-                        <p:outputLabel value="Category Parentid:" for="categoryParentid" />
+                        <p:outputLabel value="Category Parent:" for="categoryParentid" />
                         <p:inputText id="categoryParentid" readonly="true" value="#{categoryController.current.categoryParentid}" title="CategoryParentid" />
                     </h:panelGrid>
                     <p:commandButton actionListener="#{categoryController.createCategory()}" value="Save" update="display,:CategoryListForm:tree,:CategoryListForm:growl, :CategoryCreateForm,:CategoryListForm" oncomplete="handleSubmit(xhr,status,args,CategoryCreateDialog);"/>

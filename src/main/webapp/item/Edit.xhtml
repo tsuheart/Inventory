@@ -27,7 +27,7 @@
                         </h:column>
 
                         <h:column>
-                            <p:outputLabel value="Select a Measure Bases"/>
+                            <p:outputLabel value="Select a Measure Base"/>
                             <p:tree value="#{measurebasesController.rootNode}" var="node1" dynamic="true" cache="false"  
                                     selectionMode="single"  selection="#{itemsController.selectedmeaNode}" id="meatree"> 
 
@@ -47,22 +47,22 @@
 
                 <h:panelGroup id="display">
                     <h:panelGrid  columns="2" rendered="#{itemsController.current != null}">
-                        <p:outputLabel value="ItemItemcode:" for="itemItemcode" />
+                        <p:outputLabel value="Item Code:" for="itemItemcode" />
                         <p:inputText id="itemItemcode" value="#{itemsController.current.itemItemcode}" readonly="true" title="ItemItemcode" required="true" requiredMessage="The ItemItemcode field is required."/>
-                        <p:outputLabel value="ItemName:" for="itemName" />
+                        <p:outputLabel value="Name:" for="itemName" />
                         <p:inputText id="itemName" value="#{itemsController.current.itemName}" title="ItemName" required="true" requiredMessage="The ItemName field is required."/>
-                        <p:outputLabel value="ItemRemark:" for="itemRemark" />
+                        <p:outputLabel value="Category:" for="itemCategoryCategoryid" />
+                        <p:inputText id="itemCategoryCategoryid" converter="#{categoryConverter}" value="#{itemsController.current.itemCategoryCategoryid}" readonly="true"/>
+                        <p:outputLabel value="Measure Base:" for="itemMeasurebasesMeasureid" />
+                        <p:inputText id="itemMeasurebasesMeasureid" converter="#{measurebasesConverter}" value="#{itemsController.current.itemMeasurebasesMeasureid}" readonly="true"/>
+                        <p:outputLabel value="Remark:" for="itemRemark" />
                         <p:inputText id="itemRemark" value="#{itemsController.current.itemRemark}" title="ItemRemark" />
-                        <p:outputLabel value="ItemStatus:" for="itemStatus" />
+                        <p:outputLabel value="Status:" for="itemStatus" />
                         <p:selectOneMenu id="itemStatus" value="#{itemsController.current.itemStatus}" required="true" requiredMessage="The ItemStatus field is required.">  
                             <f:selectItem itemLabel="Select One..." itemValue="" />
                             <f:selectItem itemLabel="Active" itemValue="Active" />  
                             <f:selectItem itemLabel="Inactive" itemValue="Inactive" /> 
-                        </p:selectOneMenu>
-                        <p:outputLabel value="ItemCategoryCategoryid:" for="itemCategoryCategoryid" />
-                        <p:inputText id="itemCategoryCategoryid" converter="#{categoryConverter}" value="#{itemsController.current.itemCategoryCategoryid}" readonly="true"/>
-                        <p:outputLabel value="ItemMeasurebasesMeasureid:" for="itemMeasurebasesMeasureid" />
-                        <p:inputText id="itemMeasurebasesMeasureid" converter="#{measurebasesConverter}" value="#{itemsController.current.itemMeasurebasesMeasureid}" readonly="true"/>
+                        </p:selectOneMenu>                        
                     </h:panelGrid>
 
                     <p:commandButton actionListener="#{itemsController.editItem()}" value="Save" update="display,:itemdataTable:datalist,:ItemListForm:growl" oncomplete="handleSubmit(xhr,status,args,ItemEditDialog);"/>

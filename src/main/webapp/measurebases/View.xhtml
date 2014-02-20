@@ -14,15 +14,13 @@
 
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{measurebasesController.current != null}">
-                        <h:outputText value="MeasurebasesMeasureid:"/>
-                        <h:outputText value="#{measurebasesController.current.measurebasesMeasureid}" title="MeasurebasesMeasureid"/>
-                        <h:outputText value="MeasurebasesName:"/>
+                        <h:outputText value="Name:"/>
                         <h:outputText value="#{measurebasesController.current.measurebasesName}" title="MeasurebasesName"/>
-                        <h:outputText value="MeasurebasesFactor:"/>
+                        <h:outputText value="Factor:"/>
                         <h:outputText value="#{measurebasesController.current.measurebasesFactor}" title="MeasurebasesFactor"/>
-                        <h:outputText value="MeasurebasesParentid:"/>
+                        <h:outputText value="Parent:"/>
                         <h:outputText value="#{measurebasesController.current.measurebasesParentid}" title="MeasurebasesParentid"/>
-                        <h:outputText value="MeasurebasesHierarchy:"/>
+                        <h:outputText value="Hierarchy:"/>
                         <h:outputText value="#{measurebasesController.current.measurebasesHierarchy}" title="MeasurebasesHierarchy"/>
                     </p:panelGrid>
                     <p:commandButton value="Close" onclick="MeasurebasesViewDialog.hide()"/>

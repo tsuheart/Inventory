@@ -10,7 +10,7 @@
         <p:growl id="growl" showDetail="true" sticky="false"/>
         <p:accordionPanel dynamic="true"> 
             <p:tab title="Available Item Categories">
-                <p:outputLabel value="Select the category"/>
+                <p:outputLabel value="Select a category"/>
                 <p:tree value="#{categoryController.rootNode}" var="node" dynamic="true" cache="false"  
                         selectionMode="single"  selection="#{itemsController.selectedNode}" id="tree" >  
 
@@ -38,40 +38,39 @@
 
                     <p:column filterBy="#{item.itemItemcode}" sortBy="#{item.itemItemcode}">
                         <f:facet name="header">
-                            <h:outputText value="ItemItemcode"/>
+                            <h:outputText value="Item Code"/>
                         </f:facet>
                         <h:outputText value="#{item.itemItemcode}"/>
                     </p:column>
                     <p:column filterBy="#{item.itemName}">
                         <f:facet name="header">
-                            <h:outputText value="ItemName"/>
+                            <h:outputText value="Name"/>
                         </f:facet>
                         <h:outputText value="#{item.itemName}"/>
-                    </p:column>
-                   
+                    </p:column>    
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="ItemStatus"/>
-                        </f:facet>
-                        <h:outputText value="#{item.itemStatus}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="ItemMeasurebasesMeasureName"/>
-                        </f:facet>
-                        <h:outputText value="#{item.itemMeasurebasesMeasureid}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="ItemCategoryCategoryName"/>
+                            <h:outputText value="Category"/>
                         </f:facet>
                         <h:outputText value="#{item.itemCategoryCategoryid}"/>
                     </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Measure Base"/>
+                        </f:facet>
+                        <h:outputText value="#{item.itemMeasurebasesMeasureid}"/>
+                    </p:column>                    
                      <p:column>
                         <f:facet name="header">
-                            <h:outputText value="ItemRemark"/>
+                            <h:outputText value="Remark"/>
                         </f:facet>
                         <h:outputText value="#{item.itemRemark}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Status"/>
+                        </f:facet>
+                        <h:outputText value="#{item.itemStatus}"/>
                     </p:column>
                     <f:facet name="footer">
                         <div class="footer-section">

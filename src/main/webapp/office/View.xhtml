@@ -13,15 +13,13 @@
 
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{officeController.current != null}">
-                        <p:outputLabel value="Departmentid:"/>
-                        <p:outputLabel value="#{officeController.current.officeOfficeid}" title="OfficeOfficeid"/>
-                        <p:outputLabel value="DepartmentName:"/>
+                        <p:outputLabel value="Name:"/>
                         <p:outputLabel value="#{officeController.current.officeName}" title="OfficeName"/>
-                        <p:outputLabel value="DepartmentAddress:"/>
+                        <p:outputLabel value="Address:"/>
                         <p:outputLabel value="#{officeController.current.officeAddress}" title="OfficeAddress"/>
-                        <p:outputLabel value="DepartmentContact:"/>
+                        <p:outputLabel value="Contact:"/>
                         <p:outputLabel value="#{officeController.current.officeContact}" title="OfficeContact"/>
-                        <p:outputLabel value="DepartmentStatus:"/>
+                        <p:outputLabel value="Status:"/>
                         <p:outputLabel value="#{officeController.current.officeStatus}" title="OfficeStatus"/>
                     </p:panelGrid>
                     <p:commandButton value="Close" onclick="OfficeViewDialog.hide()"/>
