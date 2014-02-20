@@ -14,13 +14,13 @@
 
                 <h:panelGroup id="display">
                     <h:panelGrid columns="2">                        
-                        <p:outputLabel value="SupplierName:" for="supplierName" />
+                        <p:outputLabel value="Name:" for="supplierName" />
                         <p:inputText id="supplierName" value="#{supplierController.current.supplierName}" title="SupplierName" required="true" requiredMessage="The SupplierName field is required."/>
-                        <p:outputLabel value="SupplierAddress:" for="supplierAddress" />
+                        <p:outputLabel value="Address:" for="supplierAddress" />
                         <p:inputText id="supplierAddress" value="#{supplierController.current.supplierAddress}" title="SupplierAddress" required="true" requiredMessage="The SupplierAddress field is required."/>
-                        <p:outputLabel value="SupplierContact:" for="supplierContact" />
+                        <p:outputLabel value="Contact:" for="supplierContact" />
                         <p:inputText id="supplierContact" value="#{supplierController.current.supplierContact}" title="SupplierContact" />
-                        <p:outputLabel value="SupplierStatus:" for="supplierStatus" />
+                        <p:outputLabel value="Status:" for="supplierStatus" />
                         <p:selectOneMenu id="supplierStatus" value="#{supplierController.current.supplierStatus}" required="true" requiredMessage="The SupplierStatus field is required.">  
                             <f:selectItem itemLabel="Select One" itemValue="" />
                             <f:selectItem itemLabel="Active" itemValue="Active" />  

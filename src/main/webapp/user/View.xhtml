@@ -15,21 +15,21 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{userController.current != null}">
 
-                        <p:outputLabel value="UserUsername:"/>
-                        <p:outputLabel value="#{userController.current.userUsername}" title="UserUsername"/>
-                        <p:outputLabel value="UserUserpassword:"/>
-                        <p:outputLabel value="#{userController.current.userUserpassword}" title="UserUserpassword"/>
-                        <p:outputLabel value="UserFirstname:"/>
+                        <p:outputLabel value="Firstname:"/>
                         <p:outputLabel value="#{userController.current.userFirstname}" title="UserFirstname"/>
-                        <p:outputLabel value="UserLastname:"/>
+                        <p:outputLabel value="Lastname:"/>
                         <p:outputLabel value="#{userController.current.userLastname}" title="UserLastname"/>
-                        <p:outputLabel value="UserAddress:"/>
+                        <p:outputLabel value="Username:"/>
+                        <p:outputLabel value="#{userController.current.userUsername}" title="UserUsername"/>
+                        <p:outputLabel value="Password:"/>
+                        <p:outputLabel value="#{userController.current.userUserpassword}" title="UserUserpassword"/>
+                        <p:outputLabel value="Address:"/>
                         <p:outputLabel value="#{userController.current.userAddress}" title="UserAddress"/>
-                        <p:outputLabel value="UserContact:"/>
+                        <p:outputLabel value="Contact:"/>
                         <p:outputLabel value="#{userController.current.userContact}" title="UserContact"/>
-                        <p:outputLabel value="UserStatus:"/>
+                        <p:outputLabel value="Status:"/>
                         <p:outputLabel value="#{userController.current.userStatus}" title="UserStatus"/>
-                        <p:outputLabel value="UserOfficeOfficeid:"/>
+                        <p:outputLabel value="Department:"/>
                         <p:outputLabel value="#{userController.current.userOfficeOfficeid.officeOfficeid}" title="UserOfficeOfficeid"/>
 
                     </p:panelGrid>

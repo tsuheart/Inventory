@@ -14,15 +14,13 @@
 
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{supplierController.current != null}">
-                        <p:outputLabel value="SupplierSupplierid:"/>
-                        <p:outputLabel value="#{supplierController.current.supplierSupplierid}" title="SupplierSupplierid"/>
-                        <p:outputLabel value="SupplierName:"/>
+                        <p:outputLabel value="Name:"/>
                         <p:outputLabel value="#{supplierController.current.supplierName}" title="SupplierName"/>
-                        <p:outputLabel value="SupplierAddress:"/>
+                        <p:outputLabel value="Address:"/>
                         <p:outputLabel value="#{supplierController.current.supplierAddress}" title="SupplierAddress"/>
-                        <p:outputLabel value="SupplierContact:"/>
+                        <p:outputLabel value="Contact:"/>
                         <p:outputLabel value="#{supplierController.current.supplierContact}" title="SupplierContact"/>
-                        <p:outputLabel value="SupplierStatus:"/>
+                        <p:outputLabel value="Status:"/>
                         <p:outputLabel value="#{supplierController.current.supplierStatus}" title="SupplierStatus"/>
                     </p:panelGrid>
                     <p:commandButton value="Close" onclick="SupplierViewDialog.hide()"/>
