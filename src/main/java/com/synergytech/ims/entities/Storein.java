@@ -48,7 +48,7 @@ public class Storein implements Serializable {
     @Basic(optional = false)
     @Column(name = "storein_id")
     private Integer storeinId;
-    @Size(max = 45)
+    @Size(max = 100)
     @Column(name = "storein_serialno")
     private String storeinSerialno;
     @Basic(optional = false)

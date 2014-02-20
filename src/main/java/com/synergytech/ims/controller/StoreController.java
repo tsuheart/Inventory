@@ -197,6 +197,7 @@ public class StoreController implements Serializable{
                     sout.setStoreoutItemOfficeOfficeid(loginController.getCurrent().getUserOfficeOfficeid());
                     sout.setStoreoutMeasure(currentStoreItem.getStoreUnit());
                     sout.setStoreoutQuantity(getCurrent().getStoreQuantity());
+                    sout.setStoreoutSerialno(getCurrent().getStoreRemarks());
                     storeoutFacade.edit(sout);
                     current.setStoreQuantity(String.valueOf(res));
                     setCurrent(null);

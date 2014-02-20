@@ -49,7 +49,7 @@ public class Storeout implements Serializable {
     @Basic(optional = false)
     @Column(name = "storeout_id")
     private Integer storeoutId;
-    @Size(max = 45)
+    @Size(max = 100)
     @Column(name = "storeout_serialno")
     private String storeoutSerialno;
     @Basic(optional = false)

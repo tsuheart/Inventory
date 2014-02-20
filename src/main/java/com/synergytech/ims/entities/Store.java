@@ -50,6 +50,9 @@ public class Store implements Serializable {
     @Size(min = 1, max = 10)
     @Column(name = "store_unit")
     private String storeUnit;
+    @Size(max = 100)
+    @Column(name = "store_remarks")
+    private String storeRemarks;
     @JoinColumn(name = "store_office_officeid", referencedColumnName = "office_officeid", insertable = false, updatable = false)
     @ManyToOne
     private Office office;
@@ -80,6 +83,14 @@ public class Store implements Serializable {
 
     public void setStorePK(StorePK storePK) {
         this.storePK = storePK;
+    }
+
+    public String getStoreRemarks() {
+        return storeRemarks;
+    }
+
+    public void setStoreRemarks(String storeRemarks) {
+        this.storeRemarks = storeRemarks;
     }
 
     public String getStoreQuantity() {

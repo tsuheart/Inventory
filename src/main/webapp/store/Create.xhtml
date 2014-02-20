@@ -15,11 +15,13 @@
                     <h:panelGrid columns="2">
                         <p:outputLabel value="StoreOutQuantity:" for="storeQuantity" />
                         <p:inputText id="storeQuantity" value="#{storeController.current.storeQuantity}" title="StoreQuantity" required="true" requiredMessage="The StoreQuantity field is required."/>
-                        
+                        <p:outputLabel value="StoreRemark:" for="storeRemark" />
+                        <p:inputText id="storeRemark" value="#{storeController.current.storeRemarks}" title="StoreRemarks" />
+
                     </h:panelGrid>
                     <p:commandButton action="#{storeController.storeoutItem()}" value="Ok" update="display,:panel,:itemdataTable:datalist,:StoreListForm:storegrowl, :StoreoutItemForm" oncomplete="handleSubmit(xhr,status,args,ItemStoreoutDialog);"/>
                     <p:commandButton value="Cancel" onclick="ItemStoreoutDialog.hide()"/>
-                
+
                 </h:panelGroup>
 
             </h:form>
