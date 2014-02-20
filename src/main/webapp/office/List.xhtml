@@ -18,7 +18,7 @@
                 <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                 <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                <p:column>
+                <p:column filterBy="#{item.officeName}">
                     <f:facet name="header">
                         <p:outputLabel value="Name"/>
                     </f:facet>

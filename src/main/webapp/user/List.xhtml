@@ -18,7 +18,7 @@
                 <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                 <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                <p:column>
+                <p:column filterBy="#{item.userFirstname}">
                     <f:facet name="header">
                         <p:outputLabel value="Firstname"/>
                     </f:facet>
@@ -30,7 +30,7 @@
                     </f:facet>
                     <p:outputLabel value="#{item.userLastname}"/>
                 </p:column>
-                <p:column>
+                <p:column filterBy="#{item.userUsername}">
                     <f:facet name="header">
                         <p:outputLabel value="Username"/>
                     </f:facet>

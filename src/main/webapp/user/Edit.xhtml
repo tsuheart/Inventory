@@ -15,9 +15,9 @@
                 <h:panelGroup id="display">
                     <h:panelGrid  columns="2" rendered="#{userController.current != null}">
                         <p:outputLabel value="Username:" for="userUsername" />
-                        <p:inputText id="userUsername" value="#{userController.current.userUsername}" title="UserUsername" required="true" requiredMessage="The UserUsername field is required."/>
+                        <p:inputText id="userUsername" value="#{userController.current.userUsername}" readonly="true" title="UserUsername" required="true" requiredMessage="The UserUsername field is required."/>
                         <p:outputLabel value="Password:" for="userUserpassword" />
-                        <p:inputText id="userUserpassword" value="#{userController.current.userUserpassword}" title="UserUserpassword" required="true" requiredMessage="The UserUserpassword field is required."/>
+                        <p:inputText id="userUserpassword" value="#{userController.current.userUserpassword}" readonly="true" title="UserUserpassword" required="true" requiredMessage="The UserUserpassword field is required."/>
                         <p:outputLabel value="Firstname:" for="userFirstname" />
                         <p:inputText id="userFirstname" value="#{userController.current.userFirstname}" title="UserFirstname" required="true" requiredMessage="The UserFirstname field is required."/>
                         <p:outputLabel value="Lastname:" for="userLastname" />

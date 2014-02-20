@@ -19,7 +19,7 @@
                         <p:inputText id="storeRemark" value="#{storeController.current.storeRemarks}" title="StoreRemarks" />
 
                     </h:panelGrid>
-                    <p:commandButton action="#{storeController.storeoutItem()}" value="Ok" update="display,:panel,:itemdataTable:datalist,:StoreListForm:storegrowl, :StoreoutItemForm" oncomplete="handleSubmit(xhr,status,args,ItemStoreoutDialog);"/>
+                    <p:commandButton action="#{storeController.storeoutItem()}" value="Store Out" update="display,:panel,:itemdataTable:datalist,:StoreListForm:storegrowl, :StoreoutItemForm" oncomplete="handleSubmit(xhr,status,args,ItemStoreoutDialog);"/>
                     <p:commandButton value="Cancel" onclick="ItemStoreoutDialog.hide()"/>
 
                 </h:panelGroup>

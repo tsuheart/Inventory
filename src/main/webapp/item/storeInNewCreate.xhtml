@@ -17,11 +17,11 @@
                     <p:outputLabel value="Quantity:" for="storeinQuantity" />
                     <p:inputText id="storeinQuantity" value="#{storeinController.current.storeinQuantity}" title="StoreinQuantity" required="true" requiredMessage="The StoreinQuantity field is required."/>
                     <p:outputLabel value="Measure Base:" for="storeinMeasure" />
-                    <p:inputText id="storeinMeasure" value="#{storeinController.current.storeinMeasure}" title="StoreinMeasure" readonly="true" required="true" requiredMessage="The StoreinMeasure field is required."/>
+                    <p:inputText id="storeinMeasure" value="#{storeinController.current.storeinMeasure}" title="StoreinMeasure" readonly="true"/>
                     <p:outputLabel value="Remark:" for="storeinRemark" />
                     <p:inputText id="storeinRemark" value="#{storeinController.current.storeinSerialno}" title="StoreinSerialno" />
                 </h:panelGrid>
-                <p:commandButton action="#{storeinController.createStorein()}" value="Save" update=":growl" oncomplete="handleSubmit(xhr,status,args,storeInNewCreateDialog);"/>
+                <p:commandButton action="#{storeinController.createStorein()}" value="Store In" update=":growl" oncomplete="handleSubmit(xhr,status,args,storeInNewCreateDialog);"/>
                 <p:commandButton value="Cancel" onclick="storeInNewCreateDialog.hide()"/>
             </h:form>
 

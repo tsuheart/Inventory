@@ -8,8 +8,8 @@
 
     <h:form id="StoreListForm">
         <p:growl id="storegrowl" showDetail="true" sticky="false"/>
-        <p:accordionPanel> 
-            <p:tab title="Available Item Categories">
+        <p:accordionPanel dynamic="true" activeIndex="-1"> 
+            <p:tab title="Select a category">
                 <p:tree value="#{categoryController.rootNode}" var="node" dynamic="true" cache="false"  
                         selectionMode="single"  selection="#{storeController.selectedNode}" id="tree">  
 
@@ -21,7 +21,7 @@
                     </p:treeNode>  
                 </p:tree>
                 <br/>
-                <p:commandButton id="showallbtn" value="Show all Store Item" action="#{storeController.showALLStoreItem()}" update=":itemdataTable" />
+                <p:commandButton id="showallbtn" value="Show All" action="#{storeController.showALLStoreItem()}" update=":itemdataTable" />
             </p:tab>
         </p:accordionPanel>       
     </h:form> 
@@ -31,7 +31,7 @@
             <br/>
             <p:separator/>
             <br/>
-            <p:panel header="Item List"   rendered="#{storeController.showItemList}">
+            <p:panel header="Store Item List">
                 <p:dataTable id="datalist" value="#{storeController.storelist}" var="item" selectionMode="single"
                              selection="#{storeController.current}" rowKey="#{item.storePK}"
                              paginator="true" rows="10" rowsPerPageTemplate="10,20,30">
@@ -60,7 +60,7 @@
                 </p:dataTable>
                 <f:facet name="footer">
                     <div class="footer-section">
-                        <p:commandButton id="createstoreinButton" value="New Store In" action="../item/index.xhtml?faces-redirect=true" disabled="#{not empty storeController.current}"/>
+                        <p:commandButton id="createstoreinButton" value="New Store" action="../item/index.xhtml?faces-redirect=true" disabled="#{not empty storeController.current}"/>
                         <p:commandButton id="storeinButton" value="Store In" action="#{storeinController.existStoreInCreate()}" actionListener="#{storeinController.prepareCreate()}" update=":storeInNewCreateForm" oncomplete="storeInNewCreateDialog.show()" disabled="#{empty storeController.current}"/>
                         <p:commandButton id="storeoutButton" value="Store Out" oncomplete="ItemStoreoutDialog.show()" disabled="#{empty storeController.current}"/>
                     </div>
