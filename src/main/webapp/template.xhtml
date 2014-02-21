@@ -28,7 +28,18 @@
                 </h:form>
             </p:layoutUnit>
 
-            <p:layoutUnit position="east" size="50"/>
+            <p:layoutUnit position="east" size="500" header="Slide Show" collapsible="true" collapsed="true">
+                <br/><br/><br/>
+                <p:carousel headerText="SlideShow" pageLinks="6" autoPlayInterval="4000" itemStyle="height:325px;width:450px"  
+                            numVisible="1" effect="fade" circular="true">  
+                    <p:graphicImage value="../resources/images/inventory.jpg" height="325" width="450"/>
+                    <p:graphicImage value="../resources/images/inventory1.jpg" height="325" width="450"/>
+                    <p:graphicImage value="../resources/images/inventory2.jpg" height="325" width="450"/>
+                    <p:graphicImage value="../resources/images/inventory3.jpg" height="325" width="450"/>
+                    <p:graphicImage value="../resources/images/inventory4.jpg" height="325" width="450"/>
+                    <p:graphicImage value="../resources/images/inventory5.jpg" height="325" width="450"/>
+                </p:carousel>
+            </p:layoutUnit>
 
             <p:layoutUnit position="south" size="60">
                 <ui:insert name="footer"/><br/>
